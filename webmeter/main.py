@@ -1,36 +1,17 @@
-import uvicorn
-from fastapi import FastAPI
-from webmeter.view import page,api
-from webmeter.public.utils import utils
-import requests
-import webbrowser
-import multiprocessing
+from __future__ import absolute_import
+from logzero import logger
+import platform
+import fire as fire
 
-app = FastAPI(debug=True)
-app.include_router(page.router)
-app.include_router(api.router)
+def checkPyVer():
+    versions = platform.python_version().split('.')
+    if int(versions[0]) < 3 or int(versions[1]) < 10:
+        logger.error('python version must be 3.10+ ,your python version is {}'.format(platform.python_version()))
+        return False
+    return True    
 
-
-def status(host: str, port: int):
-    r = requests.get('http://{}:{}/plan'.format(host, port), timeout=2.0)
-    flag = (True, False)[r.status_code == 200]
-    return flag
-
-def start(host: str, port: int):
-    uvicorn.run("main:app", host=host, port=port, reload=False)
-
-def open(host: str, port: int):
-    flag = True
-    while flag:
-        flag = status(host, port)
-    webbrowser.open('http://{}:{}/plan'.format(host, port), new=2)
-
-def main(host=utils.local_ip(), port=6006):
-    pool = multiprocessing.Pool(processes=2)
-    pool.apply_async(start, (host, port))
-    pool.apply_async(open, (host, port))
-    pool.close()
-    pool.join()    
-
-# if __name__ == "__main__":
-#     main()
+if __name__ == '__main__':
+    check = checkPyVer()
+    if check:
+        from webmeter.web import main
+        fire.Fire(main)    
