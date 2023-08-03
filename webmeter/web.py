@@ -17,7 +17,7 @@ def status(host: str, port: int):
     return flag
 
 def start(host: str, port: int):
-    uvicorn.run("main:app", host=host, port=port, reload=False)
+    uvicorn.run("__main__:app", host=host, port=port, reload=False)
 
 def open(host: str, port: int):
     flag = True

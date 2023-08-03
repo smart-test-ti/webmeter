@@ -1,4 +1,4 @@
-recursive-include webmeter/static *
-recursive-include webmeter/templates *
-recursive-include webmeter/public *
-recursive-include webmeter/view *
+recursive-include webmeter/static *.html *.js *.css *.png *.py
+recursive-include webmeter/templates *.html *.js *.css *.png *.py
+recursive-include webmeter/public *.html *.js *.css *.png *.py
+recursive-include webmeter/view *.html *.js *.css *.png *.py
