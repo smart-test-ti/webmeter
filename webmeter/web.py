@@ -17,7 +17,7 @@ def status(host: str, port: int):
     return flag
 
 def start(host: str, port: int):
-    uvicorn.run("web:app", host=host, port=port, reload=False)
+    uvicorn.run("webmeter.web:app", host=host, port=port, reload=False)
 
 def open(host: str, port: int):
     flag = True
