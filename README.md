@@ -32,9 +32,7 @@ python -m webmeter --host={ip} --port={port}
 
 ## Develop
 
-### debug
-
-```bash
-cd webmeter
-python __main__.py
-```
+* https://fastapi.tiangolo.com/
+* https://cn.vuejs.org/
+* https://github.com/tabler/tabler
+* https://jmeter.apache.org/
