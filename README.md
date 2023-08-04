@@ -36,5 +36,5 @@ python -m webmeter --host={ip} --port={port}
 
 ```bash
 cd webmeter
-python main.py
+python __main__.py
 ```
