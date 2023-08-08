@@ -38,3 +38,9 @@ python -m webmeter --host={ip} --port={port}
 * https://cn.vuejs.org/
 * https://github.com/tabler/tabler
 * https://jmeter.apache.org/
+
+### debug
+```shell
+cd webmeter
+python debug.py
+```
