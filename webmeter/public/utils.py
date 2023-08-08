@@ -1,15 +1,35 @@
 import socket
+import os
+import sys
+import platform
 
-class utils(object):
+class Platform(object):
+    WINDOWS = 'windows'
+    MACOS = 'macos'
+    LINUX = 'linux'
+
+class Utils(object):
 
     @classmethod
     def local_ip(cls):
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(('8.8.8.8', 80))
-            ip = s.getsockname()[0]
-        except Exception as e:
-            ip = '127.0.0.1'
-        finally:
-            s.close()
+        ip = socket.gethostbyname(socket.gethostname())
         return ip
+    
+    @classmethod
+    def exe_cmd(cls, cmd):
+        result = os.system(cmd)
+        return result
+    
+    @classmethod
+    def cur_platform(cls):
+        sys_platform = platform.platform().lower()
+        match sys_platform:
+            case sys_platform.__contains__(Platform.WINDOWS):
+                return Platform.WINDOWS
+            case sys_platform.__contains__(Platform.MACOS):
+                return Platform.MACOS
+            case sys_platform.__contains__(Platform.LINUX):
+                return Platform.LINUX
+            case _:
+                raise Exception('platform is invalid')
+
