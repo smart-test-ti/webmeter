@@ -9,17 +9,17 @@ class EngineServie(object):
     }
 
     @classmethod
-    def set_JmeterPropertiesFile(cls):
+    def set_JmeterPropertiesFile(cls) -> None:
         """update jmeter.properties"""
         pass
 
     @classmethod
-    def set_JmeterServerFile(cls):
+    def set_JmeterServerFile(cls) -> None:
         """update jmeter-server (sh or bat)"""
         pass
 
     @classmethod
-    def run(cls):
+    def run(cls) -> None:
         """
         excute jmeter command
         -n This specifies JMeter is to run in cli mode
