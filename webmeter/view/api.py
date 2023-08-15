@@ -35,3 +35,14 @@ async def create_plan(content: dict):
       logging.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
+
+@router.post("/api/plan/remove")
+async def remove_plan(content: dict):
+   plan_name = content.get('plan_name')
+   try:
+      test_plan.remove(plan_name)
+      result = {'status':1, 'msg': 'remove success'}   
+   except Exception as e:
+      logging.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
