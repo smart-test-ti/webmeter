@@ -19,7 +19,7 @@ def status(host: str, port: int) -> bool:
 def start(host: str, port: int) -> None:
     uvicorn.run("webmeter.web:app", host=host, port=port, reload=False)
 
-def open(host: str, port: int)  -> None:
+def open_url(host: str, port: int)  -> None:
     flag = True
     while flag:
         flag = status(host, port)
@@ -28,9 +28,6 @@ def open(host: str, port: int)  -> None:
 def main(host=Utils.ip(), port=6006) -> None:
     pool = multiprocessing.Pool(processes=2)
     pool.apply_async(start, (host, port))
-    pool.apply_async(open, (host, port))
+    pool.apply_async(open_url, (host, port))
     pool.close()
-    pool.join()    
-
-if __name__ == "__main__":
-    main()
+    pool.join()

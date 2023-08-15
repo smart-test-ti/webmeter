@@ -32,7 +32,7 @@
                 <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                     <ul class="navbar-nav">
                         <li class="nav-item active" id="apm_tab" style="margin-left: 20px;font-weight: bolder;">
-                            <a class="nav-link" href="#" >
+                            <a class="nav-link" href="/plan" >
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg t="1691481964005" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11530" width="320" height="320"><path d="M874.15 750.71L623.92 311.53V72.4H400.09v239.13L149.86 750.71c-51.04 89.59 13.65 200.92 116.77 200.92h490.76c103.11 0 167.81-111.33 116.76-200.92z" fill="#FFFFFF" p-id="11531"></path><path d="M881.44 746.61l-249.09-437.3V80.8h79.14c4.66 0 8.4-3.77 8.4-8.4s-3.74-8.4-8.4-8.4H312.52c-4.66 0-8.4 3.77-8.4 8.4s3.74 8.4 8.4 8.4h79.2v228.54L142.56 746.61c-25.46 44.69-25.26 97.9 0.59 142.33 25.85 44.49 71.98 71.07 123.5 71.07h490.77c51.45 0 97.58-26.58 123.43-71.07 25.85-44.43 26.05-97.65 0.59-142.33zM615.55 80.8v222.32H408.52V80.8h207.03z m250.79 799.73c-22.84 39.24-63.52 62.67-108.93 62.67H266.65c-45.41 0-86.16-23.43-108.99-62.67-22.77-39.24-22.97-86.22-0.52-125.66l247.84-434.96H619.1l247.78 434.96c22.43 39.44 22.23 86.42-0.54 125.66z" fill="#252526" p-id="11532"></path><path d="M157.66 880.52c22.84 39.31 63.59 62.73 108.99 62.73h490.77c45.41 0 86.09-23.43 108.93-62.67 22.77-39.31 22.97-86.29 0.52-125.73l-27.23-47.8c-90.01 21.45-184.12 19.64-272.63-8.88l-55-17.72c-96.99-37-202.42-42.38-302.39-17.72l-52.49 92.12c-22.43 39.44-22.24 86.43 0.53 125.67z" fill="#4FAEC9" p-id="11533"></path></svg>
                                 </span>
@@ -75,23 +75,19 @@
         </div>
     </header>
     <div class="page-wrapper sceen-body">
-        <div class="page-header d-print-none">
+        <div class="page-header d-print-none" v-show="planVisable">
             <div class="container-xl">
               <div class="row g-2 align-items-center">
                 <div class="col">
                   <h2 class="page-title">
                     <div class="btn-list">
-                        <a href="#" class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
+                        <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                             Test Plan
                         </a>
                         <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
                             <svg t="1690960933893" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4519" width="320" height="320"><path d="M750.933333 119.466667H290.133333c-65.877333 0-119.466667 53.589333-119.466666 119.466666v119.466667h68.266666v-119.466667c0-28.16 23.04-51.2 51.2-51.2h460.8c18.773333 0 34.133333 15.36 34.133334 34.133334v597.333333c0 18.773333-15.36 34.133333-34.133334 34.133333H290.133333c-28.16 0-51.2-23.04-51.2-51.2v-153.6h-68.266666v153.6c0 65.877333 53.589333 119.466667 119.466666 119.466667h460.8c56.490667 0 102.4-45.909333 102.4-102.4V221.866667c0-56.490667-45.909333-102.4-102.4-102.4z" fill="#231815" p-id="4520"></path><path d="M396.117333 641.194667l48.298667 48.128L630.272 503.466667 444.416 317.610667l-48.298667 48.128L508.245333 477.866667H136.533333v68.266666h354.645334z" fill="#231815" p-id="4521"></path></svg>
                             Import JMX
-                        </a>
-                        <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
-                            <svg t="1691456210779" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5753" width="320" height="320"><path d="M807.1 583.2c-19.7 0-35.8 16-35.8 35.8v203.9c0 10.3-8.3 18.6-18.6 18.6h-567c-10.3 0-18.6-8.3-18.6-18.6V235.8c0-10.3 8.3-18.6 18.6-18.6h254.6c19.7 0 35.8-16 35.8-35.8 0-19.8-16-35.8-35.8-35.8H185.8c-49.7 0-90.1 40.4-90.1 90.1v587.1c0 49.6 40.4 90 90.1 90h567.1c49.7 0 90.1-40.4 90.1-90.1V619c-0.1-19.7-16.2-35.8-35.9-35.8zM433.3 373c-43 65-53.5 128.9-54.5 136-2.7 19.6 10.9 37.8 30.3 40.5 1.6 0.3 3.4 0.4 5.1 0.4 17.6 0 32.8-13.2 35.4-30.4 0.3-2.4 9.4-56.4 44.5-108.5 46.1-68.4 115.4-103.3 205.6-103.6 1.4 0.1 2.6 0.2 3.6 0.2 19.7 0 35.8-16 35.8-35.8v-42.1l100.5 95.6L739 409.1v-34.2c0-19.7-16-35.8-35.8-35.8-19.7 0-35.8 16-35.8 35.8v110.6c0 13.8 8.1 26.5 20.7 32.4 4.7 2.3 10 3.4 15.1 3.4 8.4 0 16.5-3 22.8-8.2l190.1-158.3c7.8-6.7 12.5-16.2 12.7-26.3 0.4-10.2-3.6-20.1-11-27.2l-190-180.9c-10.4-10-25.6-12.6-38.7-7-13.2 5.7-21.6 18.6-21.6 32.9v90.9C541.8 247.7 470.8 316.6 433.3 373z" fill="#000000" p-id="5754"></path></svg>
-                            Export JMX
                         </a>
                     </div>
                   </h2>
@@ -119,7 +115,7 @@
           </div>
         <div class="page-body">
             <div class="container-xl">
-                <div class="card">
+                <div class="card" v-show="planVisable">
                     <div class="row g-0">
                         <div class="col-2 d-none d-md-block border-end">
                             <div class="card-header d-none d-md-block">
@@ -131,11 +127,9 @@
                                 </div>
                               </div>
                             <div class="card-body scrollable">
-                                <div class="btn-group-vertical w-100"role="group">
-                                    <input type="radio" class="btn-check" name="btn-radio-vertical" id="btn-radio-vertical-1" autocomplete="off" v-bind:checked="checkedType">
-                                    <label for="btn-radio-vertical-1" type="button" class="btn">Plan 1</label>
-                                    <input type="radio" class="btn-check" name="btn-radio-vertical" id="btn-radio-vertical-2" autocomplete="off">
-                                    <label for="btn-radio-vertical-2" type="button" class="btn">Plan 2</label>
+                                <div class="btn-group-vertical w-100"role="group" v-for="item in plans" :key="item">
+                                        <input type="radio" class="btn-check" name="btn-radio-vertical"  autocomplete="off" v-bind:checked="item.checked">
+                                        <label for="btn-radio-vertical-1" type="button" class="btn" v-text="item.name"></label>
                                 </div>
                             </div>
                         </div>
@@ -425,30 +419,20 @@
                             </div>
                       </div>
                     </div>
-                  </div>
-                <!-- <div class="empty mt-5">
+                </div>
+                <!--empty content-->
+                <div class="empty mt-5" v-show="emptyVisable">
                     <div class="empty-img">
-                        <img src="../static/image/empty.png">
+                        <img src="/static/image/empty.png">
                     </div>
                     <p class="empty-title"> No results found </p>
                     <div class="empty-action">
-                        <a  class="btn btn-primary" @click="dialogVisible = true">
+                        <a  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-create-plan" >
                             <svg t="1690879968452" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2274" width="320" height="320"><path d="M810.666667 469.333333h-256V213.333333a42.666667 42.666667 0 0 0-85.333334 0v256H213.333333a42.666667 42.666667 0 0 0 0 85.333334h256v256a42.666667 42.666667 0 0 0 85.333334 0v-256h256a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2275" fill="#ffffff"></path></svg>
                             Add your first TEST PLAN
                         </a>
-                        <el-dialog v-model="dialogVisible" title="Tips" width="30%" draggable>
-                            <span>It's a draggable Dialog</span>
-                            <template #footer>
-                              <span class="dialog-footer">
-                                <el-button @click="dialogVisible = false">Cancel</el-button>
-                                <el-button type="primary" @click="dialogVisible = false">
-                                  Confirm
-                                </el-button>
-                              </span>
-                            </template>
-                        </el-dialog>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -486,6 +470,25 @@
             </div>
         </div>
     </footer>
+    
+    <!-- dialog -->
+    <div class="modal modal-blur fade" id="modal-create-plan" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Plan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <el-input v-model="inputPlan" placeholder="Please input plan name" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="createPlan()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <style>
     .card-header {
@@ -510,30 +513,110 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/element-plus"></script>
 <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+const { createApp, ref, onMounted, onBeforeMount, reactive } = Vue
 
+const app = createApp({
+    setup() {
+        const checkedType = ref(true)
+        const inputPlan = ref('')
+        var plans = reactive([])
+        var planVisable = ref(false)
+        var emptyVisable = ref(true)
 
-<script  lang="ts" type="module">
+        onBeforeMount(() => {
+            initPlan();
+        });
 
-    const { createApp, ref } = Vue
-  
-    const app = createApp({
-        setup() {
-            const dialogVisible = ref(false)
-            const checkedType = ref(true)
-            return {
-                dialogVisible,
-                checkedType
-            }
+        function createPlan(){
+            axios.post('/api/plan/create', {
+                plan_name: inputPlan.value
+            })
+            .then(function (response) {
+                if(response['data']['status'] == 1){
+                    elMessage('success', response['data']['msg'])
+                    initPlan()
+                }else{
+                    elMessage('error', response['data']['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                elMessage('error', error)
+            });
+        };
+
+        function initPlan(){
+            axios.post('/api/plan/all', {})
+            .then(function (response) {
+                if(response['data']['status'] == 1){
+                    response['data']['plan_list'].forEach(i =>{
+                        plans.push(i)
+                    })
+                    if(response['data']['length'] > 0){
+                        planVisable.value = true
+                        emptyVisable.value = false
+                    }
+                }else{
+                    elMessage('error', response['data']['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                elMessage('error', error)
+            });
+        };
+
+        const elMessage = (type, message) => {
+            switch(type){
+                case 'success':
+                    ElementPlus.ElMessage({
+                        showClose: true,
+                        message: message,
+                        type: 'success',
+                    })
+                    break;
+                case 'warning':
+                    ElementPlus.ElMessage({
+                        showClose: true,
+                        message: message,
+                        type: 'warning',
+                    })
+                    break;
+                case 'error':
+                    ElementPlus.ElMessage({
+                        showClose: true,
+                        message: message,
+                        type: 'error',
+                    })
+                    break;
+                default:
+                    ElementPlus.ElMessage({
+                        showClose: true,
+                        message: message,
+                    })         
+            };
         }
-    });
-    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-        app.component(key, component)
-    };
-    app.use(ElementPlus);
-    app.mount('#app');
 
-    
-  </script>
-
+        return {
+            checkedType,
+            inputPlan,
+            createPlan,
+            elMessage,
+            plans,
+            planVisable,
+            emptyVisable
+        };
+    }
+});
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+};
+app.use(ElementPlus);
+app.mount('#app');
+</script>
 </body>
 </html>

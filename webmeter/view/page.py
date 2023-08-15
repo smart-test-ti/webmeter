@@ -18,3 +18,7 @@ async def redirect_typer():
 @router.get("/plan", response_class=HTMLResponse)
 async def index(request: Request):
    return templates.TemplateResponse("plan.html", {"request": request})
+
+@router.get("/result", response_class=HTMLResponse)
+async def index(request: Request):
+   return templates.TemplateResponse("result.html", {"request": request})

@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    install_requires=['fastapi','uvicorn', 'requests', 'logzero', 'fire','pyfiglet','psutil'],
+    install_requires=['fastapi','uvicorn', 'requests', 'logzero', 'fire','pyfiglet','psutil','pyyaml'],
     version='1.0.5',
     long_description=long_description,
     long_description_content_type="text/markdown",
