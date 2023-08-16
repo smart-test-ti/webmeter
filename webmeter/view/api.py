@@ -21,6 +21,28 @@ async def get_all_plan():
       result = {'status':0, 'msg': str(e)}
    return result
 
+@router.post("/api/plan/checked")
+async def checked_one_plan(content: dict):
+   plan_name = content.get('plan_name')
+   try:
+      plan_list = test_plan.checked_one_plan(plan_name)
+      result = {'status':1, 'plan_list':plan_list, 'length':len(plan_list), 'msg': 'get success'}
+   except Exception as e:
+      logging.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+
+@router.post("/api/plan/info")
+async def get_plan_info(content: dict):
+   plan_name = content.get('plan_name')
+   try:
+      plan_info = test_plan.get_plan_info(plan_name)
+      result = {'status':1, 'plan_info':plan_info, 'msg': 'get success'}
+   except Exception as e:
+      logging.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
 
 @router.post("/api/plan/create")
 async def create_plan(content: dict):
@@ -41,6 +63,16 @@ async def remove_plan(content: dict):
    plan_name = content.get('plan_name')
    try:
       test_plan.remove(plan_name)
+      result = {'status':1, 'msg': 'remove success'}   
+   except Exception as e:
+      logging.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/plan/removeall")
+async def remove_all_plan():
+   try:
+      test_plan.remove_all()
       result = {'status':1, 'msg': 'remove success'}   
    except Exception as e:
       logging.exception(e)

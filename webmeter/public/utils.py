@@ -67,7 +67,7 @@ class Utils(object):
                 raise Exception('platform is invalid')
 
     @classmethod
-    def read_jmxfile(cls, jmx_path_or_name: str, tag: str, name: str) -> str:
+    def read_jmxfile_text(cls, jmx_path_or_name: str, tag: str, name: str) -> str:
         """read text from jmx file"""
         treeDom =ElementTree.parse(jmx_path_or_name)
         rootDom = treeDom.getroot()
@@ -78,7 +78,32 @@ class Utils(object):
         raise Exception('no result')
     
     @classmethod
-    def write_jmxfile(cls, jmx_path_or_name: str, tag: str, 
+    def read_jmxfile_testname(cls, jmx_path_or_name: str, tag: str, attr: str) -> str:
+        """read attr from jmx file"""
+        treeDom =ElementTree.parse(jmx_path_or_name)
+        rootDom = treeDom.getroot()
+        tag_object = rootDom.iter(tag)
+        for tag_target in tag_object:
+            if tag_target.attrib['testclass'] == attr:
+                return tag_target.attrib['testname']
+        raise Exception('no result')
+    
+    @classmethod
+    def write_jmxfile_testname(cls, jmx_path_or_name: str, tag: str, 
+                  attr: str, testname: str) -> str:
+        """update testname to jmx file"""
+        treeDom =ElementTree.parse(jmx_path_or_name)
+        rootDom = treeDom.getroot()
+        tag_object = rootDom.iter(tag)
+        for tag_target in tag_object:
+            if tag_target.attrib['testclass'] == attr:
+                tag_target.attrib['testname'] = testname
+                treeDom.write(jmx_path_or_name, encoding='utf-8')
+                return True
+        return False
+    
+    @classmethod
+    def write_jmxfile_text(cls, jmx_path_or_name: str, tag: str, 
                   name: str, text: str) -> str:
         """write text to jmx file"""
         treeDom =ElementTree.parse(jmx_path_or_name)

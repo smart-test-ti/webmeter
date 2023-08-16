@@ -74,18 +74,18 @@
             </div>
         </div>
     </header>
-    <div class="page-wrapper sceen-body">
+    <div class="page-wrapper sceen-body" v-loading="loading">
         <div class="page-header d-print-none" v-show="planVisable">
             <div class="container-xl">
               <div class="row g-2 align-items-center">
                 <div class="col">
                   <h2 class="page-title">
                     <div class="btn-list">
-                        <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
+                        <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-create-plan">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                             Test Plan
                         </a>
-                        <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
+                        <a class="btn  d-none d-sm-inline-block">
                             <svg t="1690960933893" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4519" width="320" height="320"><path d="M750.933333 119.466667H290.133333c-65.877333 0-119.466667 53.589333-119.466666 119.466666v119.466667h68.266666v-119.466667c0-28.16 23.04-51.2 51.2-51.2h460.8c18.773333 0 34.133333 15.36 34.133334 34.133334v597.333333c0 18.773333-15.36 34.133333-34.133334 34.133333H290.133333c-28.16 0-51.2-23.04-51.2-51.2v-153.6h-68.266666v153.6c0 65.877333 53.589333 119.466667 119.466666 119.466667h460.8c56.490667 0 102.4-45.909333 102.4-102.4V221.866667c0-56.490667-45.909333-102.4-102.4-102.4z" fill="#231815" p-id="4520"></path><path d="M396.117333 641.194667l48.298667 48.128L630.272 503.466667 444.416 317.610667l-48.298667 48.128L508.245333 477.866667H136.533333v68.266666h354.645334z" fill="#231815" p-id="4521"></path></svg>
                             Import JMX
                         </a>
@@ -103,9 +103,13 @@
                             <svg t="1691459726911" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="16557" width="320" height="320"><path d="M512 967.111111c-250.311111 0-455.111111-204.8-455.111111-455.111111s204.8-455.111111 455.111111-455.111111 455.111111 204.8 455.111111 455.111111-204.8 455.111111-455.111111 455.111111z m0-56.888889c221.866667 0 398.222222-176.355556 398.222222-398.222222s-176.355556-398.222222-398.222222-398.222222-398.222222 176.355556-398.222222 398.222222 176.355556 398.222222 398.222222 398.222222z" fill="#333333" p-id="16558"></path><path d="M341.333333 341.333333h341.333334v341.333334H341.333333z" fill="#333333" p-id="16559"></path></svg>
                             Stop
                         </a>
-                        <a class="btn d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-danger">
+                        <a class="btn d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-remove-one">
                             <svg t="1690960673011" class="icon" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2638" width="320" height="320"><path d="M513.852 144.914c-203.711 0-368.936 165.192-368.936 368.936 0 203.756 165.203 368.936 368.936 368.936 203.756 0 368.936-165.143 368.936-368.936 0.005-203.711-165.177-368.936-368.936-368.936zM665.109 616.241c6.27 6.218 10.153 14.838 10.153 24.363 0 0.025 0 0.050 0 0.076 0 0.003 0 0.008 0 0.017 0 19.086-15.472 34.558-34.558 34.558-9.555 0-18.204-3.877-24.46-10.146l-102.39-102.331-102.319 102.364c-6.255 6.272-14.905 10.153-24.462 10.153-0.016 0-0.031 0-0.046 0-19.061 0-34.558-15.463-34.558-34.598 0-0.018 0-0.037 0-0.056 0-9.517 3.866-18.129 10.115-24.354l102.379-102.435-102.355-102.349c-6.25-6.245-10.117-14.875-10.117-24.408 0-0.021 0-0.042 0-0.063 0-19.093 15.486-34.583 34.586-34.583 0.010 0 0.023 0 0.036 0 9.533 0 18.162 3.865 24.409 10.116l102.319 102.378 102.39-102.352c6.256-6.25 14.896-10.116 24.438-10.116 19.098 0 34.579 15.482 34.579 34.579 0 0.003 0 0.007 0 0.007 0 0.020 0 0.044 0 0.067 0 9.537-3.882 18.168-10.15 24.398l-102.321 102.321 102.33 102.396z" fill="#2c2c2c" p-id="2639"></path></svg>
                             Remove
+                        </a>
+                        <a class="btn d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-remove-all">
+                            <svg t="1690960673011" class="icon" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2638" width="320" height="320"><path d="M513.852 144.914c-203.711 0-368.936 165.192-368.936 368.936 0 203.756 165.203 368.936 368.936 368.936 203.756 0 368.936-165.143 368.936-368.936 0.005-203.711-165.177-368.936-368.936-368.936zM665.109 616.241c6.27 6.218 10.153 14.838 10.153 24.363 0 0.025 0 0.050 0 0.076 0 0.003 0 0.008 0 0.017 0 19.086-15.472 34.558-34.558 34.558-9.555 0-18.204-3.877-24.46-10.146l-102.39-102.331-102.319 102.364c-6.255 6.272-14.905 10.153-24.462 10.153-0.016 0-0.031 0-0.046 0-19.061 0-34.558-15.463-34.558-34.598 0-0.018 0-0.037 0-0.056 0-9.517 3.866-18.129 10.115-24.354l102.379-102.435-102.355-102.349c-6.25-6.245-10.117-14.875-10.117-24.408 0-0.021 0-0.042 0-0.063 0-19.093 15.486-34.583 34.586-34.583 0.010 0 0.023 0 0.036 0 9.533 0 18.162 3.865 24.409 10.116l102.319 102.378 102.39-102.352c6.256-6.25 14.896-10.116 24.438-10.116 19.098 0 34.579 15.482 34.579 34.579 0 0.003 0 0.007 0 0.007 0 0.020 0 0.044 0 0.067 0 9.537-3.882 18.168-10.15 24.398l-102.321 102.321 102.33 102.396z" fill="#2c2c2c" p-id="2639"></path></svg>
+                            Remove All
                         </a>
                     </div>
                   </div>
@@ -127,9 +131,9 @@
                                 </div>
                               </div>
                             <div class="card-body scrollable">
-                                <div class="btn-group-vertical w-100"role="group" v-for="item in plans" :key="item">
-                                    <input type="radio" class="btn-check" name="btn-radio-vertical"  autocomplete="off" v-bind:checked="item.checked">
-                                    <label for="btn-radio-vertical-1" type="button" class="btn" v-text="item.name"></label>
+                                <div class="btn-group-vertical w-100 mb-2"role="group" v-for="item in plans" :key="item">
+                                    <input type="radio" class="btn-check" name="btn-radio-vertical" :id="item.name" :checked="item.checked">
+                                    <label type="button" class="btn" v-text="item.name" :for="item.name"></label>
                                 </div>
                             </div>
                         </div>
@@ -489,7 +493,7 @@
             </div>
         </div>
     </div>
-    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-blur fade" id="modal-remove-one" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
           <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -512,7 +516,31 @@
             </div>
           </div>
         </div>
-      </div>
+    </div>
+    <div class="modal modal-blur fade" id="modal-remove-all" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-status bg-danger"></div>
+            <div class="modal-body text-center py-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>
+              <h3>Are you sure?</h3>
+            </div>
+            <div class="modal-footer">
+              <div class="w-100">
+                <div class="row">
+                  <div class="col"><a class="btn w-100" data-bs-dismiss="modal">
+                      Cancel
+                    </a></div>
+                  <div class="col"><a class="btn btn-danger w-100" data-bs-dismiss="modal" @click="removeAllPlan()">
+                      Delete
+                    </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 </div>
 <style>
     .card-header {
@@ -539,42 +567,40 @@
 <script src="https://unpkg.com/@element-plus/icons-vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-const { createApp, ref, onMounted, onBeforeMount, reactive } = Vue
+const { createApp, ref, onMounted, onBeforeMount, reactive, nextTick } = Vue
 
 const app = createApp({
     setup() {
         const checkedType = ref(true)
         const inputPlan = ref('')
+        const loading = ref(false)
+        const isReload = ref(true)
+        const debug = ref(true)
         var plans = reactive([])
         var planVisable = ref(false)
         var emptyVisable = ref(true)
         var checkedPlan = ref('')
-
-        onBeforeMount(() => {
+        
+        onMounted(() => {
             initPlan();
         });
 
-        function createPlan(){
-            axios.post('/api/plan/create', {
-                plan_name: inputPlan.value
-            })
-            .then(function (response) {
-                if(response['data']['status'] == 1){
-                    elMessage('success', response['data']['msg'])
-                    initPlan()
-                }else{
-                    elMessage('error', response['data']['msg'])
-                }
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-                elMessage('error', error)
-            });
+        async function reload() {
+            this.isReload = false;
+            await nextTick();
+            this.isReload = true;
         };
 
-        function initPlan(){
-            axios.post('/api/plan/all', {})
+        function checkItem(){
+            debug.value = true
+        }
+
+        const clickPlan = (name) => {
+            loading.value = true
+            plans.length = 0 // 置空，避免叠加
+            axios.post('/api/plan/checked', {
+                plan_name: name
+            })
             .then(function (response) {
                 if(response['data']['status'] == 1){
                     response['data']['plan_list'].forEach(i =>{
@@ -584,6 +610,9 @@ const app = createApp({
                         planVisable.value = true
                         emptyVisable.value = false
                         checkedPlan.value = plans[0]['name']
+                    }else{
+                        planVisable.value = false
+                        emptyVisable.value = true
                     }
                 }else{
                     elMessage('error', response['data']['msg'])
@@ -594,6 +623,59 @@ const app = createApp({
                 console.log(error);
                 elMessage('error', error)
             });
+            loading.value = false
+        }
+
+        function createPlan(){
+            loading.value = true
+            axios.post('/api/plan/create', {
+                plan_name: inputPlan.value
+            })
+            .then(function (response) {
+                if(response['data']['status'] == 1){
+                    elMessage('success', response['data']['msg'])
+                    initPlan()
+
+                }else{
+                    elMessage('error', response['data']['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                elMessage('error', error)
+            });
+            loading.value = false
+            inputPlan.value = ''
+        };
+
+        function initPlan(){
+            loading.value = true
+            plans.length = 0 // 置空，避免叠加
+            axios.post('/api/plan/all', {})
+            .then(function (response) {
+                if(response['data']['status'] == 1){
+                    response['data']['plan_list'].forEach(i =>{
+                        plans.push(i)
+                    })
+                    if(response['data']['length'] > 0){
+                        planVisable.value = true
+                        emptyVisable.value = false
+                        checkedPlan.value = plans[0]['name']
+                    }else{
+                        planVisable.value = false
+                        emptyVisable.value = true
+                    }
+                }else{
+                    elMessage('error', response['data']['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                elMessage('error', error)
+            });
+            loading.value = false
         };
 
         function removePlan(){
@@ -602,7 +684,24 @@ const app = createApp({
             })
             .then(function (response) {
                 if(response['data']['status'] == 1){
-                    location.reload()
+                    initPlan()
+                }else{
+                    elMessage('error', response['data']['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                elMessage('error', error)
+            });
+        }
+
+        function removeAllPlan(){
+            axios.post('/api/plan/removeall', {
+            })
+            .then(function (response) {
+                if(response['data']['status'] == 1){
+                    initPlan()
                 }else{
                     elMessage('error', response['data']['msg'])
                 }
@@ -648,13 +747,17 @@ const app = createApp({
         return {
             checkedType,
             inputPlan,
-            createPlan,
-            elMessage,
-            removePlan,
             plans,
             planVisable,
             emptyVisable,
-            checkedPlan
+            checkedPlan,
+            loading,
+            createPlan,
+            elMessage,
+            removePlan,
+            removeAllPlan,
+            checkItem,
+            debug
         };
     }
 });

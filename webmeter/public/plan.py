@@ -37,18 +37,38 @@ class TestPlan(object):
             Utils.write_jmxfile(new_dir, 'stringProp', key, element_dict[key])
 
     def remove(self, plan: str) -> None:
-        """remove test plan"""
+        """remove one plan"""
         shutil.rmtree(os.path.join(self.root_dir, plan), True)
     
+    def remove_all(self) -> None:
+        """remove all plan"""
+        dirs = os.listdir(self.root_dir)
+        for plan in dirs:
+            shutil.rmtree(os.path.join(self.root_dir, plan), True)
+
     def get_all_plan(self) -> list:
         """get all plan"""
         dirs = os.listdir(self.root_dir)
         dir_list = reversed(sorted(dirs, key=lambda x: os.path.getmtime(os.path.join(self.root_dir, x))))
+        plan_sorted_list = [plan for plan in dir_list]
         plan_list = []
-        for plan in dir_list:
+        for plan in plan_sorted_list:
             plan_dict = {}
             plan_dict['name'] = plan
-            plan_dict['checked'] =True if plan.index(plan) == 0 else False
+            plan_dict['checked'] =True if plan_sorted_list.index(plan) == 0 else False
+            plan_list.append(plan_dict)
+        return plan_list
+    
+    def checked_one_plan(self, plan_name) -> list:
+        """checked one plan"""
+        dirs = os.listdir(self.root_dir)
+        dir_list = reversed(sorted(dirs, key=lambda x: os.path.getmtime(os.path.join(self.root_dir, x))))
+        plan_sorted_list = [plan for plan in dir_list]
+        plan_list = []
+        for plan in plan_sorted_list:
+            plan_dict = {}
+            plan_dict['name'] = plan
+            plan_dict['checked'] =True if plan == plan_name else False
             plan_list.append(plan_dict)
         return plan_list
 
@@ -57,8 +77,9 @@ class TestPlan(object):
         """get one plan info"""
         plan_jmx_path = os.path.join(self.root_dir, plan, 'plan.jmx')
         result = {}
-        result['comments'] = Utils.read_jmxfile(plan_jmx_path, 'stringProp', 'TestPlan.comments')
-        result['functional_mode'] = Utils.read_jmxfile(plan_jmx_path, 'stringProp', 'TestPlan.functional_mode')
-        result['tearDown_on_shutdown'] = Utils.read_jmxfile(plan_jmx_path, 'stringProp', 'TestPlan.tearDown_on_shutdown')
-        result['serialize_threadgroups'] = Utils.read_jmxfile(plan_jmx_path, 'stringProp', 'TestPlan.serialize_threadgroups') 
+        result['name'] = Utils.read_jmxfile_attr(plan_jmx_path, 'TestPlan', 'TestPlan')
+        result['comments'] = Utils.read_jmxfile_text(plan_jmx_path, 'stringProp', 'TestPlan.comments')
+        result['functional_mode'] = Utils.read_jmxfile_text(plan_jmx_path, 'stringProp', 'TestPlan.functional_mode')
+        result['tearDown_on_shutdown'] = Utils.read_jmxfile_text(plan_jmx_path, 'stringProp', 'TestPlan.tearDown_on_shutdown')
+        result['serialize_threadgroups'] = Utils.read_jmxfile_text(plan_jmx_path, 'stringProp', 'TestPlan.serialize_threadgroups') 
         return result
