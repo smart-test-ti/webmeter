@@ -1,10 +1,12 @@
 import socket
 import os
+import enum
 import platform
+from loguru import logger
 from xml.etree import ElementTree
 
 
-class Platform(object):
+class Platform(enum.Enum):
     WINDOWS = 'windows'
     MACOS = 'macos'
     LINUX = 'linux'
@@ -12,9 +14,11 @@ class Platform(object):
 class Utils(object):
     
     STATICPATH = os.path.dirname(os.path.realpath(__file__))
-    MAPPING = {}
+    MAPPING = dict()
     MAPPING[False] = 'false'
     MAPPING[True] = 'true'
+    MAPPING['false'] = False
+    MAPPING['true'] = True
 
     @classmethod
     def ip(cls) -> str:
@@ -22,6 +26,8 @@ class Utils(object):
         try:
             ip = socket.gethostbyname(socket.gethostname())
         except:
+            logger.info('hostname:{}'.format(socket.gethostname()))
+            logger.warning('config [127.0.0.1 hostname] in /etc/hosts file')
             ip = '127.0.0.1'    
         return ip
     
@@ -53,16 +59,16 @@ class Utils(object):
             return content            
     
     @classmethod
-    def get_pc_platform(cls) -> str:
-        """get current pc's platform"""
+    def pc_platform(cls) -> str:
+        """get pc platform"""
         sys_platform = platform.platform().lower()
         match sys_platform:
-            case sys_platform.__contains__(Platform.WINDOWS):
-                return Platform.WINDOWS
-            case sys_platform.__contains__(Platform.MACOS):
-                return Platform.MACOS
-            case sys_platform.__contains__(Platform.LINUX):
-                return Platform.LINUX
+            case sys_platform.__contains__(Platform.WINDOWS.value):
+                return Platform.WINDOWS.value
+            case sys_platform.__contains__(Platform.MACOS.value):
+                return Platform.MACOS.value
+            case sys_platform.__contains__(Platform.LINUX.value):
+                return Platform.LINUX.value
             case _:
                 raise Exception('platform is invalid')
 

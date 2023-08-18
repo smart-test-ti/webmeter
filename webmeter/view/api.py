@@ -5,11 +5,6 @@ import logging
 router = APIRouter()
 test_plan = TestPlan()
 
-@router.post("/api/language")
-async def language(content: dict):
-   response = {'status':1}
-   return response
-
 
 @router.post("/api/plan/all")
 async def get_all_plan():
@@ -26,7 +21,7 @@ async def checked_one_plan(content: dict):
    plan_name = content.get('plan_name')
    try:
       plan_list = test_plan.checked_one_plan(plan_name)
-      result = {'status':1, 'plan_list':plan_list, 'length':len(plan_list), 'msg': 'get success'}
+      result = {'status':1, 'plan_list':plan_list, 'length':plan_list.__len__(), 'msg': 'get success'}
    except Exception as e:
       logging.exception(e)
       result = {'status':0, 'msg': str(e)}
