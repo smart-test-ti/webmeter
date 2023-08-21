@@ -1,10 +1,31 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Response, Cookie
 from public.plan import TestPlan
 import logging
+from typing import Union
 
 router = APIRouter()
 test_plan = TestPlan()
 
+
+@router.post("/api/language/set")
+async def set_language(content: dict, response:Response):
+   try:
+      language = content.get('language')
+      response.set_cookie(key="language",value=language)
+      result = {'status':1, 'msg': 'set success'}
+   except Exception as e:
+      logging.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/language/get")
+async def get_language(language:Union[str,None]=Cookie(default=None)):
+   try:
+      result = {'status':1,'language':language}
+   except Exception as e:
+      logging.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
 
 @router.post("/api/plan/all")
 async def get_all_plan():

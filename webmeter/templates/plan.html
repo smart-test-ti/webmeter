@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link rel="icon" href="https://jmeter.apache.org/images/favicon.png">
-    <title>WebMeter -  TEST PLAN </title>
+    <title>WebMeter -  TEST PLAN</title>
     <!-- CSS files -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
@@ -24,7 +24,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                <a href="#" target="_blank">
+                <a href=".">
                     <img src="https://jmeter.apache.org/images/asf-logo.svg" width="110" height="32" alt="SoloX" class="navbar-brand-image">
                 </a>
             </h1>
@@ -36,7 +36,7 @@
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg t="1691481964005" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11530" width="320" height="320"><path d="M874.15 750.71L623.92 311.53V72.4H400.09v239.13L149.86 750.71c-51.04 89.59 13.65 200.92 116.77 200.92h490.76c103.11 0 167.81-111.33 116.76-200.92z" fill="#FFFFFF" p-id="11531"></path><path d="M881.44 746.61l-249.09-437.3V80.8h79.14c4.66 0 8.4-3.77 8.4-8.4s-3.74-8.4-8.4-8.4H312.52c-4.66 0-8.4 3.77-8.4 8.4s3.74 8.4 8.4 8.4h79.2v228.54L142.56 746.61c-25.46 44.69-25.26 97.9 0.59 142.33 25.85 44.49 71.98 71.07 123.5 71.07h490.77c51.45 0 97.58-26.58 123.43-71.07 25.85-44.43 26.05-97.65 0.59-142.33zM615.55 80.8v222.32H408.52V80.8h207.03z m250.79 799.73c-22.84 39.24-63.52 62.67-108.93 62.67H266.65c-45.41 0-86.16-23.43-108.99-62.67-22.77-39.24-22.97-86.22-0.52-125.66l247.84-434.96H619.1l247.78 434.96c22.43 39.44 22.23 86.42-0.54 125.66z" fill="#252526" p-id="11532"></path><path d="M157.66 880.52c22.84 39.31 63.59 62.73 108.99 62.73h490.77c45.41 0 86.09-23.43 108.93-62.67 22.77-39.31 22.97-86.29 0.52-125.73l-27.23-47.8c-90.01 21.45-184.12 19.64-272.63-8.88l-55-17.72c-96.99-37-202.42-42.38-302.39-17.72l-52.49 92.12c-22.43 39.44-22.24 86.43 0.53 125.67z" fill="#4FAEC9" p-id="11533"></path></svg>
                                 </span>
-                                <span class="nav-link-title strong-text">TEST PLAN</span>
+                                <span class="nav-link-title strong-text" v-text="language.plan_page_title"></span>
                             </a>
                         </li>
                         <li class="nav-item" id="report_tab" style="margin-left: 20px;font-weight: bolder;">
@@ -44,7 +44,7 @@
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg t="1690875909592" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="26542" width="320" height="320"><path d="M244.224 370.78016h526.336c48.64 0 87.552 39.424 87.552 87.552v292.352c0 48.64-39.424 87.552-87.552 87.552H244.224c-48.64 0-87.552-39.424-87.552-87.552v-292.352c-0.512-48.128 38.912-87.552 87.552-87.552z" fill="#CAE4FF" p-id="26543"></path><path d="M760.832 983.30624H245.76c-114.176 0-206.848-92.672-206.848-206.848v-357.888c0-114.176 92.672-206.336 206.848-206.848h515.072c114.176 0 206.336 92.672 206.848 206.848v357.888c0 114.176-92.672 206.848-206.848 206.848zM245.76 270.09024c-81.92 0-148.48 66.56-148.48 148.48v357.888c0 81.92 66.56 148.48 148.48 148.48h515.072c81.92 0 148.48-66.56 148.48-148.48v-357.888c0-81.92-66.56-148.48-148.48-148.48H245.76z" fill="#0972E7" p-id="26544"></path><path d="M303.616 748.29824c0.512 14.848-11.264 27.648-26.112 28.16-14.848 0.512-27.648-11.264-28.16-26.112v-291.328c0.512-14.848 13.312-26.624 28.16-26.112 14.336 0.512 25.6 11.776 26.112 26.112v289.28z" fill="#0972E7" p-id="26545"></path><path d="M742.912 758.53824c0 13.824-11.264 25.088-25.088 25.088H274.432c-13.824 0.512-25.6-9.728-26.112-23.552-0.512-13.824 9.728-25.6 23.552-26.112h446.464c13.312 0 24.576 11.264 24.576 24.576z m-261.12-224.768c-9.728-10.24-26.112-10.24-36.352-0.512l-78.848 79.36c-10.24 10.24-10.24 26.624 0 36.864 9.728 10.24 26.112 10.24 36.352 0.512l79.36-78.848c9.728-10.752 9.728-27.136-0.512-37.376z" fill="#0972E7" p-id="26546"></path><path d="M564.736 648.97024c10.24-9.728 10.24-26.112 0-36.352l-79.36-78.848c-10.24-10.24-26.624-10.24-36.864 0-10.24 9.728-10.24 26.112 0 36.352l78.848 78.848c10.752 10.24 27.136 10.24 37.376 0z" fill="#0972E7" p-id="26547"></path><path d="M649.216 533.77024c-9.728-10.24-26.112-10.24-36.352-0.512l-79.36 78.848c-10.24 10.24-10.24 26.624 0 36.864 9.728 10.24 26.112 10.24 36.352 0.512l79.36-78.848c9.728-10.24 9.728-26.624 0-36.864z" fill="#0972E7" p-id="26548"></path><path d="M714.24 468.74624c-9.728-10.24-26.112-10.24-36.352-0.512l-79.36 78.848c-10.24 10.24-10.24 26.624 0 36.864 9.728 10.24 26.112 10.24 36.352 0.512l79.36-78.848c10.24-10.24 10.24-27.136 0-36.864zM97.792 404.74624H39.936c0-51.2-0.512-120.832-0.512-120.832 0-112.128 91.136-203.264 203.264-203.264h136.704c123.392 0 194.56 66.56 194.56 182.784h-57.856c0-83.968-44.544-124.928-136.192-124.928H242.688c-80.384 0-145.408 65.024-145.408 145.408 0 0 0.512 69.632 0.512 120.832z" fill="#0972E7" p-id="26549"></path></svg>
                                 </span>
-                                <span class="nav-link-title strong-text">TEST RESULT</span>
+                                <span class="nav-link-title strong-text" v-text="language.result_page_title"></span>
                             </a>
                         </li>
                     </ul>
@@ -67,8 +67,8 @@
                     <svg t="1677481883820" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2905" width="50" height="50"><path d="M608 416h288c35.36 0 64 28.48 64 64v416c0 35.36-28.48 64-64 64H480c-35.36 0-64-28.48-64-64v-288H128c-35.36 0-64-28.48-64-64V128c0-35.36 28.48-64 64-64h416c35.36 0 64 28.48 64 64v288z m0 64v64c0 35.36-28.48 64-64 64h-64v256.032c0 17.664 14.304 31.968 31.968 31.968H864a31.968 31.968 0 0 0 31.968-31.968V512a31.968 31.968 0 0 0-31.968-31.968H608zM128 159.968V512c0 17.664 14.304 31.968 31.968 31.968H512a31.968 31.968 0 0 0 31.968-31.968V160A31.968 31.968 0 0 0 512.032 128H160A31.968 31.968 0 0 0 128 159.968z m64 244.288V243.36h112.736V176h46.752c6.4 0.928 9.632 1.824 9.632 2.752a10.56 10.56 0 0 1-1.376 4.128c-2.752 7.328-4.128 16.032-4.128 26.112v34.368h119.648v156.768h-50.88v-20.64h-68.768v118.272H306.112v-118.272H238.752v24.768H192z m46.72-122.368v60.48h67.392V281.92H238.752z m185.664 60.48V281.92h-68.768v60.48h68.768z m203.84 488H576L668.128 576h64.64l89.344 254.4h-54.976l-19.264-53.664h-100.384l-19.232 53.632z m33.024-96.256h72.864l-34.368-108.608h-1.376l-37.12 108.608zM896 320h-64a128 128 0 0 0-128-128V128a192 192 0 0 1 192 192zM128 704h64a128 128 0 0 0 128 128v64a192 192 0 0 1-192-192z" fill="#333333" p-id="2906"></path></svg>
                 </a>
                 <div class="dropdown-menu">
-                    <a  class="dropdown-item">中文</a>
-                    <a  class="dropdown-item">English</a>
+                    <a  class="dropdown-item" @click="setLanguage('chinese')">中文</a>
+                    <a  class="dropdown-item" @click="setLanguage('english')">English</a>
                   </div>
             </div>
             
@@ -89,7 +89,7 @@
                     <div class="btn-list">
                         <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-create-plan">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-                            Test Plan
+                            New Plan
                         </a>
                         <a class="btn  d-none d-sm-inline-block">
                             <svg t="1690960933893" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4519" width="320" height="320"><path d="M750.933333 119.466667H290.133333c-65.877333 0-119.466667 53.589333-119.466666 119.466666v119.466667h68.266666v-119.466667c0-28.16 23.04-51.2 51.2-51.2h460.8c18.773333 0 34.133333 15.36 34.133334 34.133334v597.333333c0 18.773333-15.36 34.133333-34.133334 34.133333H290.133333c-28.16 0-51.2-23.04-51.2-51.2v-153.6h-68.266666v153.6c0 65.877333 53.589333 119.466667 119.466666 119.466667h460.8c56.490667 0 102.4-45.909333 102.4-102.4V221.866667c0-56.490667-45.909333-102.4-102.4-102.4z" fill="#231815" p-id="4520"></path><path d="M396.117333 641.194667l48.298667 48.128L630.272 503.466667 444.416 317.610667l-48.298667 48.128L508.245333 477.866667H136.533333v68.266666h354.645334z" fill="#231815" p-id="4521"></path></svg>
@@ -585,6 +585,8 @@
 <script src="https://unpkg.com/element-plus"></script>
 <script src="https://unpkg.com/@element-plus/icons-vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/static/js/lan.js"></script>
+
 <script>
 
 const { 
@@ -611,7 +613,12 @@ const app = createApp({
         const tearDown_on_shutdown_checked = ref(false)
         const serialize_threadgroups_checked = ref(false)
         const functional_mode_checked = ref(false)
+        const language = ref({})
         
+        onBeforeMount(() => {
+            getLanguage()
+        });
+
         onMounted(() => {
             initPlan();
         });
@@ -621,6 +628,51 @@ const app = createApp({
             await nextTick();
             this.isReload = true;
         };
+
+        const setLanguage = (language) => {
+            loading.value = true
+            axios.post('/api/language/set', {
+                language: language
+            })
+            .then(function (response) {
+                if(response['data']['status'] == 1){
+                    elMessage('success', response['data']['msg'])
+                    getLanguage()
+                }else{
+                    elMessage('error', response['data']['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                elMessage('error', error)
+            });
+            loading.value = false
+        }
+
+        const getLanguage = () => {
+            loading.value = true
+            axios.post('/api/language/get', {})
+            .then(function (response) {
+                if(response['data']['status'] == 1){
+                    if(response['data']['language'] == 'chinese'){
+                        language.value = CHINESE
+                    }else{
+                        language.value = ENGLISH
+                    }                
+                }else{
+                    elMessage('error', response['data']['msg'])
+                    language.value = ENGLISH
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                elMessage('error', error)
+                language.value = ENGLISH
+            });
+            loading.value = false
+        }
 
         const clickPlan = (name) => {
             loading.value = true
@@ -778,11 +830,13 @@ const app = createApp({
             tearDown_on_shutdown_checked,
             serialize_threadgroups_checked,
             functional_mode_checked,
+            language,
             createPlan,
             elMessage,
             removePlan,
             removeAllPlan,
-            clickPlan
+            clickPlan,
+            setLanguage
         };
     }
 });
