@@ -12,7 +12,7 @@ async def set_language(content: dict, response:Response):
    try:
       language = content.get('language')
       response.set_cookie(key="language",value=language)
-      result = {'status':1, 'msg': 'set success'}
+      result = {'status':1, 'msg': 'Change the language to {}'.format(language)}
    except Exception as e:
       logging.exception(e)
       result = {'status':0, 'msg': str(e)}

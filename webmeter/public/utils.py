@@ -63,61 +63,77 @@ class Utils(object):
         """get pc platform"""
         sys_platform = platform.platform().lower()
         match sys_platform:
-            case sys_platform.__contains__(Platform.WINDOWS.value):
-                return Platform.WINDOWS.value
-            case sys_platform.__contains__(Platform.MACOS.value):
-                return Platform.MACOS.value
-            case sys_platform.__contains__(Platform.LINUX.value):
-                return Platform.LINUX.value
+            case sys_platform.__contains__(Platform.WINDOWS):
+                return Platform.WINDOWS
+            case sys_platform.__contains__(Platform.MACOS):
+                return Platform.MACOS
+            case sys_platform.__contains__(Platform.LINUX):
+                return Platform.LINUX
             case _:
-                raise Exception('platform is invalid')
+                raise Exception('platform is undefined')
 
     @classmethod
-    def read_jmxfile_text(cls, jmx_path_or_name: str, tag: str, name: str) -> str:
+    def read_jmxfile_text(cls, 
+                          jmx_path_or_name: str, 
+                          tag: str, 
+                          name: str, 
+                          default: any) -> any:
         """read text from jmx file"""
-        treeDom =ElementTree.parse(jmx_path_or_name)
-        rootDom = treeDom.getroot()
-        tag_object = rootDom.iter(tag)
+        jmxElementTreeDom =ElementTree.parse(jmx_path_or_name)
+        jmxElementRootDom = jmxElementTreeDom.getroot()
+        tag_object = jmxElementRootDom.iter(tag)
         for tag_target in tag_object:
             if tag_target.attrib['name'] == name:
                 return tag_target.text
-        raise Exception('no result')
+        logger.warning('no found {}'.format(name))
+        return default
     
     @classmethod
-    def read_jmxfile_testname(cls, jmx_path_or_name: str, tag: str, attr: str) -> str:
+    def read_jmxfile_testname(cls, 
+                              jmx_path_or_name: str, 
+                              tag: str,
+                              attr: str, 
+                              default: any) -> any:
         """read attr from jmx file"""
-        treeDom =ElementTree.parse(jmx_path_or_name)
-        rootDom = treeDom.getroot()
-        tag_object = rootDom.iter(tag)
+        jmxElementTreeDom =ElementTree.parse(jmx_path_or_name)
+        jmxElementRootDom = jmxElementTreeDom.getroot()
+        tag_object = jmxElementRootDom.iter(tag)
         for tag_target in tag_object:
             if tag_target.attrib['testclass'] == attr:
                 return tag_target.attrib['testname']
-        raise Exception('no result')
+        logger.warning('no found {}'.format(attr))
+        return default
     
     @classmethod
-    def write_jmxfile_testname(cls, jmx_path_or_name: str, tag: str, 
-                  attr: str, testname: str) -> str:
+    def write_jmxfile_testname(cls, 
+                               jmx_path_or_name: str, 
+                               tag: str,
+                               attr: str, 
+                               testname: str) -> str:
         """update testname to jmx file"""
-        treeDom =ElementTree.parse(jmx_path_or_name)
-        rootDom = treeDom.getroot()
-        tag_object = rootDom.iter(tag)
+        jmxElementTreeDom =ElementTree.parse(jmx_path_or_name)
+        jmxElementRootDom = jmxElementTreeDom.getroot()
+        tag_object = jmxElementRootDom.iter(tag)
         for tag_target in tag_object:
             if tag_target.attrib['testclass'] == attr:
                 tag_target.attrib['testname'] = testname
-                treeDom.write(jmx_path_or_name, encoding='utf-8')
+                jmxElementTreeDom.write(jmx_path_or_name, encoding='utf-8')
                 return True
         return False
     
     @classmethod
-    def write_jmxfile_text(cls, jmx_path_or_name: str, tag: str, 
-                  name: str, text: str) -> str:
+    def write_jmxfile_text(cls, 
+                           jmx_path_or_name: str, 
+                           tag: str,
+                           name: str, 
+                           text: str) -> str:
         """write text to jmx file"""
-        treeDom =ElementTree.parse(jmx_path_or_name)
-        rootDom = treeDom.getroot()
-        tag_object = rootDom.iter(tag)
+        jmxElementTreeDom =ElementTree.parse(jmx_path_or_name)
+        jmxElementRootDom = jmxElementTreeDom.getroot()
+        tag_object = jmxElementRootDom.iter(tag)
         for tag_target in tag_object:
             if tag_target.attrib['name'] == name:
                 tag_target.text = text
-                treeDom.write(jmx_path_or_name, encoding='utf-8')
+                jmxElementTreeDom.write(jmx_path_or_name, encoding='utf-8')
                 return True
         return False    

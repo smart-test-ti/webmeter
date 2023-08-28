@@ -40,7 +40,15 @@ python -m webmeter --host={ip} --port={port}
 
 ### debug
 
-```shell
-cd webmeter
-python debug.py
-```
+* remove [webmeter] moudle from all python file
+
+  ```python
+  example
+  from webmeter.public.plan import TestPlan  change to from public.plan import TestPlan
+  ```
+* run debug.py
+
+  ```
+  cd webmeter
+  python debug.py
+  ```
