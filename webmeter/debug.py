@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from view import page,api
-from public.utils import Utils
+from public.utils import Common
 from fastapi.staticfiles import StaticFiles
 import requests
 import webbrowser
@@ -25,7 +25,7 @@ def open_url(host: str, port: int) -> None:
         flag = status(host, port)
     webbrowser.open('http://{}:{}/plan'.format(host, port), new=2)
 
-def main(host=Utils.ip(), port=6006) -> None:
+def main(host=Common.ip(), port=6006) -> None:
     start(host, port)   
 
 if __name__ == "__main__":

@@ -1,22 +1,22 @@
 import os
 import shutil
 from loguru import logger
-from public.utils import Utils
+from public.utils import Common, JMX
 
 class TestPlan(object):
 
     def __init__(self):
-        self.file_dir = os.path.join(Utils.STATICPATH, 'file')
+        self.file_dir = os.path.join(Common.STATICPATH, 'file')
         self.template_jmx_path = os.path.join(self.file_dir, 'template.jmx')
-        self.root_dir = Utils.make_dir(os.path.join(os.getcwd(), 'webmeter'))
+        self.root_dir = Common.make_dir(os.path.join(os.getcwd(), 'webmeter'))
 
 
     def create(self, plan_name: str) -> str:
         """create new plan"""
-        content = Utils.read_file_content(self.template_jmx_path)
-        plan_dir = Utils.make_dir(os.path.join(self.root_dir, plan_name))
-        plan_path = Utils.make_dir_file(dir=plan_dir, filename='plan.jmx', content=content)
-        Utils.write_jmxfile_testname(jmx_path_or_name=os.path.join(self.root_dir, plan_name, 'plan.jmx'),
+        content = Common.read_file_content(self.template_jmx_path)
+        plan_dir = Common.make_dir(os.path.join(self.root_dir, plan_name))
+        plan_path = Common.make_dir_file(dir=plan_dir, filename='plan.jmx', content=content)
+        JMX.write_testname(jmx_path_or_name=os.path.join(self.root_dir, plan_name, 'plan.jmx'),
                                      tag='TestPlan', attr='TestPlan', testname=plan_name)
         logger.info('create plan success: {}'.format(plan_path))
         return plan_path
@@ -38,7 +38,7 @@ class TestPlan(object):
         element_dict['TestPlan.tearDown_on_shutdown'] = content['tearDown_on_shutdown']
         element_dict['TestPlan.serialize_threadgroups'] = content['serialize_threadgroups']
         for key in element_dict.keys():
-            Utils.write_jmxfile_text(new_dir, 'stringProp', key, element_dict[key])
+            JMX.write_text(new_dir, 'stringProp', key, element_dict[key])
 
     def remove(self, plan: str) -> None:
         """remove one plan"""
@@ -81,27 +81,27 @@ class TestPlan(object):
     def plan_base_info(self, plan_jmx_path: str) -> dict:
         """read plan base info"""
         plan_info_dict = dict()
-        plan_info_dict['name'] = Utils.read_jmxfile_testname(
+        plan_info_dict['name'] = JMX.read_testname(
             jmx_path_or_name=plan_jmx_path, 
             tag='TestPlan', 
             attr='TestPlan',
             default='TestPlan')
-        plan_info_dict['comments'] = Utils.read_jmxfile_text(
+        plan_info_dict['comments'] = JMX.read_text(
             jmx_path_or_name=plan_jmx_path, 
             tag='stringProp', 
             name='TestPlan.comments', 
             default='')
-        plan_info_dict['functional_mode'] = Utils.MAPPING.get(Utils.read_jmxfile_text(
+        plan_info_dict['functional_mode'] = Common.MAPPING.get(JMX.read_text(
             jmx_path_or_name=plan_jmx_path, 
             tag='boolProp', 
             name='TestPlan.functional_mode',
             default='false'))
-        plan_info_dict['tearDown_on_shutdown'] = Utils.MAPPING.get(Utils.read_jmxfile_text(
+        plan_info_dict['tearDown_on_shutdown'] = Common.MAPPING.get(JMX.read_text(
             jmx_path_or_name=plan_jmx_path,
             tag='boolProp', 
             name='TestPlan.tearDown_on_shutdown',
             default='true'))
-        plan_info_dict['serialize_threadgroups'] = Utils.MAPPING.get(Utils.read_jmxfile_text(
+        plan_info_dict['serialize_threadgroups'] = Common.MAPPING.get(JMX.read_text(
             jmx_path_or_name=plan_jmx_path, 
             tag='boolProp', 
             name='TestPlan.serialize_threadgroups',
@@ -111,57 +111,57 @@ class TestPlan(object):
     def thread_group_info(self, plan_jmx_path: str) -> dict:
         """read thread group info"""
         thread_group_info_dict = dict()
-        thread_group_info_dict['thread_group_name'] = Utils.read_jmxfile_testname(
+        thread_group_info_dict['thread_group_name'] = JMX.read_testname(
             jmx_path_or_name=plan_jmx_path, 
             tag='ThreadGroup', 
             attr='ThreadGroup',
             default='ThreadGroup')
-        thread_group_info_dict['thread_group_comment'] = Utils.read_jmxfile_text(
+        thread_group_info_dict['thread_group_comment'] = JMX.read_text(
             jmx_path_or_name=plan_jmx_path, 
             tag='stringProp', 
             name='TestPlan.comments',
             default=None)
-        thread_group_info_dict['on_sample_error'] = Utils.read_jmxfile_text(
+        thread_group_info_dict['on_sample_error'] = JMX.read_text(
             jmx_path_or_name=plan_jmx_path, 
             tag='stringProp', 
             name='ThreadGroup.on_sample_error',
             default='continue')
-        thread_group_info_dict['num_threads'] = Utils.read_jmxfile_text(
+        thread_group_info_dict['num_threads'] = JMX.read_text(
             jmx_path_or_name=plan_jmx_path, 
             tag='stringProp', 
             name='ThreadGroup.num_threads',
             default='1')
-        thread_group_info_dict['ramp_time'] = Utils.read_jmxfile_text(
+        thread_group_info_dict['ramp_time'] = JMX.read_text(
             jmx_path_or_name=plan_jmx_path, 
             tag='stringProp', 
             name='ThreadGroup.ramp_time',
             default='1')
-        thread_group_info_dict['loops'] = Utils.read_jmxfile_text(
+        thread_group_info_dict['loops'] = JMX.read_text(
             jmx_path_or_name=plan_jmx_path,
             tag='stringProp', 
             name='LoopController.loops',
             default='1')
-        thread_group_info_dict['same_user_on_next_iteration'] = Utils.MAPPING.get(Utils.read_jmxfile_text(
+        thread_group_info_dict['same_user_on_next_iteration'] = Common.MAPPING.get(JMX.read_text(
             jmx_path_or_name=plan_jmx_path,
             tag='boolProp', 
             name='ThreadGroup.same_user_on_next_iteration',
             default='true'))
-        thread_group_info_dict['delayedStart'] = Utils.MAPPING.get(Utils.read_jmxfile_text(
+        thread_group_info_dict['delayedStart'] = Common.MAPPING.get(JMX.read_text(
             jmx_path_or_name=plan_jmx_path,
             tag='boolProp', 
             name='ThreadGroup.delayedStart',
             default='false'))
-        thread_group_info_dict['scheduler'] = Utils.MAPPING.get(Utils.read_jmxfile_text(
+        thread_group_info_dict['scheduler'] = Common.MAPPING.get(JMX.read_text(
             jmx_path_or_name=plan_jmx_path,
             tag='boolProp', 
             name='ThreadGroup.scheduler',
             default='false'))
-        thread_group_info_dict['duration'] = Utils.read_jmxfile_text(
+        thread_group_info_dict['duration'] = JMX.read_text(
             jmx_path_or_name=plan_jmx_path, 
             tag='stringProp', 
             name='ThreadGroup.duration',
             default='')
-        thread_group_info_dict['delay'] = Utils.read_jmxfile_text(
+        thread_group_info_dict['delay'] = JMX.read_text(
             jmx_path_or_name=plan_jmx_path, 
             tag='stringProp', 
             name='ThreadGroup.delay',
@@ -169,12 +169,92 @@ class TestPlan(object):
         logger.info(thread_group_info_dict)
         return thread_group_info_dict
     
+    def samplers_info(self, plan_jmx_path: str) -> list:
+        """get samplers info"""
+        samplers_info_dict = dict()
+        samplers_info_dict['http_request_name'] = JMX.read_testname(
+            jmx_path_or_name=plan_jmx_path, 
+            tag='HTTPSamplerProxy', 
+            attr='HTTPSamplerProxy',
+            default='Http Request')
+        samplers_info_dict['protocol'] = JMX.read_text(
+            jmx_path_or_name=plan_jmx_path, 
+            tag='stringProp', 
+            name='HTTPSampler.protocol',
+            default='')
+        samplers_info_dict['domain'] = JMX.read_text(
+            jmx_path_or_name=plan_jmx_path, 
+            tag='stringProp', 
+            name='HTTPSampler.domain',
+            default='')
+        samplers_info_dict['port'] = JMX.read_text(
+            jmx_path_or_name=plan_jmx_path, 
+            tag='stringProp', 
+            name='HTTPSampler.port',
+            default='')
+        samplers_info_dict['method'] = JMX.read_text(
+            jmx_path_or_name=plan_jmx_path, 
+            tag='stringProp', 
+            name='HTTPSampler.method',
+            default='')
+        samplers_info_dict['path'] = JMX.read_text(
+            jmx_path_or_name=plan_jmx_path, 
+            tag='stringProp', 
+            name='HTTPSampler.path',
+            default='')
+        samplers_info_dict['contentEncoding'] = JMX.read_text(
+            jmx_path_or_name=plan_jmx_path, 
+            tag='stringProp', 
+            name='HTTPSampler.contentEncoding',
+            default='')
+        samplers_info_dict['follow_redirects'] = Common.MAPPING.get(JMX.read_text(
+            jmx_path_or_name=plan_jmx_path,
+            tag='boolProp', 
+            name='HTTPSampler.follow_redirects',
+            default='true'))
+        samplers_info_dict['auto_redirects'] = Common.MAPPING.get(JMX.read_text(
+            jmx_path_or_name=plan_jmx_path,
+            tag='boolProp', 
+            name='HTTPSampler.auto_redirects',
+            default='false'))
+        samplers_info_dict['use_keepalive'] = Common.MAPPING.get(JMX.read_text(
+            jmx_path_or_name=plan_jmx_path,
+            tag='boolProp', 
+            name='HTTPSampler.use_keepalive',
+            default='true'))
+        samplers_info_dict['DO_MULTIPART_POST'] = Common.MAPPING.get(JMX.read_text(
+            jmx_path_or_name=plan_jmx_path,
+            tag='boolProp', 
+            name='HTTPSampler.DO_MULTIPART_POST',
+            default='false'))
+        samplers_info_dict['BROWSER_COMPATIBLE_MULTIPART'] = Common.MAPPING.get(JMX.read_text(
+            jmx_path_or_name=plan_jmx_path,
+            tag='boolProp', 
+            name='HTTPSampler.BROWSER_COMPATIBLE_MULTIPART',
+            default='false'))
+        samplers_info_dict['parameters'] = JMX.read_proxy(plan_jmx_path)
+        samplers_info_dict['postBodyRaw'] = Common.MAPPING.get(JMX.read_text(
+            jmx_path_or_name=plan_jmx_path,
+            tag='boolProp', 
+            name='HTTPSampler.postBodyRaw',
+            default='false'))
+        if samplers_info_dict['postBodyRaw']:
+            samplers_info_dict['body_data'] = JMX.read_text(
+                jmx_path_or_name=plan_jmx_path, 
+                tag='stringProp', 
+                name='Argument.value',
+                default='{}')
+        logger.info(samplers_info_dict)
+        return samplers_info_dict
+    
     def get_plan_info(self, plan: str) -> dict:
         """get one plan info"""
         result = dict()
         plan_jmx_path = os.path.join(self.root_dir, plan, 'plan.jmx')
         plan_base_info = self.plan_base_info(plan_jmx_path)
         thread_group_info = self.thread_group_info(plan_jmx_path)
+        samplers_info = self.samplers_info(plan_jmx_path)
         result.update(plan_base_info)
         result.update(thread_group_info)
+        result.update(samplers_info)
         return result

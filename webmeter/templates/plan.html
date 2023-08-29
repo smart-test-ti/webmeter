@@ -290,13 +290,13 @@
                                             <div class="mb-3 row">
                                                 <label class="col-2 col-form-label required">Name</label>
                                                 <div class="col">
-                                                  <input  class="form-control"  placeholder="Enter name" value="HTTP Request">
+                                                  <input  class="form-control"  placeholder="Enter name" :value="samplerName">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label class="col-2 col-form-label">Comments</label>
                                                 <div class="col">
-                                                  <input  class="form-control" placeholder="Enter comments">
+                                                  <input  class="form-control" placeholder="Enter comments" :value="samplerComment">
                                                 </div>
                                             </div>
                                             <div class="hr-text hr-text-left">Web Server</div>
@@ -304,19 +304,19 @@
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Protocol[http]</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" :value="samplerProtocol">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Server Name or IP</label>
-                                                        <input type="test" class="form-control" >
+                                                        <input type="test" class="form-control" :value="samplerIP">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                       <label class="form-label">Port Number</label>
-                                                      <input type="test" class="form-control" >
+                                                      <input type="test" class="form-control" :value="samplerPort">
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,56 +325,54 @@
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Method</label>
-                                                        <select class="form-control form-select">
-                                                            <option value="">GET</option>
-                                                            <option value="">POST</option>
-                                                            <option value="">PUT</option>
+                                                        <select class="form-control form-select" :value="selectedMethod">
+                                                            <option v-for="method in methodList" :key="method" :text="method"></option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Path</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" :value="requestPath">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Content encoding</label>
-                                                        <input type="test" class="form-control" >
+                                                        <input type="test" class="form-control" :value="requestEncode">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" >
+                                                    <input class="form-check-input" type="checkbox" :checked="autoRedirectChecked">
                                                     <span class="form-check-label">Redirect Automatically</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" checked>
+                                                    <input class="form-check-input" type="checkbox" :checked="followRedirectChecked">
                                                     <span class="form-check-label">Follow Redirect</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" checked>
+                                                    <input class="form-check-input" type="checkbox" :checked="useKeepAliveChecked">
                                                     <span class="form-check-label">Use KeepAlive</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" >
+                                                    <input class="form-check-input" type="checkbox" :checked="useKeepMultipartChecked">
                                                     <span class="form-check-label">Use multipart/form-data</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" >
+                                                    <input class="form-check-input" type="checkbox" :checked="browserComatibleChecked">
                                                     <span class="form-check-label">Browser-compatible headers</span>
                                                 </label>
                                             </div>
                                             <div class="card-tabs">
                                                 <ul class="nav nav-tabs">
-                                                    <li class="nav-item"><a href="#parameter" class="nav-link active" data-bs-toggle="tab">Parameters</a></li>
-                                                    <li class="nav-item"><a href="#body-data" class="nav-link" data-bs-toggle="tab">Body Data</a></li>
-                                                    <li class="nav-item"><a href="#files-upload" class="nav-link" data-bs-toggle="tab">Files Upload</a></li>
+                                                    <li class="nav-item"><a href="#parameter" v-show="parametersVisable" class="nav-link active" data-bs-toggle="tab">Parameters</a></li>
+                                                    <li class="nav-item"><a href="#body-data" v-show="bodydataVisavle" class="nav-link active" data-bs-toggle="tab">Body Data</a></li>
+                                                    <!-- <li class="nav-item"><a href="#files-upload" class="nav-link" data-bs-toggle="tab">Files Upload</a></li> -->
                                                 </ul>
                                                 <div class="tab-content">
-                                                    <div id="parameter" class="card tab-pane active show">
+                                                    <div id="parameter" v-show="parametersVisable" class="card tab-pane active">
                                                         
                                                         <div class="card-body">
                                                             <div class="btn-list">
@@ -418,15 +416,15 @@
                                                               </div>
                                                             </div>
                                                     </div>
-                                                    <div id="body-data" class="card tab-pane">
+                                                    <div id="body-data" v-show="bodydataVisavle" class="card tab-pane active">
                                                         <div class="card-body">
-                                                            <textarea class="form-control" name="example-textarea" placeholder="Textarea placeholder"></textarea>
+                                                            <textarea :value="bodyDataContent" class="form-control" name="example-textarea" placeholder="Textarea placeholder"></textarea>
                                                         </div>
                                                     </div>
-                                                    <div id="files-upload" class="card tab-pane">
+                                                    <!-- <div id="files-upload" class="card tab-pane">
                                                         <div class="card-body">
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -659,6 +657,25 @@ const app = createApp({
         const duration = ref('')
         const delay = ref('')
 
+        //sampler info
+        const samplerName = ref('')
+        const samplerComment = ref('')
+        const samplerProtocol = ref('')
+        const samplerIP = ref('')
+        const samplerPort = ref('')
+        const requestPath = ref('')
+        const requestEncode = ref('')
+        const autoRedirectChecked = ref(false)
+        const followRedirectChecked = ref(true)
+        const useKeepAliveChecked = ref(true)
+        const useKeepMultipartChecked = ref(false)
+        const browserComatibleChecked = ref(false)
+        const selectedMethod = ref('GET')
+        const methodList = ['GET', 'POST', 'PUT']
+        const bodyDataContent = ref('{}')
+        const parametersVisable = ref(false)
+        const bodydataVisavle = ref(true)
+
         onBeforeMount(() => {
             getLanguage()
         });
@@ -731,7 +748,7 @@ const app = createApp({
             .then(function (response) {
                 plan_data = response['data']
                 if(plan_data['status'] == 1){
-                    // plan base info
+                    //plan base info
                     planName.value = plan_data['plan_info']['name']
                     planComments.value = plan_data['plan_info']['comments']
                     tearDown_on_shutdown_checked.value = plan_data['plan_info']['tearDown_on_shutdown']
@@ -755,7 +772,22 @@ const app = createApp({
                     schedulerChecked.value = plan_data['plan_info']['scheduler']
                     duration.value = plan_data['plan_info']['duration']
                     delay.value = plan_data['plan_info']['delay']
-
+                    //sampler info
+                    samplerName.value = plan_data['plan_info']['http_request_name']
+                    samplerProtocol.value = plan_data['plan_info']['protocol']
+                    samplerIP.value = plan_data['plan_info']['domain']
+                    samplerPort.value = plan_data['plan_info']['port']
+                    requestPath.value = plan_data['plan_info']['path']
+                    selectedMethod.value = plan_data['plan_info']['method']
+                    requestEncode.value = plan_data['plan_info']['contentEncoding']
+                    autoRedirectChecked.value = plan_data['plan_info']['auto_redirects']
+                    followRedirectChecked.value = plan_data['plan_info']['follow_redirects']
+                    useKeepAliveChecked.value = plan_data['plan_info']['use_keepalive']
+                    useKeepMultipartChecked.value = plan_data['plan_info']['DO_MULTIPART_POST']
+                    browserComatibleChecked.value = plan_data['plan_info']['BROWSER_COMPATIBLE_MULTIPART']
+                    if(plan_data['plan_info']['postBodyRaw']){
+                        bodyDataContent.value = plan_data['plan_info']['body_data']
+                    }
                 }else{
                     elMessage('error', response['data']['msg'])
                 }
@@ -932,6 +964,25 @@ const app = createApp({
             duration,
             delay,
 
+            //sampler info
+            samplerName,
+            samplerComment,
+            samplerProtocol,
+            samplerIP,
+            samplerPort,
+            requestPath,
+            requestEncode,
+            autoRedirectChecked,
+            followRedirectChecked,
+            useKeepAliveChecked,
+            useKeepMultipartChecked,
+            browserComatibleChecked,
+            methodList,
+            selectedMethod,
+            bodyDataContent,
+            parametersVisable,
+            bodydataVisavle,
+            
             // founction
             createPlan,
             elMessage,

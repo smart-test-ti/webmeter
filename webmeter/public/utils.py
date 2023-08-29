@@ -10,8 +10,8 @@ class Platform(enum.Enum):
     WINDOWS = 'windows'
     MACOS = 'macos'
     LINUX = 'linux'
-
-class Utils(object):
+    
+class Common(object):
     
     STATICPATH = os.path.dirname(os.path.realpath(__file__))
     MAPPING = dict()
@@ -71,13 +71,13 @@ class Utils(object):
                 return Platform.LINUX
             case _:
                 raise Exception('platform is undefined')
+        
+
+class JMX(object):
 
     @classmethod
-    def read_jmxfile_text(cls, 
-                          jmx_path_or_name: str, 
-                          tag: str, 
-                          name: str, 
-                          default: any) -> any:
+    def read_text(cls, jmx_path_or_name: str, tag: str, 
+                  name: str, default: any) -> any:
         """read text from jmx file"""
         jmxElementTreeDom =ElementTree.parse(jmx_path_or_name)
         jmxElementRootDom = jmxElementTreeDom.getroot()
@@ -89,11 +89,57 @@ class Utils(object):
         return default
     
     @classmethod
-    def read_jmxfile_testname(cls, 
-                              jmx_path_or_name: str, 
-                              tag: str,
-                              attr: str, 
-                              default: any) -> any:
+    def read_text_list(cls, jmx_path_or_name: str, tag: str, 
+                  name: str, key: str) -> list:
+        """read text list from jmx file"""
+        element_list = list()
+        element_dict = dict()
+        jmxElementTreeDom =ElementTree.parse(jmx_path_or_name)
+        jmxElementRootDom = jmxElementTreeDom.getroot()
+        tag_object = jmxElementRootDom.iter(tag)
+        for tag_target in tag_object:
+            tag_dict = dict()
+            if tag_target.attrib['name'] == name:
+                element_dict[key] = tag_target.text
+                tag_dict.update(element_dict)
+                element_list.append(tag_dict)
+        return element_list
+    
+    @classmethod
+    def read_proxy(cls, jmx_path_or_name: str) -> list:
+        """read text from jmx file"""
+        name_list = cls.read_text_list(jmx_path_or_name=jmx_path_or_name,
+                                       tag='stringProp',
+                                       name='Argument.name',
+                                       key='name')        
+        value_list = cls.read_text_list(jmx_path_or_name=jmx_path_or_name,
+                                        tag='stringProp',
+                                        name='Argument.value',
+                                        key='value')
+        metadata_list = cls.read_text_list(jmx_path_or_name=jmx_path_or_name,
+                                        tag='stringProp',
+                                        name='Argument.metadata',
+                                        key='metadata')
+        use_equals_list = cls.read_text_list(jmx_path_or_name=jmx_path_or_name,
+                                        tag='boolProp',
+                                        name='HTTPArgument.use_equals',
+                                        key='use_equals')
+        always_encode_list = cls.read_text_list(jmx_path_or_name=jmx_path_or_name,
+                                        tag='boolProp',
+                                        name='HTTPArgument.always_encode',
+                                        key='always_encode')
+        proxy_list = list()
+        for i in range(len(name_list)):
+            name_list[i].update(value_list[i])
+            name_list[i].update(metadata_list[i])
+            name_list[i].update(use_equals_list[i])
+            name_list[i].update(always_encode_list[i])
+            proxy_list.append(name_list[i])
+        return proxy_list
+    
+    @classmethod
+    def read_testname(cls, jmx_path_or_name: str, tag: str,
+                      attr: str, default: any) -> any:
         """read attr from jmx file"""
         jmxElementTreeDom =ElementTree.parse(jmx_path_or_name)
         jmxElementRootDom = jmxElementTreeDom.getroot()
@@ -105,11 +151,8 @@ class Utils(object):
         return default
     
     @classmethod
-    def write_jmxfile_testname(cls, 
-                               jmx_path_or_name: str, 
-                               tag: str,
-                               attr: str, 
-                               testname: str) -> str:
+    def write_testname(cls, jmx_path_or_name: str, tag: str,
+                       attr: str, testname: str) -> str:
         """update testname to jmx file"""
         jmxElementTreeDom =ElementTree.parse(jmx_path_or_name)
         jmxElementRootDom = jmxElementTreeDom.getroot()
@@ -122,11 +165,8 @@ class Utils(object):
         return False
     
     @classmethod
-    def write_jmxfile_text(cls, 
-                           jmx_path_or_name: str, 
-                           tag: str,
-                           name: str, 
-                           text: str) -> str:
+    def write_text(cls, jmx_path_or_name: str, tag: str,
+                   name: str, text: str) -> str:
         """write text to jmx file"""
         jmxElementTreeDom =ElementTree.parse(jmx_path_or_name)
         jmxElementRootDom = jmxElementTreeDom.getroot()
@@ -136,4 +176,4 @@ class Utils(object):
                 tag_target.text = text
                 jmxElementTreeDom.write(jmx_path_or_name, encoding='utf-8')
                 return True
-        return False    
+        return False

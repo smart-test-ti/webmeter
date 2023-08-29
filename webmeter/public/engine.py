@@ -1,12 +1,12 @@
 import os
-from public.utils import Utils
+from public.utils import Common
 
 
 class EngineServie(object):
 
     JMETER_PATH = {
-        'windows': os.path.join(Utils.STATICPATH, 'jmeter', 'win_mac', 'apache-jmeter-5.6.2', 'bin', 'jmeter.bat'),
-        'mac': os.path.join(Utils.STATICPATH, 'jmeter', 'win_mac', 'apache-jmeter-5.6.2', 'bin', 'jmeter.sh')
+        'windows': os.path.join(Common.STATICPATH, 'jmeter', 'win_mac', 'apache-jmeter-5.6.2', 'bin', 'jmeter.bat'),
+        'mac': os.path.join(Common.STATICPATH, 'jmeter', 'win_mac', 'apache-jmeter-5.6.2', 'bin', 'jmeter.sh')
     }
 
     @classmethod
