@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Response, Cookie
+from fastapi import APIRouter, Response, Cookie, UploadFile, File, Form
 from public.plan import TestPlan
 import logging
+from loguru import logger
 from typing import Union
 
 router = APIRouter()
@@ -64,9 +65,23 @@ async def get_plan_info(content: dict):
 async def create_plan(content: dict):
    plan_name = content.get('plan_name')
    try:
+      logger.info(plan_name)
       if not test_plan.isexist(plan_name):
          test_plan.create(plan_name)
          result = {'status':1, 'msg': 'create success'}
+      else:
+         result = {'status':0, 'msg': 'plan existed'}   
+   except Exception as e:
+      logging.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/plan/import")
+async def import_plan(file:UploadFile = File(...), plan_name:str = Form(...)):
+   try:
+      if not test_plan.isexist(plan_name):
+         test_plan.import_jmx(file, plan_name)
+         result = {'status':1, 'msg': 'import success'}
       else:
          result = {'status':0, 'msg': 'plan existed'}   
    except Exception as e:

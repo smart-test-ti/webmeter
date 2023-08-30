@@ -91,7 +91,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                             New
                         </a>
-                        <a class="btn  d-none d-sm-inline-block">
+                        <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-import-plan">
                             <svg t="1690960933893" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4519" width="320" height="320"><path d="M750.933333 119.466667H290.133333c-65.877333 0-119.466667 53.589333-119.466666 119.466666v119.466667h68.266666v-119.466667c0-28.16 23.04-51.2 51.2-51.2h460.8c18.773333 0 34.133333 15.36 34.133334 34.133334v597.333333c0 18.773333-15.36 34.133333-34.133334 34.133333H290.133333c-28.16 0-51.2-23.04-51.2-51.2v-153.6h-68.266666v153.6c0 65.877333 53.589333 119.466667 119.466666 119.466667h460.8c56.490667 0 102.4-45.909333 102.4-102.4V221.866667c0-56.490667-45.909333-102.4-102.4-102.4z" fill="#231815" p-id="4520"></path><path d="M396.117333 641.194667l48.298667 48.128L630.272 503.466667 444.416 317.610667l-48.298667 48.128L508.245333 477.866667H136.533333v68.266666h354.645334z" fill="#231815" p-id="4521"></path></svg>
                             Import
                         </a>
@@ -177,13 +177,13 @@
                                             <div class="mb-3 row">
                                                 <label class="col-2 col-form-label required">Name</label>
                                                 <div class="col">
-                                                  <input  class="form-control"  placeholder="Enter plan name" :value="planName">
+                                                  <input  class="form-control"  placeholder="Enter plan name" v-model="planName">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label class="col-2 col-form-label">Comments</label>
                                                 <div class="col">
-                                                  <input  class="form-control" placeholder="Enter comments" :value="planComments">
+                                                  <input  class="form-control" placeholder="Enter comments" v-model="planComments">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -208,13 +208,13 @@
                                             <div class="mb-3 row">
                                                 <label class="col-2 col-form-label required">Name</label>
                                                 <div class="col">
-                                                  <input  class="form-control"  placeholder="Enter Thread Group Name" :value="threadgroupName">
+                                                  <input  class="form-control"  placeholder="Enter Thread Group Name" v-model="threadgroupName">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label class="col-2 col-form-label">Comments</label>
                                                 <div class="col">
-                                                  <input  class="form-control" placeholder="Enter comments" :value="threadgroupComments">
+                                                  <input  class="form-control" placeholder="Enter comments" v-model="threadgroupComments">
                                                 </div>
                                             </div>
                                             <div class="hr-text hr-text-left">Action to be taken after a Sampler error</div>
@@ -244,19 +244,19 @@
                                             <div class="mb-3 row">
                                                 <label class="col-3 col-form-label required">Number of Threads (users)</label>
                                                 <div class="col">
-                                                  <input  class="form-control" :value="threadNum">
+                                                  <input  class="form-control" v-model="threadNum">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label class="col-3 col-form-label">Ramp-up period (seconds)</label>
                                                 <div class="col">
-                                                  <input  class="form-control" :value="rampTime">
+                                                  <input  class="form-control" v-model="rampTime">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label class="col-3 col-form-label">Loop  Count</label>
                                                 <div class="col">
-                                                  <input  class="form-control" :value="loopCount">
+                                                  <input  class="form-control" v-model="loopCount">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -276,13 +276,13 @@
                                             <div class="mb-3 row">
                                                 <label class="col-3 col-form-label">Duration (seconds)</label>
                                                 <div class="col">
-                                                  <input  class="form-control"  :disabled="schedulerDisabled" :value="duration">
+                                                  <input  class="form-control"  :disabled="schedulerDisabled" v-model="duration">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label class="col-3 col-form-label">Startup delay (seconds)</label>
                                                 <div class="col">
-                                                  <input  class="form-control" :disabled="schedulerDisabled" :value="delay">
+                                                  <input  class="form-control" :disabled="schedulerDisabled" v-model="delay">
                                                 </div>
                                             </div>
                                         </div>
@@ -290,13 +290,13 @@
                                             <div class="mb-3 row">
                                                 <label class="col-2 col-form-label required">Name</label>
                                                 <div class="col">
-                                                  <input  class="form-control"  placeholder="Enter name" :value="samplerName">
+                                                  <input  class="form-control"  placeholder="Enter name" v-model="samplerName">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label class="col-2 col-form-label">Comments</label>
                                                 <div class="col">
-                                                  <input  class="form-control" placeholder="Enter comments" :value="samplerComment">
+                                                  <input  class="form-control" placeholder="Enter comments" v-model="samplerComment">
                                                 </div>
                                             </div>
                                             <div class="hr-text hr-text-left">Web Server</div>
@@ -304,19 +304,19 @@
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Protocol[http]</label>
-                                                        <input type="text" class="form-control" :value="samplerProtocol">
+                                                        <input type="text" class="form-control" v-model="samplerProtocol">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Server Name or IP</label>
-                                                        <input type="test" class="form-control" :value="samplerIP">
+                                                        <input type="test" class="form-control" v-model="samplerIP">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                       <label class="form-label">Port Number</label>
-                                                      <input type="test" class="form-control" :value="samplerPort">
+                                                      <input type="test" class="form-control" v-model="samplerPort">
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,7 +325,7 @@
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Method</label>
-                                                        <select class="form-control form-select" :value="selectedMethod">
+                                                        <select class="form-control form-select" v-model="selectedMethod">
                                                             <option v-for="method in methodList" :key="method" :text="method"></option>
                                                         </select>
                                                     </div>
@@ -333,13 +333,13 @@
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Path</label>
-                                                        <input type="text" class="form-control" :value="requestPath">
+                                                        <input type="text" class="form-control" v-model="requestPath">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Content encoding</label>
-                                                        <input type="test" class="form-control" :value="requestEncode">
+                                                        <input type="test" class="form-control" v-model="requestEncode">
                                                     </div>
                                                 </div>
                                             </div>
@@ -418,7 +418,7 @@
                                                     </div>
                                                     <div id="body-data" v-show="bodydataVisavle" class="card tab-pane active">
                                                         <div class="card-body">
-                                                            <textarea :value="bodyDataContent" class="form-control" name="example-textarea" placeholder="Textarea placeholder"></textarea>
+                                                            <textarea v-model="bodyDataContent" class="form-control" name="example-textarea" placeholder="Textarea placeholder"></textarea>
                                                         </div>
                                                     </div>
                                                     <!-- <div id="files-upload" class="card tab-pane">
@@ -457,6 +457,14 @@
                             Add your first TEST PLAN
                         </a>
                     </div>
+                    <label class="mt-3"><strong>OR</strong></label>
+                    <div class="empty-action">
+                        <a  class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-import-plan" >
+                            <svg t="1693382701142" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1631" width="320" height="320"><path d="M739.530598 294.52799l0 435.029978c0 24.048719-20.48045 43.594891-44.444235 43.594891L303.417963 773.152858l0 43.425022c0 23.963785 19.800975 43.508933 43.807738 43.508933l434.795641 0c24.006763 0 44.360324-19.545148 44.360324-43.508933L826.381665 207.551056c0-24.048719-20.35356-43.636846-44.360324-43.636846L347.224678 163.91421c-24.006763 0-43.807738 19.588127-43.807738 43.636846l0 44.147476 391.669424 0C719.051171 251.698532 739.530598 270.521227 739.530598 294.52799zM588.693218 556.539402 463.561289 674.320922c-17.334807 16.315594-44.699038 15.551184-61.142545-1.86958-16.315594-17.419741-15.508205-44.783972 1.86958-61.099566l59.357899-55.916521L241.086335 555.435255c-24.006763 0-43.468001-18.951631-43.468001-43.00035 0-24.049742 19.461237-43.020816 43.468001-43.020816l222.559888 0-59.357899-56.257282c-17.377786-16.35755-18.185174-43.934628-1.86958-61.312414 8.583492-9.007141 20.055778-13.680581 31.528064-13.680581 10.621918 0 21.24486 3.823072 29.65746 11.68411l125.08895 117.653607c12.32163 11.535731 19.37528 27.767414 19.37528 44.593638C608.068498 528.836457 601.014848 545.06814 588.693218 556.539402z" fill="#ffffff" p-id="1632" data-spm-anchor-id="a313x.search_index.0.i0.62903a81VCJFTq" class="selected"></path></svg>
+                            import your first TEST PLAN
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -510,11 +518,29 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <el-input v-model="inputPlan" placeholder="Please input plan name" />
+                    <input type="text" class="form-control" v-model="inputPlanName" placeholder="Enter plan name" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="createPlan()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-blur fade" id="modal-import-plan" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import JMX</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="file" class="form-control mb-3" id="jmx-file" accept=".jmx"/>
+                    <input type="text" class="form-control" v-model="importPlanName" placeholder="Enter plan name" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="importPlan()">Create</button>
                 </div>
             </div>
         </div>
@@ -613,12 +639,13 @@ const app = createApp({
         const isReload = ref(true)
         const language = ref({})
         var planList = reactive([])
-        const inputPlan = ref('')
+        const inputPlanName = ref('')
+        const importPlanName = ref('')
         const planVisable = ref(false)
         const emptyVisable = ref(true)
         const checkedPlan = ref('')
         const remove_plan_name = ref('')
-
+        
         //plan base info
         const planName = ref('')
         const planComments = ref('')
@@ -803,25 +830,55 @@ const app = createApp({
 
         const createPlan = () => {
             loading.value = true
-            axios.post('/api/plan/create', {
-                plan_name: inputPlan.value.trim()
-            })
-            .then(function (response) {
-                if(response['data']['status'] == 1){
-                    elMessage('success', response['data']['msg'])
-                    initPlan()
-
-                }else{
-                    elMessage('error', response['data']['msg'])
-                }
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-                elMessage('error', error)
-            });
+            const new_plan = inputPlanName.value.trim()
+            if(new_plan){
+                axios.post('/api/plan/create', {
+                    plan_name: new_plan
+                }).then(function (response) {
+                    if(response['data']['status'] == 1){
+                        elMessage('success', response['data']['msg'])
+                        initPlan()
+                    }else{
+                        elMessage('error', response['data']['msg'])
+                    }
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                    elMessage('error', error)
+                });
+            }else{
+                elMessage('error', 'plan is empty')
+            }
             loading.value = false
-            inputPlan.value = ''
+            inputPlanName.value = ''
+        };
+
+        const importPlan = () => {
+            loading.value = true
+            const new_plan = importPlanName.value.trim()
+            const file = document.querySelector('input[type=file]').files[0]
+            if(new_plan && file){
+                const formData = new FormData()
+                formData.append('file', file)
+                formData.append('plan_name', new_plan)
+                axios.post('/api/plan/import', formData
+                ).then(function (response) {
+                    if(response['data']['status'] == 1){
+                        elMessage('success', response['data']['msg'])
+                        initPlan()
+                    }else{
+                        elMessage('error', response['data']['msg'])
+                    }
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                    elMessage('error', error)
+                });
+            }else{
+                elMessage('error', 'jmx file or plan name is empty')
+            }
+            loading.value = false
+            importPlanName.value = ''
         };
 
         const initPlan = () => {
@@ -936,7 +993,8 @@ const app = createApp({
             planVisable,
             emptyVisable,
             checkedPlan,
-            inputPlan,
+            inputPlanName,
+            importPlanName,
             remove_plan_name,
 
             //plan base info
@@ -985,6 +1043,7 @@ const app = createApp({
             
             // founction
             createPlan,
+            importPlan,
             elMessage,
             removePlan,
             removeAllPlan,

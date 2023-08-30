@@ -21,6 +21,20 @@ class TestPlan(object):
         logger.info('create plan success: {}'.format(plan_path))
         return plan_path
     
+    def import_jmx(self, file, plan_name):
+        """import new plan"""
+        plan_dir = Common.make_dir(os.path.join(self.root_dir, plan_name))
+        jmx_name = file.filename
+        jmx_path = os.path.join(self.root_dir, plan_name, jmx_name)
+        with open(jmx_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        content = Common.read_file_content(jmx_path)
+        os.remove(jmx_path)
+        plan_path = Common.make_dir_file(dir=plan_dir, filename='plan.jmx', content=content)
+        JMX.write_testname(jmx_path_or_name=os.path.join(self.root_dir, plan_name, 'plan.jmx'),
+                                     tag='TestPlan', attr='TestPlan', testname=plan_name)
+        logger.info('import plan success: {}'.format(plan_path))
+
     def isexist(self, plan_name: str) -> bool:
         if os.path.exists(os.path.join(self.root_dir, plan_name)):
             return True
