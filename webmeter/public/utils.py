@@ -1,12 +1,13 @@
 import socket
 import os
-import enum
+from enum import Enum, unique
 import platform
 from loguru import logger
 from xml.etree import ElementTree
+from typing import Optional
 
-
-class Platform(enum.Enum):
+@unique
+class Platform(Enum):
     WINDOWS = 'windows'
     MACOS = 'macos'
     LINUX = 'linux'
@@ -18,7 +19,7 @@ class Common(object):
     MAPPING[False] = 'false'
     MAPPING[True] = 'true'
     MAPPING['false'] = False
-    MAPPING['true'] = True
+    MAPPING['true'] = True    
 
     @classmethod
     def ip(cls) -> str:
@@ -59,18 +60,19 @@ class Common(object):
             return content            
     
     @classmethod
-    def pc_platform(cls) -> str:
+    def pc_platform(cls) -> Optional[str]:
         """get pc platform"""
         sys_platform = platform.platform().lower()
         match sys_platform:
-            case sys_platform.__contains__(Platform.WINDOWS):
-                return Platform.WINDOWS
-            case sys_platform.__contains__(Platform.MACOS):
-                return Platform.MACOS
-            case sys_platform.__contains__(Platform.LINUX):
-                return Platform.LINUX
+            case sys_platform.__contains__(Platform.WINDOWS.value):
+                return Platform.WINDOWS.value
+            case sys_platform.__contains__(Platform.MACOS.value):
+                return Platform.MACOS.value
+            case sys_platform.__contains__(Platform.LINUX.value):
+                return Platform.LINUX.value
             case _:
-                raise Exception('platform is undefined')
+                logger.error('platform is undefined')
+                return None
         
 
 class JMX(object):

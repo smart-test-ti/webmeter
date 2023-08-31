@@ -188,15 +188,15 @@
                                             </div>
                                             <div class="col">
                                                 <label class="form-check">
-                                                    <input class="form-check-input" type="checkbox" :checked="tearDown_on_shutdown_checked">
+                                                    <input class="form-check-input" type="checkbox" v-model="tearDown_on_shutdown_checked">
                                                     <span class="form-check-label">Run tearDown Thread Groups after shutdown of main threads</thead></span>
                                                 </label>
                                                 <label class="form-check">
-                                                    <input class="form-check-input" type="checkbox" :checked="serialize_threadgroups_checked">
+                                                    <input class="form-check-input" type="checkbox" v-model="serialize_threadgroups_checked">
                                                     <span class="form-check-label">Run Thread Groups consecutively (i.e. one at a time)</span>
                                                 </label>
                                                 <label class="form-check">
-                                                    <input class="form-check-input" type="checkbox" :checked="functional_mode_checked">
+                                                    <input class="form-check-input" type="checkbox" v-model="functional_mode_checked">
                                                     <span class="form-check-label">Functional Test Mode (i.e. save Response Data and Sampler Data)</span>
                                                     <span class="form-check-description">
                                                         Selecting Functional Test Mode may adversely affect performance.
@@ -220,23 +220,23 @@
                                             <div class="hr-text hr-text-left">Action to be taken after a Sampler error</div>
                                             <div>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="radios-inline"  :checked="continueChecked">
+                                                    <input class="form-check-input" type="radio" name="radios-inline"  v-model="smplerAction" value="continue">
                                                     <span class="form-check-label">Continue</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="radios-inline" :checked="startnextChecked">
+                                                    <input class="form-check-input" type="radio" name="radios-inline" v-model="smplerAction" value="startnextloop">
                                                     <span class="form-check-label">Start Next Thread Loop</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="radios-inline" :checked="stopthreadChecked">
+                                                    <input class="form-check-input" type="radio" name="radios-inline" v-model="smplerAction" value="stopthread">
                                                     <span class="form-check-label">Stop Thread</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="radios-inline" :checked="stoptestChecked">
+                                                    <input class="form-check-input" type="radio" name="radios-inline" v-model="smplerAction" value="stoptest">
                                                     <span class="form-check-label">Stop Test</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="radios-inline" :checked="stoptestnowChecked">
+                                                    <input class="form-check-input" type="radio" name="radios-inline" v-model="smplerAction" value="stoptestnow">
                                                     <span class="form-check-label">Stop Test Now</span>
                                                 </label>
                                             </div>
@@ -261,15 +261,15 @@
                                             </div>
                                             <div class="col">
                                                 <label class="form-check">
-                                                    <input class="form-check-input" type="checkbox" :checked="iterationChecked">
+                                                    <input class="form-check-input" type="checkbox" v-model="iterationChecked">
                                                     <span class="form-check-label">Same user on each iteration</thead></span>
                                                 </label>
                                                 <label class="form-check">
-                                                    <input class="form-check-input" type="checkbox" :checked="delayedChecked">
+                                                    <input class="form-check-input" type="checkbox" v-model="delayedChecked">
                                                     <span class="form-check-label">Delay Thread creation until needed</span>
                                                 </label>
                                                 <label class="form-check">
-                                                    <input class="form-check-input" type="checkbox" :checked="schedulerChecked" @click="clickScheduler()">
+                                                    <input class="form-check-input" type="checkbox" v-model="schedulerChecked" @click="clickScheduler()">
                                                     <span class="form-check-label">Specify Thread lifetime</span>
                                                 </label>
                                             </div>
@@ -345,23 +345,23 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" :checked="autoRedirectChecked">
+                                                    <input class="form-check-input" type="checkbox" v-model="autoRedirectChecked">
                                                     <span class="form-check-label">Redirect Automatically</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" :checked="followRedirectChecked">
+                                                    <input class="form-check-input" type="checkbox" v-model="followRedirectChecked">
                                                     <span class="form-check-label">Follow Redirect</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" :checked="useKeepAliveChecked">
+                                                    <input class="form-check-input" type="checkbox" v-model="useKeepAliveChecked">
                                                     <span class="form-check-label">Use KeepAlive</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" :checked="useKeepMultipartChecked">
+                                                    <input class="form-check-input" type="checkbox" v-model="useKeepMultipartChecked">
                                                     <span class="form-check-label">Use multipart/form-data</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" :checked="browserComatibleChecked">
+                                                    <input class="form-check-input" type="checkbox" v-model="browserComatibleChecked">
                                                     <span class="form-check-label">Browser-compatible headers</span>
                                                 </label>
                                             </div>
@@ -436,7 +436,7 @@
                             </div>
                             <div class="card-footer bg-transparent mt-auto">
                                 <div class="btn-list justify-content-end">
-                                    <a  class="btn">
+                                    <a  class="btn" @click="editPlan()">
                                         <svg t="1692672026903" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7786" width="320" height="320"><path d="M904 1024H120c-66.168 0-120-53.832-120-120V120C0 53.832 53.832 0 120 0h784c66.168 0 120 53.832 120 120v784c0 66.168-53.832 120-120 120zM120 4C56.038 4 4 56.038 4 120v784c0 63.962 52.038 116 116 116h784c63.962 0 116-52.038 116-116V120c0-63.962-52.038-116-116-116H120z" fill="#D8DDE3" p-id="7787"></path><path d="M732 832H292c-55.14 0-100-44.86-100-100V292c0-55.14 44.86-100 100-100h440c55.14 0 100 44.86 100 100v440c0 55.14-44.86 100-100 100zM292 252c-22.056 0-40 17.944-40 40v440c0 22.056 17.944 40 40 40h440c22.056 0 40-17.944 40-40V292c0-22.056-17.944-40-40-40H292z" fill="#20263B" p-id="7788"></path><path d="M642 442H382c-44.112 0-80-35.888-80-80v-110c0-33.084 26.916-60 60-60h300c33.084 0 60 26.916 60 60v110c0 44.112-35.888 80-80 80z m-280-190v110c0 11.028 8.972 20 20 20h260c11.028 0 20-8.972 20-20v-110H362z" fill="#20263B" p-id="7789"></path><path d="M572.928 275h60v80.174h-60z" fill="#FF4B07" p-id="7790"></path></svg>
                                         Save
                                     </a>
@@ -454,14 +454,14 @@
                     <div class="empty-action">
                         <a  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-create-plan" >
                             <svg t="1690879968452" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2274" width="320" height="320"><path d="M810.666667 469.333333h-256V213.333333a42.666667 42.666667 0 0 0-85.333334 0v256H213.333333a42.666667 42.666667 0 0 0 0 85.333334h256v256a42.666667 42.666667 0 0 0 85.333334 0v-256h256a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2275" fill="#ffffff"></path></svg>
-                            Add your first TEST PLAN
+                            Create your first TEST PLAN
                         </a>
                     </div>
                     <label class="mt-3"><strong>OR</strong></label>
                     <div class="empty-action">
                         <a  class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-import-plan" >
                             <svg t="1693382701142" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1631" width="320" height="320"><path d="M739.530598 294.52799l0 435.029978c0 24.048719-20.48045 43.594891-44.444235 43.594891L303.417963 773.152858l0 43.425022c0 23.963785 19.800975 43.508933 43.807738 43.508933l434.795641 0c24.006763 0 44.360324-19.545148 44.360324-43.508933L826.381665 207.551056c0-24.048719-20.35356-43.636846-44.360324-43.636846L347.224678 163.91421c-24.006763 0-43.807738 19.588127-43.807738 43.636846l0 44.147476 391.669424 0C719.051171 251.698532 739.530598 270.521227 739.530598 294.52799zM588.693218 556.539402 463.561289 674.320922c-17.334807 16.315594-44.699038 15.551184-61.142545-1.86958-16.315594-17.419741-15.508205-44.783972 1.86958-61.099566l59.357899-55.916521L241.086335 555.435255c-24.006763 0-43.468001-18.951631-43.468001-43.00035 0-24.049742 19.461237-43.020816 43.468001-43.020816l222.559888 0-59.357899-56.257282c-17.377786-16.35755-18.185174-43.934628-1.86958-61.312414 8.583492-9.007141 20.055778-13.680581 31.528064-13.680581 10.621918 0 21.24486 3.823072 29.65746 11.68411l125.08895 117.653607c12.32163 11.535731 19.37528 27.767414 19.37528 44.593638C608.068498 528.836457 601.014848 545.06814 588.693218 556.539402z" fill="#ffffff" p-id="1632" data-spm-anchor-id="a313x.search_index.0.i0.62903a81VCJFTq" class="selected"></path></svg>
-                            import your first TEST PLAN
+                            Import your first TEST PLAN
                         </a>
                     </div>
 
@@ -656,24 +656,7 @@ const app = createApp({
         //thread group info
         const threadgroupName = ref('')
         const threadgroupComments = ref('')
-        const continueChecked = ref(true)
-        const startnextChecked = ref(false)
-        const stopthreadChecked = ref(false)
-        const stoptestChecked = ref(false)
-        const stoptestnowChecked = ref(false)
-        const THREAD_GROUP_ACTION_LIST= [
-            'continue', 
-            'startnextloop', 
-            'stopthread', 
-            'stoptest', 
-            'stoptestnow']
-        const THREAD_GROUP_ACTION = {
-            'continue': continueChecked,
-            'startnextloop': startnextChecked,
-            'stopthread': stopthreadChecked,
-            'stoptest': stoptestChecked,
-            'stoptestnow': stoptestnowChecked
-        }
+        const smplerAction = ref('continue')
         const threadNum = ref('1')
         const rampTime = ref('1')
         const loopCount = ref('1')
@@ -717,11 +700,6 @@ const app = createApp({
             this.isReload = true;
         };
 
-        const checkedThreadGroupAction = (action) => {
-
-        }
-
-        
         const setLanguage = (language) => {
             loading.value = true
             axios.post('/api/language/set', {
@@ -784,13 +762,7 @@ const app = createApp({
                     //thread group info
                     threadgroupName.value = plan_data['plan_info']['thread_group_name']
                     threadgroupComments.value = plan_data['plan_info']['thread_group_comment']
-                    THREAD_GROUP_ACTION_LIST.forEach(action =>{
-                        if(action == plan_data['plan_info']['on_sample_error']){
-                            THREAD_GROUP_ACTION[action].value = true
-                        }else{
-                            THREAD_GROUP_ACTION[action].value = false
-                        }
-                    })
+                    smplerAction.value = plan_data['plan_info']['on_sample_error']
                     threadNum.value = plan_data['plan_info']['num_threads']
                     rampTime.value = plan_data['plan_info']['ramp_time']
                     loopCount.value = plan_data['plan_info']['loops']
@@ -911,6 +883,37 @@ const app = createApp({
             loading.value = false
         };
 
+        const editPlan = () => {
+            loading.value = true
+            const new_plan_name = planName.value.trim()
+            if(new_plan_name){
+                axios.post('/api/plan/save', {
+                    old_plan_name: checkedPlan.value,
+                    new_plan_name: new_plan_name,
+                    plan_comment: planComments.value,
+                    functional_mode: functional_mode_checked.value,
+                    tearDown_on_shutdown: tearDown_on_shutdown_checked.value,
+                    serialize_threadgroups: serialize_threadgroups_checked.value
+                }).then(function (response) {
+                    if(response['data']['status'] == 1){
+                        elMessage('success', response['data']['msg'])
+                        initPlan()
+                        clickPlan(planName.value.trim())
+                    }else{
+                        elMessage('error', response['data']['msg'])
+                    }
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                    elMessage('error', error)
+                });
+            }else{
+                elMessage('error', 'plan is empty')
+            }
+            loading.value = false
+            inputPlanName.value = ''
+        };
+
         const removeClick = () => {
             remove_plan_name.value = checkedPlan.value
         }
@@ -949,10 +952,9 @@ const app = createApp({
                 elMessage('error', error)
             });
         }
-        
+
         const clickScheduler = () => {
-            schedulerChecked.value = schedulerChecked.value ? false : true
-            schedulerDisabled.value = schedulerChecked.value ? false : true
+            schedulerDisabled.value = schedulerChecked.value ? true : false
         }
 
         const elMessage = (type, message) => {
@@ -1007,11 +1009,7 @@ const app = createApp({
             //thread group info
             threadgroupName,
             threadgroupComments,
-            continueChecked,
-            startnextChecked,
-            stopthreadChecked,
-            stoptestChecked,
-            stoptestnowChecked,
+            smplerAction,
             threadNum,
             rampTime,
             loopCount,
@@ -1050,7 +1048,8 @@ const app = createApp({
             clickPlan,
             setLanguage,
             removeClick,
-            clickScheduler
+            clickScheduler,
+            editPlan
         };
     }
 });

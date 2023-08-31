@@ -54,7 +54,7 @@ async def checked_one_plan(content: dict):
 async def get_plan_info(content: dict):
    plan_name = content.get('plan_name')
    try:
-      plan_info = test_plan.get_plan_info(plan_name)
+      plan_info = test_plan.info(plan_name)
       result = {'status':1, 'plan_info':plan_info, 'msg': 'get success'}
    except Exception as e:
       logging.exception(e)
@@ -105,6 +105,16 @@ async def remove_all_plan():
    try:
       test_plan.remove_all()
       result = {'status':1, 'msg': 'remove success'}   
+   except Exception as e:
+      logging.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/plan/save")
+async def save_plan(content: dict):
+   try:
+      test_plan.edit(content)
+      result = {'status':1, 'msg': 'sava success'}   
    except Exception as e:
       logging.exception(e)
       result = {'status':0, 'msg': str(e)}

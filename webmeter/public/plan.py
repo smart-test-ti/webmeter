@@ -2,97 +2,12 @@ import os
 import shutil
 from loguru import logger
 from public.utils import Common, JMX
+from fastapi import UploadFile
 
-class TestPlan(object):
+class Base(object):
 
-    def __init__(self):
-        self.file_dir = os.path.join(Common.STATICPATH, 'file')
-        self.template_jmx_path = os.path.join(self.file_dir, 'template.jmx')
-        self.root_dir = Common.make_dir(os.path.join(os.getcwd(), 'webmeter'))
-
-
-    def create(self, plan_name: str) -> str:
-        """create new plan"""
-        content = Common.read_file_content(self.template_jmx_path)
-        plan_dir = Common.make_dir(os.path.join(self.root_dir, plan_name))
-        plan_path = Common.make_dir_file(dir=plan_dir, filename='plan.jmx', content=content)
-        JMX.write_testname(jmx_path_or_name=os.path.join(self.root_dir, plan_name, 'plan.jmx'),
-                                     tag='TestPlan', attr='TestPlan', testname=plan_name)
-        logger.info('create plan success: {}'.format(plan_path))
-        return plan_path
-    
-    def import_jmx(self, file, plan_name):
-        """import new plan"""
-        plan_dir = Common.make_dir(os.path.join(self.root_dir, plan_name))
-        jmx_name = file.filename
-        jmx_path = os.path.join(self.root_dir, plan_name, jmx_name)
-        with open(jmx_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-        content = Common.read_file_content(jmx_path)
-        os.remove(jmx_path)
-        plan_path = Common.make_dir_file(dir=plan_dir, filename='plan.jmx', content=content)
-        JMX.write_testname(jmx_path_or_name=os.path.join(self.root_dir, plan_name, 'plan.jmx'),
-                                     tag='TestPlan', attr='TestPlan', testname=plan_name)
-        logger.info('import plan success: {}'.format(plan_path))
-
-    def isexist(self, plan_name: str) -> bool:
-        if os.path.exists(os.path.join(self.root_dir, plan_name)):
-            return True
-        return False
-    
-    def edit(self, content: dict) -> None:
-        """edit plan content"""
-        old_dir = os.path.join(self.root_dir, content['old_name'])
-        new_dir = os.path.join(self.root_dir, content['new_name'])
-        os.rename(old_dir, new_dir)
-        # edit plan info
-        element_dict = dict()
-        element_dict['TestPlan.comments'] = content['comments']
-        element_dict['TestPlan.functional_mode'] = content['functional_mode']
-        element_dict['TestPlan.tearDown_on_shutdown'] = content['tearDown_on_shutdown']
-        element_dict['TestPlan.serialize_threadgroups'] = content['serialize_threadgroups']
-        for key in element_dict.keys():
-            JMX.write_text(new_dir, 'stringProp', key, element_dict[key])
-
-    def remove(self, plan: str) -> None:
-        """remove one plan"""
-        shutil.rmtree(os.path.join(self.root_dir, plan), True)
-        logger.info('remove {} success'.format(plan))
-    
-    def remove_all(self) -> None:
-        """remove all plan"""
-        dirs = os.listdir(self.root_dir)
-        for plan in dirs:
-            shutil.rmtree(os.path.join(self.root_dir, plan), True)
-            logger.info('remove {} success'.format(plan))
-
-    def get_all_plan(self) -> list:
-        """get all plan"""
-        dirs = os.listdir(self.root_dir)
-        dir_list = reversed(sorted(dirs, key=lambda x: os.path.getmtime(os.path.join(self.root_dir, x))))
-        plan_sorted_list = [plan for plan in dir_list if plan.__contains__('.') is False]
-        plan_list = list()
-        for plan in plan_sorted_list:
-            plan_dict = dict()
-            plan_dict['name'] = plan
-            plan_dict['checked'] =True if plan_sorted_list.index(plan) == 0 else False
-            plan_list.append(plan_dict)
-        return plan_list
-    
-    def checked_one_plan(self, plan_name) -> list:
-        """checked one plan"""
-        dirs = os.listdir(self.root_dir)
-        dir_list = reversed(sorted(dirs, key=lambda x: os.path.getmtime(os.path.join(self.root_dir, x))))
-        plan_sorted_list = [plan for plan in dir_list if plan.__contains__('.') is False]
-        plan_list = list()
-        for plan in plan_sorted_list:
-            plan_dict = dict()
-            plan_dict['name'] = plan
-            plan_dict['checked'] =True if plan == plan_name else False
-            plan_list.append(plan_dict)
-        return plan_list
-    
-    def plan_base_info(self, plan_jmx_path: str) -> dict:
+    @classmethod
+    def info(cls, plan_jmx_path: str) -> dict:
         """read plan base info"""
         plan_info_dict = dict()
         plan_info_dict['name'] = JMX.read_testname(
@@ -122,7 +37,19 @@ class TestPlan(object):
             default='false'))
         return plan_info_dict
     
-    def thread_group_info(self, plan_jmx_path: str) -> dict:
+    @classmethod
+    def save(cls, jmx_path: str, content: dict) -> None:
+        logger.info(content)
+        JMX.write_testname(jmx_path,'TestPlan','TestPlan', content.get('new_plan_name'))
+        JMX.write_text(jmx_path, 'stringProp', 'TestPlan.comments', content.get('plan_comment'))
+        JMX.write_text(jmx_path, 'boolProp', 'TestPlan.functional_mode', Common.MAPPING.get(content.get('functional_mode')))
+        JMX.write_text(jmx_path, 'boolProp', 'TestPlan.tearDown_on_shutdown', Common.MAPPING.get(content.get('tearDown_on_shutdown')))
+        JMX.write_text(jmx_path, 'boolProp', 'TestPlan.serialize_threadgroups', Common.MAPPING.get(content.get('serialize_threadgroups')))
+    
+class Thread_Group(object):
+
+    @classmethod
+    def info(cls, plan_jmx_path: str) -> dict:
         """read thread group info"""
         thread_group_info_dict = dict()
         thread_group_info_dict['thread_group_name'] = JMX.read_testname(
@@ -182,8 +109,11 @@ class TestPlan(object):
             default='')
         logger.info(thread_group_info_dict)
         return thread_group_info_dict
+
+class Samplers(object):
     
-    def samplers_info(self, plan_jmx_path: str) -> list:
+    @classmethod
+    def info(cls, plan_jmx_path: str) -> list:
         """get samplers info"""
         samplers_info_dict = dict()
         samplers_info_dict['http_request_name'] = JMX.read_testname(
@@ -260,15 +190,100 @@ class TestPlan(object):
                 default='{}')
         logger.info(samplers_info_dict)
         return samplers_info_dict
+
+class TestPlan(Base, Thread_Group, Samplers):
+
+    def __init__(self):
+        self.file_dir = os.path.join(Common.STATICPATH, 'file')
+        self.template_jmx_path = os.path.join(self.file_dir, 'template.jmx')
+        self.root_dir = Common.make_dir(os.path.join(os.getcwd(), 'webmeter'))
+
+
+    def create(self, plan_name: str) -> str:
+        """create new plan"""
+        content = Common.read_file_content(self.template_jmx_path)
+        plan_dir = Common.make_dir(os.path.join(self.root_dir, plan_name))
+        plan_path = Common.make_dir_file(dir=plan_dir, filename='plan.jmx', content=content)
+        JMX.write_testname(jmx_path_or_name=os.path.join(self.root_dir, plan_name, 'plan.jmx'),
+                                     tag='TestPlan', attr='TestPlan', testname=plan_name)
+        logger.info('create plan success: {}'.format(plan_path))
+        return plan_path
     
-    def get_plan_info(self, plan: str) -> dict:
+    def import_jmx(self, file: UploadFile, plan_name: str) -> str:
+        """import new plan"""
+        plan_dir = Common.make_dir(os.path.join(self.root_dir, plan_name))
+        jmx_name = file.filename
+        jmx_path = os.path.join(self.root_dir, plan_name, jmx_name)
+        with open(jmx_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        content = Common.read_file_content(jmx_path)
+        os.remove(jmx_path)
+        plan_path = Common.make_dir_file(dir=plan_dir, filename='plan.jmx', content=content)
+        JMX.write_testname(jmx_path_or_name=os.path.join(self.root_dir, plan_name, 'plan.jmx'),
+                                     tag='TestPlan', attr='TestPlan', testname=plan_name)
+        logger.info('import plan success: {}'.format(plan_path))
+        return plan_path
+
+    def isexist(self, plan_name: str) -> bool:
+        if os.path.exists(os.path.join(self.root_dir, plan_name)):
+            return True
+        return False
+    
+    def info(self, plan: str) -> dict:
         """get one plan info"""
         result = dict()
         plan_jmx_path = os.path.join(self.root_dir, plan, 'plan.jmx')
-        plan_base_info = self.plan_base_info(plan_jmx_path)
-        thread_group_info = self.thread_group_info(plan_jmx_path)
-        samplers_info = self.samplers_info(plan_jmx_path)
+        plan_base_info = Base.info(plan_jmx_path)
+        thread_group_info = Thread_Group.info(plan_jmx_path)
+        samplers_info = Samplers.info(plan_jmx_path)
         result.update(plan_base_info)
         result.update(thread_group_info)
         result.update(samplers_info)
         return result
+    
+    def edit(self, content: dict) -> None:
+        """edit plan content"""
+        jmx_path = os.path.join(self.root_dir, content['old_plan_name'], 'plan.jmx')
+        # edit plan info
+        Base.save(jmx_path, content)
+        old_plan_dir = os.path.join(self.root_dir, content['old_plan_name'])
+        new_plan_dir = os.path.join(self.root_dir, content['new_plan_name'])
+        os.rename(old_plan_dir, new_plan_dir)
+
+    def remove(self, plan: str) -> None:
+        """remove one plan"""
+        shutil.rmtree(os.path.join(self.root_dir, plan), True)
+        logger.warning('remove {} success'.format(plan))
+    
+    def remove_all(self) -> None:
+        """remove all plan"""
+        dirs = os.listdir(self.root_dir)
+        for plan in dirs:
+            shutil.rmtree(os.path.join(self.root_dir, plan), True)
+            logger.warning('remove {} success'.format(plan))
+
+    def get_all_plan(self) -> list:
+        """get all plan"""
+        dirs = os.listdir(self.root_dir)
+        dir_list = reversed(sorted(dirs, key=lambda x: os.path.getmtime(os.path.join(self.root_dir, x))))
+        plan_sorted_list = [plan for plan in dir_list if plan.__contains__('.') is False]
+        plan_list = list()
+        for plan in plan_sorted_list:
+            plan_dict = dict()
+            plan_dict['name'] = plan
+            plan_dict['checked'] =True if plan_sorted_list.index(plan) == 0 else False
+            plan_list.append(plan_dict)
+        return plan_list
+    
+    def checked_one_plan(self, plan_name) -> list:
+        """checked one plan"""
+        dirs = os.listdir(self.root_dir)
+        dir_list = reversed(sorted(dirs, key=lambda x: os.path.getmtime(os.path.join(self.root_dir, x))))
+        plan_sorted_list = [plan for plan in dir_list if plan.__contains__('.') is False]
+        plan_list = list()
+        for plan in plan_sorted_list:
+            plan_dict = dict()
+            plan_dict['name'] = plan
+            plan_dict['checked'] =True if plan == plan_name else False
+            plan_list.append(plan_dict)
+        return plan_list
