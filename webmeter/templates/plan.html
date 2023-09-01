@@ -303,20 +303,20 @@
                                             <div class="row row-cards">
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label">Protocol[http]</label>
-                                                        <input type="text" class="form-control" v-model="samplerProtocol">
+                                                        <label class="form-label required">Protocol[http]</label>
+                                                        <input type="text" class="form-control" v-model="samplerProtocol" placeholder="Enter protocol">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label">Server Name or IP</label>
-                                                        <input type="test" class="form-control" v-model="samplerIP">
+                                                        <label class="form-label required">Server Name or IP</label>
+                                                        <input type="test" class="form-control" v-model="samplerIP" placeholder="Enter server name or ip">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                       <label class="form-label">Port Number</label>
-                                                      <input type="test" class="form-control" v-model="samplerPort">
+                                                      <input type="test" class="form-control" v-model="samplerPort" placeholder="Enter port number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -332,14 +332,14 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label">Path</label>
-                                                        <input type="text" class="form-control" v-model="requestPath">
+                                                        <label class="form-label required">Path</label>
+                                                        <input type="text" class="form-control" v-model="requestPath" placeholder="Enter path">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Content encoding</label>
-                                                        <input type="test" class="form-control" v-model="requestEncode">
+                                                        <input type="test" class="form-control" v-model="requestEncode" placeholder="Enter content encoding">
                                                     </div>
                                                 </div>
                                             </div>
@@ -418,7 +418,7 @@
                                                     </div>
                                                     <div id="body-data" v-show="bodydataVisavle" class="card tab-pane active">
                                                         <div class="card-body">
-                                                            <textarea v-model="bodyDataContent" class="form-control" name="example-textarea" placeholder="Textarea placeholder"></textarea>
+                                                            <textarea v-model="bodyDataContent" class="form-control" name="example-textarea" placeholder="Enter json data"></textarea>
                                                         </div>
                                                     </div>
                                                     <!-- <div id="files-upload" class="card tab-pane">
@@ -632,8 +632,9 @@ const {
     reactive, 
     nextTick 
 } = Vue
-
+ 
 const app = createApp({
+    
     setup() {
         const loading = ref(false)
         const isReload = ref(true)
@@ -685,7 +686,7 @@ const app = createApp({
         const bodyDataContent = ref('{}')
         const parametersVisable = ref(false)
         const bodydataVisavle = ref(true)
-
+        
         onBeforeMount(() => {
             getLanguage()
         });
@@ -700,6 +701,7 @@ const app = createApp({
             this.isReload = true;
         };
 
+        
         const setLanguage = (language) => {
             loading.value = true
             axios.post('/api/language/set', {
@@ -787,6 +789,9 @@ const app = createApp({
                     if(plan_data['plan_info']['postBodyRaw']){
                         bodyDataContent.value = plan_data['plan_info']['body_data']
                     }
+                    if(schedulerChecked.value){
+                        schedulerDisabled.value = false
+                    }
                 }else{
                     elMessage('error', response['data']['msg'])
                 }
@@ -829,7 +834,12 @@ const app = createApp({
             loading.value = true
             const new_plan = importPlanName.value.trim()
             const file = document.querySelector('input[type=file]').files[0]
-            if(new_plan && file){
+            if(!file){
+                elMessage('error', 'No file seleted')
+                loading.value = false
+                return
+            }
+            if(new_plan){
                 const formData = new FormData()
                 formData.append('file', file)
                 formData.append('plan_name', new_plan)
@@ -847,7 +857,7 @@ const app = createApp({
                     elMessage('error', error)
                 });
             }else{
-                elMessage('error', 'jmx file or plan name is empty')
+                elMessage('error', 'Plan name is empty')
             }
             loading.value = false
             importPlanName.value = ''
@@ -886,6 +896,7 @@ const app = createApp({
         const editPlan = () => {
             loading.value = true
             const new_plan_name = planName.value.trim()
+            // const body_data = bodyDataContent.value
             if(new_plan_name){
                 axios.post('/api/plan/save', {
                     old_plan_name: checkedPlan.value,
@@ -893,7 +904,30 @@ const app = createApp({
                     plan_comment: planComments.value,
                     functional_mode: functional_mode_checked.value,
                     tearDown_on_shutdown: tearDown_on_shutdown_checked.value,
-                    serialize_threadgroups: serialize_threadgroups_checked.value
+                    serialize_threadgroups: serialize_threadgroups_checked.value,
+                    thread_group_name: threadgroupName.value,
+                    on_sample_error: smplerAction.value,
+                    num_threads: threadNum.value,
+                    ramp_time: rampTime.value,
+                    loops: loopCount.value,
+                    same_user_on_next_iteration: iterationChecked.value,
+                    delayedStart: delayedChecked.value,
+                    scheduler: schedulerChecked.value,
+                    loodurationps: duration.value,
+                    delay: delay.value,
+                    http_request_name: samplerName.value,
+                    protocol: samplerProtocol.value,
+                    domain: samplerIP.value,
+                    port: samplerPort.value,
+                    path: requestPath.value,
+                    method: selectedMethod.value,
+                    contentEncoding: requestEncode.value,
+                    follow_redirects: followRedirectChecked.value,
+                    auto_redirects: autoRedirectChecked.value,
+                    use_keepalive: useKeepAliveChecked.value,
+                    DO_MULTIPART_POST: useKeepMultipartChecked.value,
+                    BROWSER_COMPATIBLE_MULTIPART: browserComatibleChecked.value,
+                    body_data: bodyDataContent.value
                 }).then(function (response) {
                     if(response['data']['status'] == 1){
                         elMessage('success', response['data']['msg'])

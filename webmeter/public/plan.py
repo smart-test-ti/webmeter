@@ -109,6 +109,21 @@ class Thread_Group(object):
             default='')
         logger.info(thread_group_info_dict)
         return thread_group_info_dict
+    
+    @classmethod
+    def save(cls, jmx_path: str, content: dict):
+        logger.info(content)
+        JMX.write_testname(jmx_path,'ThreadGroup','ThreadGroup', content.get('thread_group_name'))
+        JMX.write_text(jmx_path, 'stringProp', 'ThreadGroup.on_sample_error', content.get('on_sample_error'))
+        JMX.write_text(jmx_path, 'stringProp', 'ThreadGroup.num_threads', content.get('num_threads'))
+        JMX.write_text(jmx_path, 'stringProp', 'ThreadGroup.ramp_time', content.get('ramp_time'))
+        JMX.write_text(jmx_path, 'stringProp', 'LoopController.loops', content.get('loops'))
+        JMX.write_text(jmx_path, 'boolProp', 'ThreadGroup.same_user_on_next_iteration', 
+                       Common.MAPPING.get(content.get('same_user_on_next_iteration')))
+        JMX.write_text(jmx_path, 'boolProp', 'ThreadGroup.delayedStart', Common.MAPPING.get(content.get('delayedStart')))
+        JMX.write_text(jmx_path, 'boolProp', 'ThreadGroup.scheduler', Common.MAPPING.get(content.get('scheduler')))
+        JMX.write_text(jmx_path, 'stringProp', 'ThreadGroup.duration', content.get('loodurationps'))
+        JMX.write_text(jmx_path, 'stringProp', 'ThreadGroup.delay', content.get('delay'))
 
 class Samplers(object):
     
@@ -190,6 +205,29 @@ class Samplers(object):
                 default='{}')
         logger.info(samplers_info_dict)
         return samplers_info_dict
+    
+    @classmethod
+    def save(cls, jmx_path: str, content: dict):
+        logger.info(content)
+        JMX.write_testname(jmx_path,'HTTPSamplerProxy','HTTPSamplerProxy', content.get('http_request_name'))
+        JMX.write_text(jmx_path, 'stringProp', 'HTTPSampler.protocol', content.get('protocol'))
+        JMX.write_text(jmx_path, 'stringProp', 'HTTPSampler.domain', content.get('domain'))
+        JMX.write_text(jmx_path, 'stringProp', 'HTTPSampler.port', content.get('port'))
+        JMX.write_text(jmx_path, 'stringProp', 'HTTPSampler.method', content.get('method'))
+        JMX.write_text(jmx_path, 'stringProp', 'HTTPSampler.path', content.get('path'))
+        JMX.write_text(jmx_path, 'stringProp', 'HTTPSampler.contentEncoding', content.get('contentEncoding'))
+        JMX.write_text(jmx_path, 'boolProp', 'HTTPSampler.follow_redirects', 
+                       Common.MAPPING.get(content.get('follow_redirects')))
+        JMX.write_text(jmx_path, 'boolProp', 'HTTPSampler.auto_redirects', 
+                       Common.MAPPING.get(content.get('auto_redirects')))
+        JMX.write_text(jmx_path, 'boolProp', 'HTTPSampler.use_keepalive', 
+                       Common.MAPPING.get(content.get('use_keepalive')))
+        JMX.write_text(jmx_path, 'boolProp', 'HTTPSampler.DO_MULTIPART_POST', 
+                       Common.MAPPING.get(content.get('DO_MULTIPART_POST')))
+        JMX.write_text(jmx_path, 'boolProp', 'HTTPSampler.BROWSER_COMPATIBLE_MULTIPART', 
+                       Common.MAPPING.get(content.get('BROWSER_COMPATIBLE_MULTIPART')))
+        JMX.write_text(jmx_path, 'stringProp', 'Argument.value', content.get('body_data'))
+
 
 class TestPlan(Base, Thread_Group, Samplers):
 
@@ -246,6 +284,8 @@ class TestPlan(Base, Thread_Group, Samplers):
         jmx_path = os.path.join(self.root_dir, content['old_plan_name'], 'plan.jmx')
         # edit plan info
         Base.save(jmx_path, content)
+        Thread_Group.save(jmx_path, content)
+        Samplers.save(jmx_path, content)
         old_plan_dir = os.path.join(self.root_dir, content['old_plan_name'])
         new_plan_dir = os.path.join(self.root_dir, content['new_plan_name'])
         os.rename(old_plan_dir, new_plan_dir)
