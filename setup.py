@@ -10,7 +10,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     install_requires=['fastapi','uvicorn', 'requests', 'loguru', 'fire','pyfiglet','psutil',
-    'pyyaml','python-multipart'],
+    'pyyaml','python-multipart','sqlalchemy'],
     version='1.0.5',
     long_description=long_description,
     long_description_content_type="text/markdown",

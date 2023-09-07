@@ -1,7 +1,7 @@
 import os
 import shutil
 from loguru import logger
-from public.utils import Common, JMX
+from core.utils import Common, JMX
 from fastapi import UploadFile
 
 class Base(object):

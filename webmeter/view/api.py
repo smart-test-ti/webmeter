@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Response, Cookie, UploadFile, File, Form
-from public.plan import TestPlan
-import logging
 from loguru import logger
 from typing import Union
+from fastapi import APIRouter, Response, Cookie, UploadFile, File, Form
+from core.plan import TestPlan
+from core.engine import EngineServie
 
 router = APIRouter()
 test_plan = TestPlan()
@@ -15,7 +15,7 @@ async def set_language(content: dict, response:Response):
       response.set_cookie(key="language",value=language)
       result = {'status':1, 'msg': 'Change the language to {}'.format(language)}
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
@@ -24,7 +24,7 @@ async def get_language(language:Union[str,None]=Cookie(default=None)):
    try:
       result = {'status':1,'language':language}
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
@@ -34,7 +34,7 @@ async def get_all_plan():
       plan_list = test_plan.get_all_plan()
       result = {'status':1, 'plan_list':plan_list, 'length':len(plan_list), 'msg': 'get success'}
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
@@ -45,7 +45,7 @@ async def checked_one_plan(content: dict):
       plan_list = test_plan.checked_one_plan(plan_name)
       result = {'status':1, 'plan_list':plan_list, 'length':plan_list.__len__(), 'msg': 'get success'}
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
@@ -57,7 +57,7 @@ async def get_plan_info(content: dict):
       plan_info = test_plan.info(plan_name)
       result = {'status':1, 'plan_info':plan_info, 'msg': 'get success'}
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
@@ -72,7 +72,7 @@ async def create_plan(content: dict):
       else:
          result = {'status':0, 'msg': 'plan existed'}   
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
@@ -85,7 +85,7 @@ async def import_plan(file:UploadFile = File(...), plan_name:str = Form(...)):
       else:
          result = {'status':0, 'msg': 'plan existed'}   
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
@@ -96,7 +96,7 @@ async def remove_plan(content: dict):
       test_plan.remove(plan_name)
       result = {'status':1, 'msg': 'remove success'}   
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
@@ -106,7 +106,7 @@ async def remove_all_plan():
       test_plan.remove_all()
       result = {'status':1, 'msg': 'remove success'}   
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
@@ -114,8 +114,19 @@ async def remove_all_plan():
 async def save_plan(content: dict):
    try:
       test_plan.edit(content)
-      result = {'status':1, 'msg': 'sava success'}   
+      result = {'status':1, 'msg': 'save success'}   
    except Exception as e:
-      logging.exception(e)
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+
+@router.post("/api/plan/run")
+async def run_plan(content: dict):
+   try:
+      EngineServie.run(content=content, remote=False)
+      result = {'status':1, 'msg': 'run success'}   
+   except Exception as e:
+      logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result

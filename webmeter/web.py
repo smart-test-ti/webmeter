@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from webmeter.view import page,api
-from webmeter.public.utils import Utils
+from webmeter.core.utils import Utils
 import requests
 import webbrowser
 import multiprocessing

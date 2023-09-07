@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from view import page,api
-from public.utils import Common
+from core.utils import Common
 from fastapi.staticfiles import StaticFiles
 import requests
 import webbrowser

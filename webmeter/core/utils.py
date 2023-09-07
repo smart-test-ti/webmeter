@@ -5,6 +5,8 @@ import platform
 from loguru import logger
 from xml.etree import ElementTree
 from typing import Optional
+from contextlib import contextmanager
+
 
 @unique
 class Platform(Enum):
@@ -32,9 +34,21 @@ class Common(object):
             ip = '127.0.0.1'    
         return ip
     
+    @contextmanager
+    @classmethod
+    def open_file(name, mode):
+        try:
+            file = open(name, mode)
+            yield file
+        except Exception as e:
+            raise e    
+        finally:
+            file.close()
+
     @classmethod
     def exec_cmd(cls, cmd: str) -> int:
-        """excute command"""
+        """execute command"""
+        logger.info('start command : {}'.format(cmd))
         result = os.system(cmd.strip())
         return result
     
@@ -63,16 +77,15 @@ class Common(object):
     def pc_platform(cls) -> Optional[str]:
         """get pc platform"""
         sys_platform = platform.platform().lower()
-        match sys_platform:
-            case sys_platform.__contains__(Platform.WINDOWS.value):
-                return Platform.WINDOWS.value
-            case sys_platform.__contains__(Platform.MACOS.value):
-                return Platform.MACOS.value
-            case sys_platform.__contains__(Platform.LINUX.value):
-                return Platform.LINUX.value
-            case _:
-                logger.error('platform is undefined')
-                return None
+        if sys_platform.__contains__(Platform.WINDOWS.value):
+            return Platform.WINDOWS.value
+        elif sys_platform.__contains__(Platform.MACOS.value):
+            return Platform.MACOS.value
+        elif sys_platform.__contains__(Platform.LINUX.value):
+            return Platform.LINUX.value
+        else:
+            logger.error('platform is undefined')
+            return None
         
 
 class JMX(object):
