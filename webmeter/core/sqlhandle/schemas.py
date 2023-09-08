@@ -17,20 +17,23 @@ class taskQuery(TaskBase):
     id: int
     plan: str
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class KeyBase(BaseModel):
-    value: Optional[str] = None
+    key: Optional[str] = None
 
 class keyCreate(KeyBase):
     key: str
     value: Optional[str] = None
 
+class keyUpdate(KeyBase):
+    key: str
+    value: Optional[str] = None
+
 class keyQuery(KeyBase):
-    id: int
     key: str
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class monitorBase(BaseModel):
     cpu: float
@@ -45,5 +48,5 @@ class monitorQuery(monitorBase):
     id: int
     task: str
     class Config:
-        orm_mode = True
+        from_attributes = True
 

@@ -3,26 +3,59 @@ from typing import Union
 from fastapi import APIRouter, Response, Cookie, UploadFile, File, Form
 from core.plan import TestPlan
 from core.engine import EngineServie
-
+from core.sqlhandle import crud, models, schemas
+from core.sqlhandle.database import engine
 router = APIRouter()
 test_plan = TestPlan()
+models.Base.metadata.create_all(bind=engine)
 
 
-@router.post("/api/language/set")
-async def set_language(content: dict, response:Response):
+@router.post("/api/initialize")
+async def initialize(keys: schemas.keyCreate):
    try:
-      language = content.get('language')
-      response.set_cookie(key="language",value=language)
-      result = {'status':1, 'msg': 'Change the language to {}'.format(language)}
+      crud.create_key(keys=keys)
+      result = {'status':1, 'msg': 'success'}
    except Exception as e:
       logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
 
-@router.post("/api/language/get")
-async def get_language(language:Union[str,None]=Cookie(default=None)):
+# @router.post("/api/language/set")
+# async def set_language(content: dict, response:Response):
+#    try:
+#       language = content.get('language')
+#       response.set_cookie(key="language",value=language)
+#       result = {'status':1, 'msg': 'Change the language to {}'.format(language)}
+#    except Exception as e:
+#       logger.exception(e)
+#       result = {'status':0, 'msg': str(e)}
+#    return result
+
+@router.post("/api/language/set")
+async def set_language(keys: schemas.keyUpdate):
    try:
-      result = {'status':1,'language':language}
+      crud.update_value(keys=keys)
+      result = {'status':1, 'msg': 'Change the language to {}'.format(keys.value)}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+# @router.post("/api/sql/language/get")
+# async def get_sql_language(keys: schemas.keyQuery):
+#    try:
+#       value = crud.query_key(keys)
+#       result = {'status':1, 'msg': 'success', 'language': value}
+#    except Exception as e:
+#       logger.exception(e)
+#       result = {'status':0, 'msg': str(e)}
+#    return result
+
+@router.post("/api/language/get")
+async def get_language(keys: schemas.keyQuery):
+   try:
+      value = crud.query_key(keys)
+      result = {'status':1, 'msg': 'success', 'language': value}
    except Exception as e:
       logger.exception(e)
       result = {'status':0, 'msg': str(e)}

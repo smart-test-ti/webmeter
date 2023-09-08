@@ -55,13 +55,13 @@
             <div class="nav-item dropdown d-none d-md-flex me-3">
                 <a  class="btn  btn-pill w-100">
                     <svg t="1692319746964"  class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="51522" width="320" height="320"><path d="M815.2576 795.3408H208.7424c-73.4208 0-133.12-59.6992-133.12-133.12V218.624c0-73.4208 59.6992-133.12 133.12-133.12h606.5664c73.4208 0 133.12 59.6992 133.12 133.12v443.5968c-0.0512 73.4208-59.7504 133.12-133.1712 133.12zM208.7424 146.944c-39.5264 0-71.68 32.1536-71.68 71.68v443.5968c0 39.5264 32.1536 71.68 71.68 71.68h606.5664c39.5264 0 71.68-32.1536 71.68-71.68V218.624c0-39.5264-32.1536-71.68-71.68-71.68H208.7424zM706.2016 945.4592H317.7984c-16.9472 0-30.72-13.7728-30.72-30.72s13.7728-30.72 30.72-30.72h388.4032c16.9472 0 30.72 13.7728 30.72 30.72s-13.7728 30.72-30.72 30.72z" fill="#303135" p-id="51523"></path><path d="M256.6144 563.0976a30.6176 30.6176 0 0 1-22.3232-9.6256 30.67904 30.67904 0 0 1 1.2288-43.4176l162.7648-153.9072a30.72512 30.72512 0 0 1 41.8304-0.3584l129.7408 118.784 176.2816-169.2672c12.2368-11.7248 31.6928-11.3664 43.4176 0.8704s11.3664 31.6928-0.8704 43.4176l-197.0688 189.2352a30.77632 30.77632 0 0 1-42.0352 0.512L419.6864 420.4032l-141.9776 134.2976a30.7456 30.7456 0 0 1-21.0944 8.3968z" fill="#FF623E" p-id="51524"></path></svg>
-                     Monitor 
+                    <label v-text="language.monitor"></label>
                 </a>
             </div>
             <div class="nav-item dropdown d-none d-md-flex me-3">
                 <a href="https://github.com/rafa0128/webmeter" target="_blank" class="btn  btn-pill w-100">
                     <svg t="1692672213633" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11694" width="320" height="320"><path d="M688.8 873.2c-20.8 0-40.8-6.6-57.7-19.1L512 766.2l-119.1 87.9c-16.9 12.5-36.9 19.1-57.7 19.1-44 0-82.7-29.8-94.3-72.4-4.8-17.9-4-37.3 2.5-57.7l45.3-141.8-121.3-89.6c-37.7-27.8-50.2-78.7-29.7-121 16.1-33.2 51.6-54.6 90.6-54.6h145.1l45.8-143.3c12.9-40.5 50.2-67.7 92.7-67.7s79.8 27.2 92.7 67.7l45.8 143.3h148.2c46.8 0 87.1 33.5 95.7 79.7 6.8 36.2-9.1 74.6-40.4 97.7l-118.8 87.7 45.7 143c6 18.7 6.9 37.7 2.6 54.7-10.9 43.8-49.8 74.3-94.6 74.3zM512 694.4c6.7 0 13.4 2.1 19 6.3l138.1 102c5.9 4.3 12.7 6.6 19.7 6.6 15.4 0 28.9-10.6 32.7-25.8 1.4-5.5 0.9-12.3-1.5-19.6L667.3 599c-4.2-13.1 0.4-27.3 11.5-35.5L816 462.1c11.7-8.7 17.8-22.2 15.5-34.5-3-16.2-16.5-27.5-32.8-27.5H627.1c-13.9 0-26.2-9-30.5-22.3l-52.9-165.5c-4.4-13.9-17.2-23.2-31.7-23.2s-27.3 9.3-31.7 23.2l-52.9 165.5c-4.2 13.3-16.6 22.3-30.5 22.3H228.4c-14.6 0-27.5 7.3-33 18.5-7.2 14.8-3 31.9 10.1 41.6l139.7 103.2c11 8.1 15.6 22.4 11.5 35.5l-52.3 163.6c-2.7 8.3-3.3 15.7-1.7 21.5 4 14.8 17.4 25.2 32.5 25.2 7 0 13.9-2.3 19.7-6.6l138.1-102c5.6-4.1 12.3-6.2 19-6.2z" p-id="11695"></path></svg>
-                     Star Me 
+                    <label v-text="language.star_me"></label> 
                 </a>
             </div>
             <div class="nav-item dropdown  d-none d-md-flex me-3">
@@ -90,11 +90,11 @@
                     <div class="btn-list">
                         <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-create-plan">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-                            New
+                            <label v-text="language.new"></label>
                         </a>
                         <a class="btn  d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-import-plan">
                             <svg t="1690960933893" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4519" width="320" height="320"><path d="M750.933333 119.466667H290.133333c-65.877333 0-119.466667 53.589333-119.466666 119.466666v119.466667h68.266666v-119.466667c0-28.16 23.04-51.2 51.2-51.2h460.8c18.773333 0 34.133333 15.36 34.133334 34.133334v597.333333c0 18.773333-15.36 34.133333-34.133334 34.133333H290.133333c-28.16 0-51.2-23.04-51.2-51.2v-153.6h-68.266666v153.6c0 65.877333 53.589333 119.466667 119.466666 119.466667h460.8c56.490667 0 102.4-45.909333 102.4-102.4V221.866667c0-56.490667-45.909333-102.4-102.4-102.4z" fill="#231815" p-id="4520"></path><path d="M396.117333 641.194667l48.298667 48.128L630.272 503.466667 444.416 317.610667l-48.298667 48.128L508.245333 477.866667H136.533333v68.266666h354.645334z" fill="#231815" p-id="4521"></path></svg>
-                            Import
+                            <label v-text="language.import"></label>
                         </a>
                     </div>
                   </h2>
@@ -104,7 +104,7 @@
                     <div class="btn-list">
                         <a  class="btn  d-none d-sm-inline-block" @click="run()" v-if="startBtn">
                             <svg t="1692612614001" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="118121" width="320" height="320"><path d="M510.3 98.2c-229.2 0-415.1 185.8-415.1 415S281 928.3 510.3 928.3s415.1-185.8 415.1-415.1c0-229.2-185.9-415-415.1-415z m163.8 448.1L446.5 679.1c-3.3 1.9-6.7 2.8-10.1 2.8-10.5 0-20.1-8.4-20.1-20.1V396.2c0-11.7 9.6-20.1 20.1-20.1 3.4 0 6.8 0.9 10.1 2.8l227.6 132.8c13.3 7.7 13.3 26.9 0 34.6z" fill="#3259CE" p-id="118122"></path></svg>
-                            Start
+                            <label v-text="language.start"></label>
                         </a>
                         <a  class="btn  d-none d-sm-inline-block disabled" v-if="runningBtn">
                             <span class="spinner-border spinner-border-sm me-2" role="status"></span>
@@ -112,19 +112,19 @@
                         </a>
                         <a  class="btn  d-none d-sm-inline-block"  v-if="stopBtn">
                             <svg t="1692694684479" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="25736" width="320" height="320"><path d="M510.171429 919.771429c-226.742857 0-411.428571-184.685714-411.428572-411.428572S283.428571 96.914286 510.171429 96.914286 921.6 281.6 921.6 508.342857 736.914286 919.771429 510.171429 919.771429zM548.571429 230.4h-74.971429v266.971429H548.571429V230.4z m230.4 213.942857c-5.485714-21.942857-12.8-42.057143-23.771429-62.171428-10.971429-20.114286-21.942857-38.4-36.571429-54.857143-14.628571-16.457143-42.057143-40.228571-42.057142-40.228572s0 1.828571-40.228572 43.885715c64 40.228571 98.742857 104.228571 98.742857 184.685714 0 122.514286-100.571429 223.085714-223.085714 223.085714s-223.085714-100.571429-223.085714-223.085714c0-76.8 38.4-144.457143 98.742857-184.685714L347.428571 288.914286s-32.914286 27.428571-47.542857 43.885714c-14.628571 16.457143-25.6 34.742857-34.742857 53.028571s-16.457143 38.4-21.942857 60.342858c-5.485714 20.114286-7.314286 42.057143-7.314286 64 0 38.4 7.314286 74.971429 21.942857 107.885714 14.628571 32.914286 34.742857 62.171429 60.342858 87.771428s54.857143 43.885714 87.771428 60.342858 69.485714 21.942857 107.885714 21.942857c38.4 0 74.971429-7.314286 107.885715-21.942857 32.914286-14.628571 62.171429-34.742857 87.771428-60.342858s43.885714-54.857143 60.342857-87.771428c14.628571-32.914286 21.942857-69.485714 21.942858-107.885714-5.485714-21.942857-7.314286-45.714286-12.8-65.828572z" fill="#99163d" p-id="25737" data-spm-anchor-id="a313x.search_index.0.i5.1fa53a8151ttue" class="selected"></path></svg>
-                            Stop
+                            <label v-text="language.stop"></label>
                         </a>
                         <a  class="btn  d-none d-sm-inline-block disabled"  v-if="stoppingBtn">
                             <svg t="1692694684479" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="25736" width="320" height="320"><path d="M510.171429 919.771429c-226.742857 0-411.428571-184.685714-411.428572-411.428572S283.428571 96.914286 510.171429 96.914286 921.6 281.6 921.6 508.342857 736.914286 919.771429 510.171429 919.771429zM548.571429 230.4h-74.971429v266.971429H548.571429V230.4z m230.4 213.942857c-5.485714-21.942857-12.8-42.057143-23.771429-62.171428-10.971429-20.114286-21.942857-38.4-36.571429-54.857143-14.628571-16.457143-42.057143-40.228571-42.057142-40.228572s0 1.828571-40.228572 43.885715c64 40.228571 98.742857 104.228571 98.742857 184.685714 0 122.514286-100.571429 223.085714-223.085714 223.085714s-223.085714-100.571429-223.085714-223.085714c0-76.8 38.4-144.457143 98.742857-184.685714L347.428571 288.914286s-32.914286 27.428571-47.542857 43.885714c-14.628571 16.457143-25.6 34.742857-34.742857 53.028571s-16.457143 38.4-21.942857 60.342858c-5.485714 20.114286-7.314286 42.057143-7.314286 64 0 38.4 7.314286 74.971429 21.942857 107.885714 14.628571 32.914286 34.742857 62.171429 60.342858 87.771428s54.857143 43.885714 87.771428 60.342858 69.485714 21.942857 107.885714 21.942857c38.4 0 74.971429-7.314286 107.885715-21.942857 32.914286-14.628571 62.171429-34.742857 87.771428-60.342858s43.885714-54.857143 60.342857-87.771428c14.628571-32.914286 21.942857-69.485714 21.942858-107.885714-5.485714-21.942857-7.314286-45.714286-12.8-65.828572z" fill="#99163d" p-id="25737" data-spm-anchor-id="a313x.search_index.0.i5.1fa53a8151ttue" class="selected"></path></svg>
-                            Stop
+                            <label v-text="language.stop"></label>
                         </a>
                         <a class="btn d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-remove-one" @click="removeClick">
                             <svg t="1692612504132" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="115440" width="320" height="320"><path d="M512 512m-384 0a384 384 0 1 0 768 0 384 384 0 1 0-768 0Z" fill="#F44336" p-id="115441"></path><path d="M640.064 320l63.957333 63.957333-319.936 319.957334-63.957333-63.978667z" fill="#FDFDFD" p-id="115442"></path><path d="M704 640.064l-63.957333 63.957333-319.957334-319.936 63.978667-63.957333z" fill="#FDFDFD" p-id="115443"></path></svg>
-                            Remove
+                            <label v-text="language.remove"></label>
                         </a>
                         <a class="btn d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-remove-all">
                             <svg t="1692612504132" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="115440" width="320" height="320"><path d="M512 512m-384 0a384 384 0 1 0 768 0 384 384 0 1 0-768 0Z" fill="#F44336" p-id="115441"></path><path d="M640.064 320l63.957333 63.957333-319.936 319.957334-63.957333-63.978667z" fill="#FDFDFD" p-id="115442"></path><path d="M704 640.064l-63.957333 63.957333-319.957334-319.936 63.978667-63.957333z" fill="#FDFDFD" p-id="115443"></path></svg>
-                            Remove All
+                            <label v-text="language.remove_all"></label>
                         </a>
                     </div>
                   </div>
@@ -157,13 +157,13 @@
                                 <div class="card-header">
                                     <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
                                         <li class="nav-item">
-                                            <a href="#tabs-test-plan" class="nav-link active" data-bs-toggle="tab">Plan Info</a>
+                                            <a href="#tabs-test-plan" class="nav-link active" data-bs-toggle="tab" v-text="language.plan_info"></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#tabs-thread-group" class="nav-link" data-bs-toggle="tab">Thread Group</a>
+                                            <a href="#tabs-thread-group" class="nav-link" data-bs-toggle="tab" v-text="language.thread_group"></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#tabs-sampler" class="nav-link" data-bs-toggle="tab">Samplers</a>
+                                            <a href="#tabs-sampler" class="nav-link" data-bs-toggle="tab" v-text="language.samplers"></a>
                                         </li>
                                         <li class="nav-item ms-auto">
                                             <a href="#tabs-plan-log" class="nav-link" data-bs-toggle="tab">
@@ -176,86 +176,86 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active show" id="tabs-test-plan">
                                             <div class="mb-3 row">
-                                                <label class="col-2 col-form-label required">Name</label>
+                                                <label class="col-2 col-form-label required" v-text="language.name"></label>
                                                 <div class="col">
                                                   <input  class="form-control"  placeholder="Enter plan name" v-model="planName">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label class="col-2 col-form-label">Comments</label>
+                                                <label class="col-2 col-form-label" v-text="language.comments"></label>
                                                 <div class="col">
                                                   <input  class="form-control" placeholder="Enter comments" v-model="planComments">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <label class="form-check">
-                                                    <input class="form-check-input" type="checkbox" v-model="tearDown_on_shutdown_checked">
-                                                    <span class="form-check-label">Run tearDown Thread Groups after shutdown of main threads</thead></span>
+                                                    <input class="form-check-input" type="checkbox" v-model="serialize_threadgroups_checked">
+                                                    <span class="form-check-label" v-text="language.serialize_threadgroups"></span>
                                                 </label>
                                                 <label class="form-check">
-                                                    <input class="form-check-input" type="checkbox" v-model="serialize_threadgroups_checked">
-                                                    <span class="form-check-label">Run Thread Groups consecutively (i.e. one at a time)</span>
+                                                    <input class="form-check-input" type="checkbox" v-model="tearDown_on_shutdown_checked">
+                                                    <span class="form-check-label" v-text="language.tearDown_on_shutdown"></span>
                                                 </label>
                                                 <label class="form-check">
                                                     <input class="form-check-input" type="checkbox" v-model="functional_mode_checked">
-                                                    <span class="form-check-label">Functional Test Mode (i.e. save Response Data and Sampler Data)</span>
+                                                    <span class="form-check-label" v-text="language.functional_mode"></span>
                                                     <span class="form-check-description">
-                                                        Selecting Functional Test Mode may adversely affect performance.
+                                                        <label v-text="language.functional_mode_tips"></label>
                                                     </span>
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tabs-thread-group">
                                             <div class="mb-3 row">
-                                                <label class="col-2 col-form-label required">Name</label>
+                                                <label class="col-2 col-form-label required"  v-text="language.name"></label>
                                                 <div class="col">
                                                   <input  class="form-control"  placeholder="Enter Thread Group Name" v-model="threadgroupName">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label class="col-2 col-form-label">Comments</label>
+                                                <label class="col-2 col-form-label" v-text="language.comments"></label>
                                                 <div class="col">
                                                   <input  class="form-control" placeholder="Enter comments" v-model="threadgroupComments">
                                                 </div>
                                             </div>
-                                            <div class="hr-text hr-text-left">Action to be taken after a Sampler error</div>
+                                            <div class="hr-text hr-text-left" v-text="language.sampler_error_title"></div>
                                             <div>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="radios-inline"  v-model="smplerAction" value="continue">
-                                                    <span class="form-check-label">Continue</span>
+                                                    <span class="form-check-label" v-text="language.continue"></span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="radios-inline" v-model="smplerAction" value="startnextloop">
-                                                    <span class="form-check-label">Start Next Thread Loop</span>
+                                                    <span class="form-check-label" v-text="language.start_next_thread_loop"></span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="radios-inline" v-model="smplerAction" value="stopthread">
-                                                    <span class="form-check-label">Stop Thread</span>
+                                                    <span class="form-check-label" v-text="language.stop_thread"></span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="radios-inline" v-model="smplerAction" value="stoptest">
-                                                    <span class="form-check-label">Stop Test</span>
+                                                    <span class="form-check-label" v-text="language.stop_test"></span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="radios-inline" v-model="smplerAction" value="stoptestnow">
-                                                    <span class="form-check-label">Stop Test Now</span>
+                                                    <span class="form-check-label" v-text="language.stop_test_now"></span>
                                                 </label>
                                             </div>
-                                            <div class="hr-text hr-text-left">Thread Properties</div>
+                                            <div class="hr-text hr-text-left" v-text="language.thread_properties"></div>
                                             <div class="mb-3 row">
-                                                <label class="col-3 col-form-label required">Number of Threads (users)</label>
+                                                <label class="col-3 col-form-label required" v-text="language.number_of_threads"></label>
                                                 <div class="col">
                                                   <input  class="form-control" v-model="threadNum">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label class="col-3 col-form-label">Ramp-up period (seconds)</label>
+                                                <label class="col-3 col-form-label" v-text="language.ramp_up_period"></label>
                                                 <div class="col">
                                                   <input  class="form-control" v-model="rampTime">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label class="col-3 col-form-label">Loop  Count</label>
+                                                <label class="col-3 col-form-label" v-text="language.loop_count"></label>
                                                 <div class="col">
                                                   <input  class="form-control" v-model="loopCount">
                                                 </div>
@@ -263,25 +263,25 @@
                                             <div class="col">
                                                 <label class="form-check">
                                                     <input class="form-check-input" type="checkbox" v-model="iterationChecked">
-                                                    <span class="form-check-label">Same user on each iteration</thead></span>
+                                                    <span class="form-check-label" v-text="language.same_user_on_each_iteration"></thead></span>
                                                 </label>
                                                 <label class="form-check">
                                                     <input class="form-check-input" type="checkbox" v-model="delayedChecked">
-                                                    <span class="form-check-label">Delay Thread creation until needed</span>
+                                                    <span class="form-check-label" v-text="language.delay_thread_creation_until_needed"></span>
                                                 </label>
                                                 <label class="form-check">
                                                     <input class="form-check-input" type="checkbox" v-model="schedulerChecked" @click="clickScheduler()">
-                                                    <span class="form-check-label">Specify Thread lifetime</span>
+                                                    <span class="form-check-label" v-text="language.specify_thread_lifetime"></span>
                                                 </label>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label class="col-3 col-form-label">Duration (seconds)</label>
+                                                <label class="col-3 col-form-label" v-text="language.duration"></label>
                                                 <div class="col">
                                                   <input  class="form-control"  :disabled="schedulerDisabled" v-model="duration">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label class="col-3 col-form-label">Startup delay (seconds)</label>
+                                                <label class="col-3 col-form-label" v-text="language.startup_delay"></label>
                                                 <div class="col">
                                                   <input  class="form-control" :disabled="schedulerDisabled" v-model="delay">
                                                 </div>
@@ -289,43 +289,43 @@
                                         </div>
                                         <div class="tab-pane" id="tabs-sampler">
                                             <div class="mb-3 row">
-                                                <label class="col-2 col-form-label required">Name</label>
+                                                <label class="col-2 col-form-label required" v-text="language.name"></label>
                                                 <div class="col">
                                                   <input  class="form-control"  placeholder="Enter name" v-model="samplerName">
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label class="col-2 col-form-label">Comments</label>
+                                                <label class="col-2 col-form-label" v-text="language.comments"></label>
                                                 <div class="col">
                                                   <input  class="form-control" placeholder="Enter comments" v-model="samplerComment">
                                                 </div>
                                             </div>
-                                            <div class="hr-text hr-text-left">Web Server</div>
+                                            <div class="hr-text hr-text-left" v-text="language.web_server"></div>
                                             <div class="row row-cards">
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label required">Protocol[http]</label>
+                                                        <label class="form-label required" v-text="language.protocol"></label>
                                                         <input type="text" class="form-control" v-model="samplerProtocol" placeholder="Enter protocol">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label required">Server Name or IP</label>
+                                                        <label class="form-label required" v-text="language.server_name_or_ip"></label>
                                                         <input type="test" class="form-control" v-model="samplerIP" placeholder="Enter server name or ip">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
-                                                      <label class="form-label">Port Number</label>
+                                                      <label class="form-label" v-text="language.port_number"></label>
                                                       <input type="test" class="form-control" v-model="samplerPort" placeholder="Enter port number">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="hr-text hr-text-left">HTTP Request</div>
+                                            <div class="hr-text hr-text-left" v-text="language.http_request"></div>
                                             <div class="row row-cards">
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label">Method</label>
+                                                        <label class="form-label" v-text="language.method"></label>
                                                         <select class="form-control form-select" v-model="selectedMethod">
                                                             <option v-for="method in methodList" :key="method" :text="method"></option>
                                                         </select>
@@ -333,13 +333,13 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label required">Path</label>
+                                                        <label class="form-label required" v-text="language.path"></label>
                                                         <input type="text" class="form-control" v-model="requestPath" placeholder="Enter path">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label">Content encoding</label>
+                                                        <label class="form-label" v-text="language.content_encoding"></label>
                                                         <input type="test" class="form-control" v-model="requestEncode" placeholder="Enter content encoding">
                                                     </div>
                                                 </div>
@@ -347,29 +347,29 @@
                                             <div class="mb-3">
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" v-model="autoRedirectChecked">
-                                                    <span class="form-check-label">Redirect Automatically</span>
+                                                    <span class="form-check-label" v-text="language.redirect_automatically"></span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" v-model="followRedirectChecked">
-                                                    <span class="form-check-label">Follow Redirect</span>
+                                                    <span class="form-check-label" v-text="language.follow_redirect"></span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" v-model="useKeepAliveChecked">
-                                                    <span class="form-check-label">Use KeepAlive</span>
+                                                    <span class="form-check-label" v-text="language.use_keepAlive"></span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" v-model="useKeepMultipartChecked">
-                                                    <span class="form-check-label">Use multipart/form-data</span>
+                                                    <span class="form-check-label" v-text="language.use_multipart_formdata"></span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" v-model="browserComatibleChecked">
-                                                    <span class="form-check-label">Browser-compatible headers</span>
+                                                    <span class="form-check-label" v-text="language.browser_compatible_headers"></span>
                                                 </label>
                                             </div>
                                             <div class="card-tabs">
                                                 <ul class="nav nav-tabs">
-                                                    <li class="nav-item"><a href="#parameter" v-show="parametersVisable" class="nav-link active" data-bs-toggle="tab">Parameters</a></li>
-                                                    <li class="nav-item"><a href="#body-data" v-show="bodydataVisavle" class="nav-link active" data-bs-toggle="tab">Body Data</a></li>
+                                                    <li class="nav-item"><a href="#parameter" v-show="parametersVisable" class="nav-link active" data-bs-toggle="tab" v-text="language.parameters"></a></li>
+                                                    <li class="nav-item"><a href="#body-data" v-show="bodydataVisavle" class="nav-link active" data-bs-toggle="tab" v-text="language.body_data"></a></li>
                                                     <!-- <li class="nav-item"><a href="#files-upload" class="nav-link" data-bs-toggle="tab">Files Upload</a></li> -->
                                                 </ul>
                                                 <div class="tab-content">
@@ -440,7 +440,7 @@
                                 <div class="btn-list justify-content-end">
                                     <a  class="btn" @click="editPlan()">
                                         <svg t="1692672026903" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7786" width="320" height="320"><path d="M904 1024H120c-66.168 0-120-53.832-120-120V120C0 53.832 53.832 0 120 0h784c66.168 0 120 53.832 120 120v784c0 66.168-53.832 120-120 120zM120 4C56.038 4 4 56.038 4 120v784c0 63.962 52.038 116 116 116h784c63.962 0 116-52.038 116-116V120c0-63.962-52.038-116-116-116H120z" fill="#D8DDE3" p-id="7787"></path><path d="M732 832H292c-55.14 0-100-44.86-100-100V292c0-55.14 44.86-100 100-100h440c55.14 0 100 44.86 100 100v440c0 55.14-44.86 100-100 100zM292 252c-22.056 0-40 17.944-40 40v440c0 22.056 17.944 40 40 40h440c22.056 0 40-17.944 40-40V292c0-22.056-17.944-40-40-40H292z" fill="#20263B" p-id="7788"></path><path d="M642 442H382c-44.112 0-80-35.888-80-80v-110c0-33.084 26.916-60 60-60h300c33.084 0 60 26.916 60 60v110c0 44.112-35.888 80-80 80z m-280-190v110c0 11.028 8.972 20 20 20h260c11.028 0 20-8.972 20-20v-110H362z" fill="#20263B" p-id="7789"></path><path d="M572.928 275h60v80.174h-60z" fill="#FF4B07" p-id="7790"></path></svg>
-                                        Save
+                                        <label v-text="language.save"></label>
                                     </a>
                                 </div>
                             </div>
@@ -452,18 +452,18 @@
                     <div class="empty-img">
                         <img src="/static/image/empty.png">
                     </div>
-                    <p class="empty-title"> No results found </p>
+                    <p class="empty-title" v-text="language.no_results_found"></p>
                     <div class="empty-action">
                         <a  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-create-plan" >
                             <svg t="1690879968452" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2274" width="320" height="320"><path d="M810.666667 469.333333h-256V213.333333a42.666667 42.666667 0 0 0-85.333334 0v256H213.333333a42.666667 42.666667 0 0 0 0 85.333334h256v256a42.666667 42.666667 0 0 0 85.333334 0v-256h256a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2275" fill="#ffffff"></path></svg>
-                            Create your first TEST PLAN
+                            <label v-text="language.create_your_first_test_plan"></label>
                         </a>
                     </div>
-                    <label class="mt-3"><strong>OR</strong></label>
+                    <label class="mt-3"><strong v-text="language.or"></strong></label>
                     <div class="empty-action">
                         <a  class="btn btn-orange" data-bs-toggle="modal" data-bs-target="#modal-import-plan" >
                             <svg t="1693382701142" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1631" width="320" height="320"><path d="M739.530598 294.52799l0 435.029978c0 24.048719-20.48045 43.594891-44.444235 43.594891L303.417963 773.152858l0 43.425022c0 23.963785 19.800975 43.508933 43.807738 43.508933l434.795641 0c24.006763 0 44.360324-19.545148 44.360324-43.508933L826.381665 207.551056c0-24.048719-20.35356-43.636846-44.360324-43.636846L347.224678 163.91421c-24.006763 0-43.807738 19.588127-43.807738 43.636846l0 44.147476 391.669424 0C719.051171 251.698532 739.530598 270.521227 739.530598 294.52799zM588.693218 556.539402 463.561289 674.320922c-17.334807 16.315594-44.699038 15.551184-61.142545-1.86958-16.315594-17.419741-15.508205-44.783972 1.86958-61.099566l59.357899-55.916521L241.086335 555.435255c-24.006763 0-43.468001-18.951631-43.468001-43.00035 0-24.049742 19.461237-43.020816 43.468001-43.020816l222.559888 0-59.357899-56.257282c-17.377786-16.35755-18.185174-43.934628-1.86958-61.312414 8.583492-9.007141 20.055778-13.680581 31.528064-13.680581 10.621918 0 21.24486 3.823072 29.65746 11.68411l125.08895 117.653607c12.32163 11.535731 19.37528 27.767414 19.37528 44.593638C608.068498 528.836457 601.014848 545.06814 588.693218 556.539402z" fill="#ffffff" p-id="1632" data-spm-anchor-id="a313x.search_index.0.i0.62903a81VCJFTq" class="selected"></path></svg>
-                            Import your first TEST PLAN
+                            <label v-text="language.import_your_first_test_plan"></label>
                         </a>
                     </div>
 
@@ -482,14 +482,12 @@
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a  target="_blank" class="link-secondary">
-                                 Documentation 
+                            <a  target="_blank" class="link-secondary" v-text="language.documentation">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <svg t="1691475851430" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4000" width="320" height="320"><path d="M512 42.666667A464.64 464.64 0 0 0 42.666667 502.186667 460.373333 460.373333 0 0 0 363.52 938.666667c23.466667 4.266667 32-9.813333 32-22.186667v-78.08c-130.56 27.733333-158.293333-61.44-158.293333-61.44a122.026667 122.026667 0 0 0-52.053334-67.413333c-42.666667-28.16 3.413333-27.733333 3.413334-27.733334a98.56 98.56 0 0 1 71.68 47.36 101.12 101.12 0 0 0 136.533333 37.973334 99.413333 99.413333 0 0 1 29.866667-61.44c-104.106667-11.52-213.333333-50.773333-213.333334-226.986667a177.066667 177.066667 0 0 1 47.36-124.16 161.28 161.28 0 0 1 4.693334-121.173333s39.68-12.373333 128 46.933333a455.68 455.68 0 0 1 234.666666 0c89.6-59.306667 128-46.933333 128-46.933333a161.28 161.28 0 0 1 4.693334 121.173333A177.066667 177.066667 0 0 1 810.666667 477.866667c0 176.64-110.08 215.466667-213.333334 226.986666a106.666667 106.666667 0 0 1 32 85.333334v125.866666c0 14.933333 8.533333 26.88 32 22.186667A460.8 460.8 0 0 0 981.333333 502.186667 464.64 464.64 0 0 0 512 42.666667" fill="#231F20" p-id="4001"></path></svg>
-                            <a href="https://github.com/smart-test-ti/webmeter" target="_blank" class="link-secondary" rel="noopener">
-                                 Source code 
+                            <a href="https://github.com/smart-test-ti/webmeter" target="_blank" class="link-secondary" rel="noopener" v-text="language.source_code">
                             </a>
                         </li>
                     </ul>
@@ -505,7 +503,7 @@
                         </li>
                         <li class="list-inline-item">
                             <a href="https://github.com/smart-test-ti/webmeter/releases" target="_blank" class="link-secondary" rel="noopener">
-                                 Releases  . V1.0.0
+                                 <label v-text="language.release"></label>  . V1.0.0
                             </a>
                         </li>
                     </ul>
@@ -703,6 +701,8 @@ const app = createApp({
 
         onMounted(() => {
             initPlan();
+            keyList = ref([{"key":"language","value":"english"}])
+            initKey(keyList.value)
         });
 
         async function reload() {
@@ -711,11 +711,24 @@ const app = createApp({
             this.isReload = true;
         };
 
-        
+        const initKey = (formList) => {
+            formList.forEach(form =>{
+                axios.post('/api/initialize', form)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    elMessage('error', error)
+                });
+            })
+        }
+
         const setLanguage = (language) => {
             loading.value = true
             axios.post('/api/language/set', {
-                language: language
+                key: 'language',
+                value: language
             })
             .then(function (response) {
                 if(response['data']['status'] == 1){
@@ -735,7 +748,9 @@ const app = createApp({
 
         const getLanguage = () => {
             loading.value = true
-            axios.post('/api/language/get', {})
+            axios.post('/api/language/get', {
+                key: 'language'
+            })
             .then(function (response) {
                 if(response['data']['status'] == 1){
                     if(response['data']['language'] == 'chinese'){
