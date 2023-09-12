@@ -1,6 +1,6 @@
 <p align="center">
 <a href="#">
-<img src="https://github.com/smart-test-ti/webmeter/blob/main/webmeter/static/image/logo.png?raw=true" alt="Webmeter" width="150">
+<img src="https://github.com/smart-test-ti/webmeter/blob/main/webmeter/static/image/logo.png?raw=true" alt="Webmeter" width="100">
 </a>
 <br>
 <br>
