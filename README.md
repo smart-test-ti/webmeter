@@ -1,3 +1,10 @@
+<p align="center">
+<a href="#">
+<img src="https://github.com/smart-test-ti/webmeter/blob/main/webmeter/static/image/logo.png?raw=true" alt="Webmeter" width="150">
+</a>
+<br>
+<br>
+
 ## WebMeter
 
 A web api-performance tool based on jmeter.
@@ -48,6 +55,7 @@ from webmeter.public.plan import TestPlan
 change to 
 from public.plan import TestPlan
 ```
+
 * run debug.py
 
 ```shell
