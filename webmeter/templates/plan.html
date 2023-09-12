@@ -16,6 +16,7 @@
     <!-- CSS files -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
 </head>
 <body class="Body">
 <div class="page" id="app">
@@ -46,7 +47,7 @@
                                     <svg t="1690875909592" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="26542" width="320" height="320"><path d="M244.224 370.78016h526.336c48.64 0 87.552 39.424 87.552 87.552v292.352c0 48.64-39.424 87.552-87.552 87.552H244.224c-48.64 0-87.552-39.424-87.552-87.552v-292.352c-0.512-48.128 38.912-87.552 87.552-87.552z" fill="#CAE4FF" p-id="26543"></path><path d="M760.832 983.30624H245.76c-114.176 0-206.848-92.672-206.848-206.848v-357.888c0-114.176 92.672-206.336 206.848-206.848h515.072c114.176 0 206.336 92.672 206.848 206.848v357.888c0 114.176-92.672 206.848-206.848 206.848zM245.76 270.09024c-81.92 0-148.48 66.56-148.48 148.48v357.888c0 81.92 66.56 148.48 148.48 148.48h515.072c81.92 0 148.48-66.56 148.48-148.48v-357.888c0-81.92-66.56-148.48-148.48-148.48H245.76z" fill="#0972E7" p-id="26544"></path><path d="M303.616 748.29824c0.512 14.848-11.264 27.648-26.112 28.16-14.848 0.512-27.648-11.264-28.16-26.112v-291.328c0.512-14.848 13.312-26.624 28.16-26.112 14.336 0.512 25.6 11.776 26.112 26.112v289.28z" fill="#0972E7" p-id="26545"></path><path d="M742.912 758.53824c0 13.824-11.264 25.088-25.088 25.088H274.432c-13.824 0.512-25.6-9.728-26.112-23.552-0.512-13.824 9.728-25.6 23.552-26.112h446.464c13.312 0 24.576 11.264 24.576 24.576z m-261.12-224.768c-9.728-10.24-26.112-10.24-36.352-0.512l-78.848 79.36c-10.24 10.24-10.24 26.624 0 36.864 9.728 10.24 26.112 10.24 36.352 0.512l79.36-78.848c9.728-10.752 9.728-27.136-0.512-37.376z" fill="#0972E7" p-id="26546"></path><path d="M564.736 648.97024c10.24-9.728 10.24-26.112 0-36.352l-79.36-78.848c-10.24-10.24-26.624-10.24-36.864 0-10.24 9.728-10.24 26.112 0 36.352l78.848 78.848c10.752 10.24 27.136 10.24 37.376 0z" fill="#0972E7" p-id="26547"></path><path d="M649.216 533.77024c-9.728-10.24-26.112-10.24-36.352-0.512l-79.36 78.848c-10.24 10.24-10.24 26.624 0 36.864 9.728 10.24 26.112 10.24 36.352 0.512l79.36-78.848c9.728-10.24 9.728-26.624 0-36.864z" fill="#0972E7" p-id="26548"></path><path d="M714.24 468.74624c-9.728-10.24-26.112-10.24-36.352-0.512l-79.36 78.848c-10.24 10.24-10.24 26.624 0 36.864 9.728 10.24 26.112 10.24 36.352 0.512l79.36-78.848c10.24-10.24 10.24-27.136 0-36.864zM97.792 404.74624H39.936c0-51.2-0.512-120.832-0.512-120.832 0-112.128 91.136-203.264 203.264-203.264h136.704c123.392 0 194.56 66.56 194.56 182.784h-57.856c0-83.968-44.544-124.928-136.192-124.928H242.688c-80.384 0-145.408 65.024-145.408 145.408 0 0 0.512 69.632 0.512 120.832z" fill="#0972E7" p-id="26549"></path></svg>
                                 </span>
                                 <span class="nav-link-title strong-text" v-text="language.result_page_title"></span>
-                                <span class="status-dot status-dot-animated bg-green d-block" style="margin-left: 5px;"></span>
+                                <span class="status-dot status-dot-animated bg-red d-block" style="margin-left: 5px;" v-if="redPointer"></span>
                             </a>
                         </li>
                     </ul>
@@ -430,7 +431,19 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tabs-plan-log">
-                                            <h4>Log</h4>
+                                            <h4>
+                                                <el-select v-model="log" filterable placeholder="Select log">
+                                                    <el-option
+                                                      v-for="item in Logs"
+                                                      :key="item.value"
+                                                      :label="item.label"
+                                                      :value="item.value"
+                                                    />
+                                                  </el-select>
+                                            </h4>
+                                            <!-- <pre style="height: 700px;">
+                                                <code class="language-python" ></code>
+                                            </pre> -->
                                             <el-empty description="No log found." />
                                         </div>
                                     </div>
@@ -623,6 +636,8 @@
 <script src="https://unpkg.com/element-plus"></script>
 <script src="https://unpkg.com/@element-plus/icons-vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
 <script src="/static/js/lan.js"></script>
 
 <script>
@@ -640,6 +655,7 @@ const app = createApp({
     
     setup() {
         const loading = ref(false)
+        const redPointer = ref(false)
         const isReload = ref(true)
         const language = ref({})
         var planList = reactive([])
@@ -694,15 +710,20 @@ const app = createApp({
         const bodyDataContent = ref('{}')
         const parametersVisable = ref(false)
         const bodydataVisavle = ref(true)
+
+        // Log
+        const log = ref('')
+        const Logs = reactive([])
         
         onBeforeMount(() => {
-            getLanguage()
+            hljs.highlightAll();
+            keyList = ref([{"key":"language","value":"english"}])
+            initKey(keyList.value)
         });
 
         onMounted(() => {
+            getLanguage()
             initPlan();
-            keyList = ref([{"key":"language","value":"english"}])
-            initKey(keyList.value)
         });
 
         async function reload() {
@@ -988,12 +1009,14 @@ const app = createApp({
             stoppingBtn.value = false
             stopBtn.value = true
             axios.post('/api/plan/run', {
-                plan_name: checkedPlan.value
+                plan_name: checkedPlan.value,
+                threads: threadNum.value
             })
             .then(function (response) {
                 plan_data = response['data']
                 if(plan_data['status'] == 1){
                     console.log(response)
+                    redPointer.value = true
                 }else{
                     elMessage('error', plan_data['msg'])
                 }
@@ -1096,6 +1119,7 @@ const app = createApp({
 
         return {
             loading,
+            redPointer,
             language,
             planList,
             planVisable,
@@ -1149,6 +1173,10 @@ const app = createApp({
             bodyDataContent,
             parametersVisable,
             bodydataVisavle,
+
+            // Log
+            log,
+            Logs,
             
             // founction
             createPlan,

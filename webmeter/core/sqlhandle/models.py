@@ -9,12 +9,13 @@ class Task(Base):
     id = Column(Integer, primary_key=True, index=True)
     plan = Column(String, index=True)
     task = Column(String, index=True, unique=True)
-    model = Column(String, index=True)
-    status = Column(String, index=True, default='runing')
+    model = Column(String, index=True, default='stand-alone') #stand-alone | distributed
     success_num = Column(Integer, index=True, default=0)
     fail_num = Column(Integer, index=True, default=0)
-    ctime = Column(DateTime, default=datetime.datetime.now)
-    is_active = Column(Boolean, default=True)
+    threads = Column(Integer, index=True, default=1)
+    status = Column(String, index=True, default='Running')
+    stime = Column(String, index=True)
+    etime = Column(String, index=True)
 
 class Monitor(Base):
     __tablename__ = "monitor"
@@ -25,7 +26,7 @@ class Monitor(Base):
     cpu = Column(Float, index=True, default=0)
     memory = Column(Float, index=True, default=0)
     network = Column(Float, index=True, default=0)
-    ctime = Column(DateTime, index=True, default=None)
+    ctime = Column(String, index=True, default=None)
 
 class Key(Base):
     __tablename__ = "key"

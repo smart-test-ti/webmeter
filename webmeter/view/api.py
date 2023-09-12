@@ -1,6 +1,6 @@
 from loguru import logger
 from typing import Union
-from fastapi import APIRouter, Response, Cookie, UploadFile, File, Form
+from fastapi import APIRouter, UploadFile, File, Form
 from core.plan import TestPlan
 from core.engine import EngineServie
 from core.sqlhandle import crud, models, schemas
@@ -20,17 +20,6 @@ async def initialize(keys: schemas.keyCreate):
       result = {'status':0, 'msg': str(e)}
    return result
 
-# @router.post("/api/language/set")
-# async def set_language(content: dict, response:Response):
-#    try:
-#       language = content.get('language')
-#       response.set_cookie(key="language",value=language)
-#       result = {'status':1, 'msg': 'Change the language to {}'.format(language)}
-#    except Exception as e:
-#       logger.exception(e)
-#       result = {'status':0, 'msg': str(e)}
-#    return result
-
 @router.post("/api/language/set")
 async def set_language(keys: schemas.keyUpdate):
    try:
@@ -40,16 +29,6 @@ async def set_language(keys: schemas.keyUpdate):
       logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
-
-# @router.post("/api/sql/language/get")
-# async def get_sql_language(keys: schemas.keyQuery):
-#    try:
-#       value = crud.query_key(keys)
-#       result = {'status':1, 'msg': 'success', 'language': value}
-#    except Exception as e:
-#       logger.exception(e)
-#       result = {'status':0, 'msg': str(e)}
-#    return result
 
 @router.post("/api/language/get")
 async def get_language(keys: schemas.keyQuery):
@@ -81,7 +60,6 @@ async def checked_one_plan(content: dict):
       logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
-
 
 @router.post("/api/plan/info")
 async def get_plan_info(content: dict):
@@ -153,12 +131,53 @@ async def save_plan(content: dict):
       result = {'status':0, 'msg': str(e)}
    return result
 
-
 @router.post("/api/plan/run")
 async def run_plan(content: dict):
    try:
       EngineServie.run(content=content, remote=False)
       result = {'status':1, 'msg': 'run success'}   
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/task/query/one")
+async def query_task_one(tasks: schemas.taskQuery):
+   try:
+      data = crud.query_task_one(tasks=tasks)
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/task/query/all")
+async def query_task_all():
+   try:
+      data = crud.query_task_all()
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/task/remove/one")
+async def remove_task_one(content: dict):
+   try:
+      plan = content.get('plan')
+      task = content.get('task')
+      data = crud.remove_task_one(plan=plan, task=task)
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/task/remove/all")
+async def remove_task_all():
+   try:
+      data = crud.remove_task_all()
+      result = {'status':1, 'msg': 'success', 'data': data}
    except Exception as e:
       logger.exception(e)
       result = {'status':0, 'msg': str(e)}

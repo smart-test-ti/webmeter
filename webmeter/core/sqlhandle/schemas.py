@@ -1,21 +1,36 @@
 from typing import Optional
 from pydantic import BaseModel
+import datetime
+
 
 
 class TaskBase(BaseModel):
-    status: Optional[str] = None
     model: Optional[str] = None
-    is_active: bool
+    threads: int
     success_num: int
     fail_num: int
+    status: str
+    etime: datetime.datetime
 
-class taskCreate(TaskBase):
+class taskCreate(BaseModel):
     plan: str
     task: str
+    model: str
 
-class taskQuery(TaskBase):
-    id: int
+class taskQuery(BaseModel):
     plan: str
+    class Config:
+        from_attributes = True
+
+class taskDetail(TaskBase):
+    plan: str
+    task: str
+    class Config:
+        from_attributes = True
+
+class taskUpdate(TaskBase):
+    plan: str
+    task: str
     class Config:
         from_attributes = True
 
@@ -41,8 +56,8 @@ class monitorBase(BaseModel):
     network: float
 
 class monitorCreate(monitorBase):
-    machine: str
-    task: str
+    machine: float
+    task: float
 
 class monitorQuery(monitorBase):
     id: int

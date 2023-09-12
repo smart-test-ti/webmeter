@@ -36,9 +36,9 @@ class Common(object):
     
     @contextmanager
     @classmethod
-    def open_file(name, mode):
+    def open_file(cls, path, mode):
         try:
-            file = open(name, mode)
+            file = open(path, mode)
             yield file
         except Exception as e:
             raise e    
@@ -53,7 +53,7 @@ class Common(object):
         return result
     
     @classmethod
-    def make_dir(self, dir: str) -> str:
+    def make_dir(cls, dir: str) -> str:
         if not os.path.exists(dir):
             os.mkdir(dir)
         return dir    
