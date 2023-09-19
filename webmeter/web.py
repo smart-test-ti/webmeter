@@ -1,11 +1,11 @@
 import uvicorn
 from fastapi import FastAPI
-from webmeter.view import page,api
-from webmeter.core.utils import Common
 import requests
 import webbrowser
 import multiprocessing
 import os
+from webmeter.view import page,api
+from webmeter.core.utils import Common
 
 app = FastAPI(debug=False)
 app.include_router(page.router)

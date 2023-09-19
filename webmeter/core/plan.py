@@ -1,8 +1,9 @@
 import os
 import shutil
 from loguru import logger
-from webmeter.core.utils import Common, JMX
 from fastapi import UploadFile
+from webmeter.core.utils import Common, JMX
+
 
 class Base(object):
 
