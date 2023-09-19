@@ -1,4 +1,7 @@
 recursive-include webmeter/static *.html *.js *.css *.png *.py *.jmx
 recursive-include webmeter/templates *.html *.js *.css *.png *.py *.jmx
-recursive-include webmeter/core *.html *.js *.css *.png *.py *.jmx
+recursive-include webmeter/core *.html *.js *.css *.png *.py *.jmx 
 recursive-include webmeter/view *.html *.js *.css *.png *.py *.jmx
+recursive-include webmeter/core/file *
+recursive-include webmeter/core/jmeter *
+recursive-include webmeter/core/sqlhandle *
