@@ -2,7 +2,7 @@ from core.sqlhandle import models, schemas, database
 from typing import Optional
 from loguru import logger
 import os, shutil, datetime
-from core.plan import TestPlan
+from webmeter.core.plan import TestPlan
 
 def create_task(tasks: dict):
     with database.dbConnect() as session:
@@ -32,21 +32,31 @@ def update_task(tasks: dict):
         else:
             raise Exception('{} is not existed'.format(result.task))
         
-def query_task_one(tasks: schemas.taskQuery):
+def query_task_one(plan: str, task: str) -> dict:
     with database.dbConnect() as session:
-        results = session.query(models.Task).filter(models.Task.plan == tasks.plan).all()
-        result_dict = [result.task for result in results]
+        results = session.query(models.Task).filter(models.Task.plan == plan,
+                                                    models.Task.task == task).first()
+        result_dict = dict()
+        result_dict['plan'] = results.plan
+        result_dict['task'] = results.task
+        result_dict['model'] = results.model
+        result_dict['status'] = results.status
+        result_dict['threads'] = results.threads
+        result_dict['success_num'] = results.success_num
+        result_dict['fail_num'] = results.fail_num
+        result_dict['stime'] = results.stime
+        result_dict['etime'] = results.etime
         return result_dict
 
-def query_task_all():
+def query_task_all() -> list:
     with database.dbConnect() as session:
         results = session.query(models.Task).order_by(models.Task.stime.desc()).all()
-        result_dict = [{'plan': result.plan, 'task':result.task,
+        result_list = [{'plan': result.plan, 'task':result.task,
                         'model': result.model, 'status': result.status,
                         'threads': result.threads, 'success_num': result.success_num,
                         'fail_num': result.fail_num, 'stime': result.stime,
                         'etime': result.etime}  for  result in results]
-        return result_dict
+        return result_list
 
 def remove_task_one(plan: str, task: str):
     logger.warning('remove task data : {}'.format(task))

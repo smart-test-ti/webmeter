@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from webmeter.view import page,api
-from webmeter.core.utils import Utils
+from webmeter.core.utils import Common
 import requests
 import webbrowser
 import multiprocessing
@@ -25,7 +25,7 @@ def open_url(host: str, port: int)  -> None:
         flag = status(host, port)
     webbrowser.open('http://{}:{}/plan'.format(host, port), new=2)
 
-def main(host=Utils.ip(), port=6006) -> None:
+def main(host=Common.ip(), port=6006) -> None:
     pool = multiprocessing.Pool(processes=2)
     pool.apply_async(start, (host, port))
     pool.apply_async(open_url, (host, port))

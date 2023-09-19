@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link rel="icon" href="/static/image/logo.png">
 
-    <title>WebMeter -  TASK RESULT</title>
+    <title>WebMeter -  TASK ANALYSIS</title>
     <!-- CSS files -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
@@ -81,80 +81,156 @@
         </div>
     </header>
     <div class="page-wrapper sceen-body" v-loading="loading">
+        <div class="page-header d-print-none">
+            <div class="container">
+              <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                  <span class="status-indicator status-green status-indicator-animated">
+                    <span class="status-indicator-circle"></span>
+                    <span class="status-indicator-circle"></span>
+                    <span class="status-indicator-circle"></span>
+                  </span>
+                </div>
+                <div class="col">
+                  <h2 class="page-title">
+                    <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+                        <li class="breadcrumb-item"><a href="/result">{{ plan }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ task }}</a></li>
+                    </ol>      
+                </h2>
+                  <div class="text-secondary">
+                    <ul class="list-inline list-inline-dots mb-0">
+                        <li class="list-inline-item"><span class="text-green">MODEL</span></li>
+                        <li class="list-inline-item">stand-alone</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-auto ms-auto d-print-none">
+                  <div class="btn-list">
+                    <a class="btn">
+                        <svg t="1694597731524" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="51115" width="320" height="320"><path d="M0 0h1024v1024H0z" fill="#F5F5F5" fill-opacity=".01" p-id="51116"></path><path d="M316.94848 57.77408v30.72H121.89696c-17.46944 0-31.80544 13.43488-33.28 30.5152l-0.12288 2.88768v195.05152h-30.72V121.89696a64.12288 64.12288 0 0 1 60.49792-64.02048l3.62496-0.1024h195.05152z" fill="#14142B" p-id="51117"></path><path d="M175.53408 184.32m40.96 0l737.28 0q40.96 0 40.96 40.96l0 737.28q0 40.96-40.96 40.96l-737.28 0q-40.96 0-40.96-40.96l0-737.28q0-40.96 40.96-40.96Z" fill="#FF6600" opacity=".1" p-id="51118"></path><path d="M88.49408 707.05152v195.05152c0 17.46944 13.43488 31.80544 30.5152 33.28l2.88768 0.12288h195.05152v30.72H121.89696a64.12288 64.12288 0 0 1-64.02048-60.49792l-0.1024-3.62496v-195.05152h30.72zM966.22592 707.05152v195.05152a64.12288 64.12288 0 0 1-60.49792 64.02048l-3.62496 0.1024h-195.05152v-30.72h195.05152c17.46944 0 31.80544-13.43488 33.28-30.5152l0.12288-2.88768v-195.05152h30.72zM902.10304 57.77408a64.12288 64.12288 0 0 1 64.02048 60.49792l0.1024 3.62496v195.05152h-30.72V121.89696c0-17.46944-13.43488-31.80544-30.5152-33.28l-2.88768-0.12288h-195.05152v-30.72h195.05152zM593.36704 277.21728h-162.73408l-48.7424 73.1136-153.43616 0.02048v396.43136h567.0912V350.35136h-153.45664l-48.7424-73.13408z m-146.30912 30.72h129.8432l48.78336 73.13408h139.12064v334.97088h-505.6512V381.05088l139.1616 0.02048 48.7424-73.15456z" fill="#14142B" p-id="51119"></path><path d="M512 447.87712a88.49408 88.49408 0 1 0 0 177.00864 88.49408 88.49408 0 0 0 0-177.00864z m0 30.72a57.77408 57.77408 0 1 1 0 115.56864 57.77408 57.77408 0 0 1 0-115.56864z" fill="#14142B" p-id="51120"></path></svg>
+                        ScreenShot
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         <div class="page-body">
-            <div class="container-xl">
-                <div class="card" v-show="taskVisable">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <svg t="1694480384519" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="48348" width="320" height="320"><path d="M79.677 876.45H876.45v88.53H79.677z" fill="#005CFF" p-id="48349"></path><path d="M684.634 604.957H271.493c-17.706 0-29.51-11.804-29.51-29.51s11.804-29.51 29.51-29.51h413.141c17.706 0 29.51 11.804 29.51 29.51s-14.755 29.51-29.51 29.51z m0 120.991H271.493c-17.706 0-29.51-11.804-29.51-29.51s11.804-29.51 29.51-29.51h413.141c17.706 0 29.51 11.804 29.51 29.51s-14.755 29.51-29.51 29.51z m-35.412-360.023H448.553c-17.706 0-29.51-11.804-29.51-29.51s11.804-29.51 29.51-29.51h200.669c17.706 0 29.51 11.804 29.51 29.51s-11.804 29.51-29.51 29.51z m35.412 120.991H271.493c-17.706 0-29.51-11.804-29.51-29.51s11.804-29.51 29.51-29.51h413.141c17.706 0 29.51 11.804 29.51 29.51s-14.755 29.51-29.51 29.51z" fill="#5CB6FF" p-id="48350"></path><path d="M779.066 994.49h-616.76c-61.972 0-112.139-53.118-112.139-115.09V327.563c0-17.706 5.902-32.461 17.706-44.265L321.66 20.657C333.464 5.902 348.219 0 365.925 0h413.141c61.971 0 112.139 53.118 112.139 115.09v761.36c0 64.922-50.168 118.04-112.139 118.04zM365.926 59.02L109.186 324.611v554.79c0 32.46 23.608 56.069 53.118 56.069h616.761c29.51 0 53.118-26.56 53.118-56.07V115.09c0-32.462-23.608-56.07-53.118-56.07h-413.14z" fill="#424242" p-id="48351"></path><path d="M377.73 56.07l2.95 224.276c0 32.46-23.608 59.02-56.069 59.02l-218.375 2.951" fill="#D9EBF4" p-id="48352"></path><path d="M106.236 371.827v-59.02l218.375-2.951c14.755 0 26.559-14.755 26.559-29.51l-2.951-224.277h59.02l2.951 224.277c0 50.167-38.363 88.53-85.579 91.481H106.236z" fill="#424242" p-id="48353"></path><path d="M472.162 758.41a236.08 236.08 0 1 0 472.16 0 236.08 236.08 0 1 0-472.16 0z" fill="#2488FF" p-id="48354"></path><path d="M708.242 1024c-67.873 0-135.746-26.56-188.864-76.726-103.286-103.286-103.286-271.493 0-374.778 50.167-50.167 118.04-76.727 188.864-76.727s138.697 26.56 188.865 76.727c50.167 50.167 76.726 118.04 76.726 188.864s-26.56 138.698-76.726 188.865C843.988 997.44 776.115 1024 708.242 1024z m0-472.161c-56.07 0-106.236 20.657-144.6 61.97-79.677 79.678-79.677 212.473 0 292.15s212.473 79.678 292.15 0c38.364-38.362 61.972-91.48 61.972-144.599s-20.657-106.236-61.971-144.6c-41.315-44.264-91.482-64.921-147.55-64.921z" fill="#FFFFFF" p-id="48355"></path><path d="M802.674 826.282h-147.55v-147.55c0-17.706 11.804-29.51 29.51-29.51s29.51 11.804 29.51 29.51v88.53h88.53c17.706 0 29.51 11.804 29.51 29.51 0 14.755-11.804 29.51-29.51 29.51z" fill="#FFFFFF" p-id="48356"></path></svg>
-                            TASK
-                        </h3>
-                        <div class="card-actions btn-actions">
-                            <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#modal-remove-all">
-                                <svg t="1694419660931" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="24583" width="320" height="320"><path d="M512 512m-469.333333 0a469.333333 469.333333 0 1 0 938.666666 0 469.333333 469.333333 0 1 0-938.666666 0Z" fill="#FF6060" p-id="24584"></path><path d="M648.533333 708.266667L315.733333 375.466667c-8.533333-8.533333-8.533333-21.333333 0-29.866667l29.866667-29.866667c8.533333-8.533333 21.333333-8.533333 29.866667 0l332.8 332.8c8.533333 8.533333 8.533333 21.333333 0 29.866667l-29.866667 29.866667c-8.533333 8.533333-21.333333 8.533333-29.866667 0z" fill="#FFFFFF" p-id="24585"></path><path d="M315.733333 648.533333l332.8-332.8c8.533333-8.533333 21.333333-8.533333 29.866667 0l29.866667 29.866667c8.533333 8.533333 8.533333 21.333333 0 29.866667L375.466667 708.266667c-8.533333 8.533333-21.333333 8.533333-29.866667 0l-29.866667-29.866667c-8.533333-8.533333-8.533333-21.333333 0-29.866667z" fill="#FFFFFF" p-id="24586"></path></svg>
-                                Remove All
-                            </button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="table-responsive" style="font-size: 15px;">
-                        <table  class="table card-table table-vcenter text-nowrap datatable">
-                            <thead class="text-center">
-                                <th style="font-size: 13px;">PLAN</th>
-                                <th style="font-size: 13px;">TASK</th>
-                                <th style="font-size: 13px;">MODEL</th>
-                                <th style="font-size: 13px;">THREADS</th>
-                                <th style="font-size: 13px;">SUCCESS NUM</th>
-                                <th style="font-size: 13px;">FAILED NUM</th>
-                                <th style="font-size: 13px;">STATUS</th>
-                                <th style="font-size: 13px;">START TIME</th>
-                                <th style="font-size: 13px;">END TIME</th>
-                                <th></th>
-                            </thead>
-                            <tbody v-for="item in taskDatas" :key="item" class="text-center">
-                                <td v-text="item.plan"></td>
-                                <td v-text="item.task"></td>
-                                <td v-text="item.model"></td>
-                                <td v-text="item.threads"></td>
-                                <td v-text="item.success_num" style="color: blue;"></td>
-                                <td v-text="item.fail_num" style="color: red;"></td>
-                                <td v-if="item.status == 'Running'" >
-                                    <span class="badge bg-indigo" style="color: white;">Running<span class="animated-dots"></span></span>
-                                </td>
-                                <td v-else-if="item.status == 'Done'"><span class="badge bg-green" style="color: white;">Done</span></td>
-                                <td v-text="item.stime"></td>
-                                <td v-text="item.etime"></td>
-                                <td>
-                                    <div class="btn-list flex-nowrap">
-                                        <a @click="analysisClick(item.plan, item.task)" class="btn btn-default btn-icon" >
-                                            <svg t="1694419593064" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15030" width="320" height="320"><path d="M586.013727 89.146379C823.976467 54.362796 1017.617033 234.520241 1018.405939 491.416725s-191.13041 493.496568-429.09315 528.280151S157.781202 874.323014 157.064015 617.354812L588.093571 554.385768z" fill="#3FA9F5" p-id="15031"></path><path d="M621.873091 85.560443h24.025774c4.876874 0 9.753747 0 14.343746 0.358593h2.581874c5.737498 0 11.403278 0.717187 16.997339 1.219219l4.876873 0.573749 12.048747 1.434375 5.880935 0.932344c3.657655 0.57375 7.171873 1.219218 11.044684 1.936405 1.864687 0 3.801093 0.645469 5.66578 1.075781l12.479059 2.79703 3.657655 0.860625c5.378905 1.362656 10.757809 2.868749 16.064995 4.446561l4.087967 1.362656c3.94453 1.219218 7.88906 2.510155 11.833591 3.94453l5.235467 1.936406c3.585936 1.362656 7.171873 2.725312 10.757809 4.231405l4.876873 2.008124q6.813279 2.940468 13.339684 6.024373l1.721249 0.788906c4.159686 2.008124 8.391091 4.159686 12.479059 6.382967h0.430312l-65.622636-35.213895c-4.231405-2.294999-8.534529-4.51828-12.909371-6.598123l-1.434374-0.645469q-6.598123-3.155624-13.339684-6.024373l-4.876873-2.008124c-3.585936-1.506093-7.171873-2.868749-10.829528-4.231405l-5.235468-1.936406c-3.872811-1.362656-7.817341-2.725312-11.83359-3.94453l-4.016248-1.362656c-5.307186-1.577812-10.68609-3.083905-16.064996-4.446561h-0.645468l-3.012187-0.645469c-4.159686-1.004062-8.319372-1.936406-12.550777-2.79703-1.864687-0.430312-3.729374-0.717187-5.594061-1.075781-3.729374-0.717187-7.171873-1.362656-11.116403-1.936406L631.124807 53.287015l-11.977027-1.434375-4.876874-0.573749C608.892002 50.77686 603.297941 50.20311 597.560443 50.20311h-41.238269l-12.335621 0.860624-5.594061 0.502032c-5.952654 0.645469-11.83359 1.290937-17.857963 2.22328l1.721249 465.311108-430.8144 63.040762a492.27735 492.27735 0 0 0 6.024374 75.161227c1.506093 9.61031 3.37078 19.1489 5.450623 28.687491a428.806275 428.806275 0 0 0 31.914834 92.158566c3.94453 8.175935 8.104216 16.136714 12.550777 23.954055a386.27707 386.27707 0 0 0 29.261241 44.178737 362.466452 362.466452 0 0 0 116.829808 100.406219l65.550918 35.213896a370.212075 370.212075 0 0 1-152.474016-156.561984 417.474716 417.474716 0 0 1-26.751086-63.255918 447.74002 447.74002 0 0 1-14.343745-55.223421 482.810478 482.810478 0 0 1-8.391091-89.504972L588.093571 554.385768l-1.72125-465.239389c6.024373-0.932343 12.048746-1.577812 18.001401-2.223281l5.522342-0.502031z" fill="#3F59F5" p-id="15032"></path><path d="M494.859224 35.213896l1.721249 465.311108-431.029556 62.969043C64.546855 306.525844 256.681328 69.997479 494.859224 35.213896z" fill="#37DFD6" p-id="15033"></path><path d="M66.55498 531.650932c0.358594-5.235467 0.57375-10.470934 1.075781-15.706402 0-3.155624 0.717187-6.311248 1.004062-9.466872 0.502031-4.733436 1.004062-9.395153 1.577812-14.343746 0.430312-3.37078 1.075781-6.598123 1.577812-9.968903s1.290937-8.893122 2.079843-13.339683 1.362656-7.171873 2.079843-10.18406 1.649531-8.606247 2.581874-12.837652 1.721249-7.171873 2.510156-10.327497 2.008124-8.319372 3.155624-12.479059 2.008124-7.171873 3.012186-10.327496 2.294999-8.104216 3.585937-12.120465 2.294999-7.171873 3.442499-10.255779 2.653593-8.032498 4.087967-11.977027l2.366718-6.096092c1.792968-4.805155 3.657655-9.61031 5.594061-14.343746 1.004062-2.510155 2.079843-5.020311 3.155624-7.171873l5.307186-12.765933 3.585936-7.673904c2.008124-4.159686 4.016249-8.319372 6.096092-12.479059l3.729374-7.171873c3.155624-6.024373 6.382967-12.048746 9.753747-17.929682 3.37078-5.952654 7.171873-11.761871 10.470934-17.571088l3.155625-5.020311q4.374842-7.171873 9.036559-13.769996l2.653593-4.016248 3.872812-5.378905c4.374842-6.167811 8.821404-12.192184 13.339683-18.216557l5.235467-6.669842c4.733436-6.024373 9.61031-11.83359 14.343746-17.642807 1.219218-1.362656 2.366718-2.868749 3.585936-4.231405 6.167811-7.171873 12.479059-13.841715 18.933744-20.511556l5.020311-4.948592c5.09203-5.09203 10.255778-10.112341 15.562964-14.989214 2.581874-2.438437 5.163748-4.876874 7.817342-7.171873l4.589998-4.016249q6.669842-5.809217 13.55484-11.403278l2.151562-1.792968c5.307186-4.231405 10.614372-8.319372 16.064995-12.335621l4.51828-3.227343a420.988934 420.988934 0 0 1 11.546715-8.175935l7.602185-5.020311c3.514218-2.366718 7.171873-4.589999 10.614372-7.171873L329.906149 94.668721c3.729374-2.223281 7.171873-4.374842 11.259841-6.454685l7.171872-4.159687c4.159686-2.223281 8.391091-4.303124 12.622497-6.454685l6.454685-3.227343q8.964841-4.303124 18.07312-8.175935l4.733436-1.649531c4.805155-2.008124 9.61031-3.94453 14.343745-5.737498l5.66578-2.079843c5.450623-2.008124 10.972965-3.872811 16.495307-5.66578l2.797031-0.860624c6.311248-1.936406 12.765934-3.729374 19.220619-5.450624l5.307186-1.721249c4.948592-1.219218 9.897184-2.366718 14.917495-3.37078l5.737498-1.219219c6.598123-1.290937 13.196246-2.438437 19.866088-3.442499L429.021432 0C422.35159 1.004062 415.968623 2.151562 408.79675 3.442499l-5.737498 1.219218c-4.948592 1.004062-9.897184 2.151562-14.845777 3.370781l-5.378904 1.290937c-6.454686 1.721249-12.837652 3.514218-19.220619 5.522342-0.860625 0-1.721249 0.57375-2.581875 0.860624-5.594061 1.721249-11.044684 3.585936-16.495307 5.594061l-5.66578 2.079843c-4.876874 1.792968-9.682028 3.729374-14.343745 5.737499l-4.51828 1.864687c-5.737498 2.438437-11.331559 4.948592-16.92562 7.602185l-1.219218 0.57375-6.382967 3.227342c-4.231405 2.151562-8.46281 4.231405-12.622496 6.526405-2.510155 1.290937-4.948592 2.725312-7.171873 4.087967-3.801093 2.079843-7.602185 4.231405-11.331559 6.454686-2.581874 1.506093-5.09203 3.083905-7.602185 4.661717l-10.686091 7.171873-7.171873 5.092029-5.020311 3.299062-6.598123 4.805155-4.446561 3.227342c-5.450623 4.016249-10.829528 8.104216-16.064995 12.335622l-2.151562 1.792968q-7.171873 5.594061-13.554839 11.403278l-4.589999 4.016248-4.51828 3.944531-3.37078 3.299061c-5.235467 4.876874-10.470934 9.897184-15.562964 14.989214l-4.948592 4.948592c-6.884998 6.167811-13.267965 13.339683-19.364057 20.511557a11.403278 11.403278 0 0 1-0.932343 0.932343l-2.725312 3.299062c-4.948592 5.809217-9.753747 11.618434-14.343746 17.642807l-5.235467 6.669841c-4.589999 6.024373-9.03656 12.048746-13.339683 18.216557-0.932343 1.219218-1.864687 2.366718-2.725312 3.657656l-1.147499 1.721249c-0.932343 1.362656-1.792968 2.725312-2.725312 4.016249-3.083905 4.589999-6.024373 9.179997-8.964841 13.769996-1.075781 1.649531-2.151562 3.299061-3.155624 5.020311-3.585936 5.809217-7.171873 11.618434-10.542653 17.642807-3.083905 4.733436-5.737498 9.682028-8.319373 14.989214-0.57375 1.075781-1.075781 2.151562-1.64953 3.155624l-3.657656 7.171873c-1.864687 4.016249-4.231405 8.032498-6.16781 12.192183-1.219218 2.581874-2.438437 5.09203-3.585937 7.673904-1.936406 4.231405-3.801093 8.46281-5.59406 12.765934-1.075781 2.438437-2.151562 4.948592-3.155624 7.171873-1.936406 4.733436-3.801093 9.538591-5.594061 14.343745-0.788906 2.008124-1.649531 4.087968-2.366718 6.096092l-0.57375 1.506094c-1.219218 3.442499-2.366718 7.171873-3.514218 10.470934s-2.366718 7.171873-3.514217 10.255778-2.366718 8.104216-3.585937 12.120465-2.079843 7.171873-3.012186 10.327497-2.079843 8.319372-3.083906 12.479059-1.721249 7.171873-2.510155 10.327496-1.792968 8.534529-2.653593 12.837653-1.434375 7.171873-2.008125 10.184059-1.1475 9.179997-2.151561 13.626559-1.075781 6.669842-1.506094 9.968903c-0.645469 4.661717-1.075781 9.323435-1.577812 14.343745 0 3.155624-0.788906 6.311248-1.075781 9.466872-0.430312 5.235467-0.717187 10.470934-1.004062 15.706402 0 2.653593-0.430312 5.307186-0.502031 7.960779C0 512.358594 0 520.319372 0 528.280151l65.622636 35.213896c0-8.032498 0-15.921558 0.430313-23.882337 0.143437-2.653593 0.358594-5.307186 0.502031-7.960778z" fill="#4CA8A2" p-id="15034"></path><path d="M1025.1475 494.357193c0.932343 257.039922-191.13041 493.568287-429.021432 528.35187l-1.721249-465.382827z" fill="#F4F4F4" p-id="15035"></path><path d="M1015.322034 489.050007l-430.742681 62.969043 1.721249 465.382827 9.825466 5.307186-1.721249-465.382827 430.742681-62.969043-9.825466-5.307186z" fill="#DDDDDD" p-id="15036"></path></svg>
-                                        </a>
-                                        <a @click="removeClick(item.plan, item.task)" class="btn btn-default btn-icon" data-bs-toggle="modal" data-bs-target="#modal-remove-one">
-                                            <svg t="1694419660931" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="24583" width="320" height="320"><path d="M512 512m-469.333333 0a469.333333 469.333333 0 1 0 938.666666 0 469.333333 469.333333 0 1 0-938.666666 0Z" fill="#FF6060" p-id="24584"></path><path d="M648.533333 708.266667L315.733333 375.466667c-8.533333-8.533333-8.533333-21.333333 0-29.866667l29.866667-29.866667c8.533333-8.533333 21.333333-8.533333 29.866667 0l332.8 332.8c8.533333 8.533333 8.533333 21.333333 0 29.866667l-29.866667 29.866667c-8.533333 8.533333-21.333333 8.533333-29.866667 0z" fill="#FFFFFF" p-id="24585"></path><path d="M315.733333 648.533333l332.8-332.8c8.533333-8.533333 21.333333-8.533333 29.866667 0l29.866667 29.866667c8.533333 8.533333 8.533333 21.333333 0 29.866667L375.466667 708.266667c-8.533333 8.533333-21.333333 8.533333-29.866667 0l-29.866667-29.866667c-8.533333-8.533333-8.533333-21.333333 0-29.866667z" fill="#FFFFFF" p-id="24586"></path></svg>
-                                        </a>
+            <div class="container-xl">    
+                <el-tabs v-model="activeTab" type="card" class="analysis-tabs">
+                    <el-tab-pane label="Dashboard" name="dashboard">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Test and Report information</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="card">
+                                    <div class="table-responsive">
+                                        <table class="table table-vcenter table-bordered table-nowrap card-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Data Source</td>
+                                                    <td v-text="baseInfo.source_file"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Start Time</td>
+                                                    <td v-text="baseInfo.stime"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End Time</td>
+                                                    <td v-text="baseInfo.etime"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </td>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <!--empty content-->
-                <div class="empty mt-5" v-show="emptyVisable">
-                    <div class="empty-img">
-                        <img src="/static/image/empty.png">
-                    </div>
-                    <p class="empty-title" v-text="language.no_results_found"></p>
-                    <p class="empty-subtitle text-secondary">
-                        Please back to the TEST PLAN page, select plan, and start the testing task.
-                    </p>
-                    <div class="empty-action">
-                        <a  class="btn btn-secondary" href="/plan" >
-                            <svg t="1693966624823" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="27057" width="320" height="320"><path d="M514 114.3c219.9 0 398.8 178.9 398.8 398.9C912.8 733.1 733.9 912 514 912S115.2 733.1 115.2 513.2 294.1 114.3 514 114.3z m0 701.6c166.9 0 302.7-135.8 302.7-302.7S680.9 210.5 514 210.5 211.3 346.3 211.3 513.2 347.1 815.9 514 815.9z" fill="#BDD2EF" p-id="27058"></path><path d="M281.9 554.7L446 718.8c22.9 22.9 60.2 22.9 83.1 0 22.9-22.9 22.9-60.2 0-83.1L465.3 572H694c32.5 0 58.8-26.3 58.8-58.8s-26.3-58.8-58.8-58.8H465.3l63.8-63.8c11.5-11.5 17.2-26.5 17.2-41.5s-5.7-30.1-17.2-41.5c-22.9-22.9-60.2-22.9-83.1 0l-164.1 164c-22.9 23-22.9 60.2 0 83.1z" fill="#ffffff" p-id="27059" data-spm-anchor-id="a313x.search_index.0.i25.3c7d3a81Iy83Je" class="selected"></path></svg>
-                            <label v-text="language.create_your_first_test_plan"></label>
-                        </a>
-                    </div>
-                </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3" style="max-height: 28rem;">
+                            <div class="card-header">
+                                <h3 class="card-title">Requests Summary</h3>
+                            </div>
+                            <div class="card-body card-body-scrollable card-body-scrollable-shadow">
+                                <div class="card">
+                                    <div class="table-responsive">
+                                        <table class="table table-vcenter table-bordered table-nowrap card-table">
+                                            <thead class="text-center">
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">lable</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">thread Name</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">URL</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">all Threads</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">response Code</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">response Message</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">failure Message</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">bytes</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">sent Bytes</th>
+                                            </thead>
+                                            <tbody v-for="item in requestSummary" :key="item" class="text-center">
+                                                <td v-text="item.lable"></td>
+                                                <td v-text="item.threadName"></td>
+                                                <td v-text="item.URL"></td>
+                                                <td v-text="item.allThreads"></td>
+                                                <td v-text="item.responseCode"></td>
+                                                <td v-text="item.responseMessage"></td>
+                                                <td v-text="item.failureMessage" style="color: red;max-width: 200px;"></td>
+                                                <td v-text="item.bytes"></td>
+                                                <td v-text="item.sentBytes"></td>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h3 class="card-title">Statistics</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter table-bordered table-nowrap card-table">
+                                        <thead class="text-center">
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">lable</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">samplers</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">errors</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">error(%)</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">avg ResTime</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">median ResTime</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">min ResTime</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">max ResTime</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">90th pct</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">95th pct</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">99th pct</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">throughput(s)</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">sent(KB/s)</th>
+                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">recieve(KB/s)</th>
+                                        </thead>
+                                        <tbody class="text-center">
+                                            <td v-text="statisticsJson.transaction"></td>
+                                            <td v-text="statisticsJson.sampleCount"></td>
+                                            <td v-text="statisticsJson.errorCount"></td>
+                                            <td v-text="statisticsJson.errorPct"></td>
+                                            <td v-text="statisticsJson.meanResTime"></td>
+                                            <td v-text="statisticsJson.medianResTime"></td>
+                                            <td v-text="statisticsJson.minResTime"></td>
+                                            <td v-text="statisticsJson.maxResTime"></td>
+                                            <td v-text="statisticsJson.pct1ResTime"></td>
+                                            <td v-text="statisticsJson.pct2ResTime"></td>
+                                            <td v-text="statisticsJson.pct3ResTime"></td>
+                                            <td v-text="statisticsJson.throughput"></td>
+                                            <td v-text="statisticsJson.sentKBytesPerSec"></td>
+                                            <td v-text="statisticsJson.receivedKBytesPerSec"></td>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="Charts" name="charts">Charts</el-tab-pane>
+                </el-tabs>
             </div>
         </div>
     </div>
@@ -198,83 +274,13 @@
             </div>
         </div>
     </footer>
-    <div class="modal modal-blur fade" id="modal-remove-one" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-status bg-danger"></div>
-            <div class="modal-body text-center py-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>
-              <h3>Are you sure?</h3>
-              <div class="text-secondary">If you confirm, you will delete <label class="text-danger" v-text="removeTaskName"></label>.</div>
-            </div>
-            <div class="modal-footer">
-              <div class="w-100">
-                <div class="row">
-                  <div class="col"><a class="btn w-100" data-bs-dismiss="modal">
-                      Cancel
-                    </a></div>
-                  <div class="col"><a class="btn btn-danger w-100" data-bs-dismiss="modal" @click="removeOneTask()">
-                      Delete
-                    </a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="modal modal-blur fade" id="modal-remove-all" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-status bg-danger"></div>
-            <div class="modal-body text-center py-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>
-              <h3>Are you sure?</h3>
-              <div class="text-secondary">If you confirm, you will delete all plans.</div>
-            </div>
-            <div class="modal-footer">
-              <div class="w-100">
-                <div class="row">
-                  <div class="col"><a class="btn w-100" data-bs-dismiss="modal">
-                      Cancel
-                    </a></div>
-                  <div class="col"><a class="btn btn-danger w-100" data-bs-dismiss="modal" @click="removeAllTask()">
-                      Delete
-                    </a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
 </div>
-<style>
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .text {
-      font-size: 14px;
-    }
-    
-    .item {
-      margin-bottom: 18px;
-    }
-    
-    .box-card {
-      width: 100%;
-    }
-</style>
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/element-plus"></script>
 <script src="https://unpkg.com/@element-plus/icons-vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/static/js/lan.js"></script>
-
 <script>
 
 const { 
@@ -291,23 +297,94 @@ const app = createApp({
     setup() {
         const loading = ref(false)
         const language = ref({})
-        const emptyVisable = ref(true)
-        const taskVisable = ref(false)
-        const taskDatas = reactive([])
-        const removeTaskName = ref('')
-        const removePlanName = ref('')
+        const activeTab = ref('dashboard')
+        const baseInfo = ref({})
+        const requestSummary = reactive([])
+        const statisticsJson = ref({})
         
         onBeforeMount(() => {
             getLanguage()
         });
 
         onMounted(() => {
-            initTaskData()
+            getTestAndReportInfo()
+            getRequestSummaryInfo()
+            getStatisticsInfo()
         });
 
-        const analysisClick = (plan, task) =>{
-            window.location.href = '/analysis/'+ plan + '/'+ task
+        const getTestAndReportInfo = () => {
+            loading.value = true
+            axios.post('/api/task/analysis/base_info', {
+                plan: '{{ plan }}',
+                task: '{{ task }}'
+            })
+            .then(function (response) {
+                if(response['data']['status'] == 1){
+                    baseInfo.value = response['data']['data']           
+                }else{
+                    elMessage('error', response['data']['msg'])
+                }
+                console.log(response);
+                loading.value = false
+            })
+            .catch(function (error) {
+                console.log(error);
+                elMessage('error', error)
+            });
         }
+
+        const getRequestSummaryInfo = () => {
+            loading.value = true
+            requestSummary.length = 0 
+            axios.post('/api/task/analysis/request_summary', {
+                plan: '{{ plan }}',
+                task: '{{ task }}'
+            })
+            .then(function (response) {
+                var data = response['data']
+                if(data['status'] == 1){
+                    data['data'].forEach(i =>{
+                        requestSummary.push(i)
+                    })
+                    loading.value = false
+                }else{
+                    loading.value = false
+                    elMessage('error', data['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                loading.value = false
+                console.log(error);
+                elMessage('error', error)
+            });
+        };
+
+        const getStatisticsInfo = () => {
+            loading.value = true
+            axios.post('/api/task/analysis/statistics', {
+                plan: '{{ plan }}',
+                task: '{{ task }}'
+            })
+            .then(function (response) {
+                var data = response['data']
+                if(data['status'] == 1){
+                    statisticsJson.value = data['data']['Total']
+                    loading.value = false
+                }else{
+                    loading.value = false
+                    elMessage('error', data['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                loading.value = false
+                console.log(error);
+                elMessage('error', error)
+            });
+        };
+
+
 
         const setLanguage = (language) => {
             loading.value = true
@@ -323,12 +400,13 @@ const app = createApp({
                     elMessage('error', response['data']['msg'])
                 }
                 console.log(response);
+                loading.value = false
             })
             .catch(function (error) {
+                loading.value = false
                 console.log(error);
                 elMessage('error', error)
             });
-            loading.value = false
         }
 
         const getLanguage = () => {
@@ -348,90 +426,13 @@ const app = createApp({
                     language.value = ENGLISH
                 }
                 console.log(response);
+                loading.value = false
             })
             .catch(function (error) {
                 console.log(error);
                 elMessage('error', error)
                 language.value = ENGLISH
             });
-            loading.value = false
-        }
-
-        const initTaskData = () => {
-            loading.value = true
-            taskDatas.length = 0
-            axios.post('/api/task/query/all')
-            .then(function (response) {
-                data = response['data']
-                if(data['status'] == 1){
-                    data['data'].forEach(i =>{
-                        taskDatas.push(i)
-                    })
-                    if(taskDatas.length > 0){
-                        taskVisable.value = true
-                        emptyVisable.value = false
-                    }else{
-                        taskVisable.value = false
-                        emptyVisable.value = true
-                    }
-                    loading.value = false
-                }else{
-                    loading.value = false
-                    elMessage('error', response['data']['msg'])
-                }
-                console.log(response);
-            })
-            .catch(function (error) {
-                loading.value = false
-                console.log(error);
-                elMessage('error', error)
-            });
-        }
-        
-        const removeOneTask = () => {
-            loading.value = true
-            axios.post('/api/task/remove/one', {
-                plan: removePlanName.value,
-                task: removeTaskName.value
-            })
-            .then(function (response) {
-                if(response['data']['status'] == 1){
-                    initTaskData()
-                }else{
-                    elMessage('error', response['data']['msg'])
-                }
-                console.log(response);
-                loading.value = false
-            })
-            .catch(function (error) {
-                loading.value = false
-                console.log(error);
-                elMessage('error', error)
-            });
-        }
-
-        const removeAllTask = () => {
-            loading.value = true
-            axios.post('/api/task/remove/all')
-            .then(function (response) {
-                if(response['data']['status'] == 1){
-                    initTaskData()
-                }else{
-                    elMessage('error', response['data']['msg'])
-                }
-                console.log(response);
-                loading.value = false
-            })
-            .catch(function (error) {
-                loading.value = false
-                console.log(error);
-                elMessage('error', error)
-            });
-        }
-
-        const removeClick = (plan, task) => {
-            removePlanName.value = plan
-            removeTaskName.value = task
         }
 
         const elMessage = (type, message) => {
@@ -468,15 +469,11 @@ const app = createApp({
         return {
             loading,
             language,
-            emptyVisable,
-            taskVisable,
-            taskDatas,
-            removeTaskName,
-            setLanguage,
-            removeClick,
-            removeOneTask,
-            removeAllTask,
-            analysisClick
+            activeTab,
+            baseInfo,
+            requestSummary,
+            statisticsJson,
+            setLanguage
         };
     }
 });

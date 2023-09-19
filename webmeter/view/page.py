@@ -22,3 +22,7 @@ async def plan(request: Request):
 @router.get("/result", response_class=HTMLResponse)
 async def result(request: Request):
    return templates.TemplateResponse("result.html", {"request": request})
+
+@router.get("/analysis/{plan}/{task}", response_class=HTMLResponse)
+async def result(request: Request, plan: str, task: str):
+   return templates.TemplateResponse("analysis.html", {"request": request, "plan": plan, "task": task})

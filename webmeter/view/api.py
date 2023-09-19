@@ -1,10 +1,11 @@
 from loguru import logger
 from typing import Union
 from fastapi import APIRouter, UploadFile, File, Form
-from core.plan import TestPlan
-from core.engine import EngineServie
-from core.sqlhandle import crud, models, schemas
-from core.sqlhandle.database import engine
+from webmeter.core.plan import TestPlan
+from webmeter.core.engine import EngineServie
+from webmeter.core.sqlhandle import crud, models, schemas
+from webmeter.core.sqlhandle.database import engine
+from webmeter.core.task import TaskDetail
 router = APIRouter()
 test_plan = TestPlan()
 models.Base.metadata.create_all(bind=engine)
@@ -141,16 +142,6 @@ async def run_plan(content: dict):
       result = {'status':0, 'msg': str(e)}
    return result
 
-@router.post("/api/task/query/one")
-async def query_task_one(tasks: schemas.taskQuery):
-   try:
-      data = crud.query_task_one(tasks=tasks)
-      result = {'status':1, 'msg': 'success', 'data': data}
-   except Exception as e:
-      logger.exception(e)
-      result = {'status':0, 'msg': str(e)}
-   return result
-
 @router.post("/api/task/query/all")
 async def query_task_all():
    try:
@@ -177,6 +168,42 @@ async def remove_task_one(content: dict):
 async def remove_task_all():
    try:
       data = crud.remove_task_all()
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/task/analysis/base_info")
+async def analysis(content: dict):
+   plan = content.get('plan')
+   task = content.get('task')
+   try:
+      data = TaskDetail.getTestAndReportInfo(plan, task)
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/task/analysis/request_summary")
+async def requests_summary(content: dict):
+   plan = content.get('plan')
+   task = content.get('task')
+   try:
+      data = TaskDetail.getRequestSummary(plan, task)
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/task/analysis/statistics")
+async def statistics(content: dict):
+   plan = content.get('plan')
+   task = content.get('task')
+   try:
+      data = TaskDetail.read_statistics_file(plan, task)
       result = {'status':1, 'msg': 'success', 'data': data}
    except Exception as e:
       logger.exception(e)

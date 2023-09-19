@@ -71,7 +71,13 @@ class Common(object):
     def read_file_content(cls, file_path) -> str:
         with open(file=file_path, mode='r', encoding='utf-8') as f:
             content = f.read() 
-            return content            
+            return content
+
+    @classmethod
+    def read_file_lines(cls, file_path) -> list:
+        with open(file=file_path, mode='r', encoding='utf-8') as f:
+            content = f.readlines() 
+            return content        
     
     @classmethod
     def pc_platform(cls) -> Optional[str]:

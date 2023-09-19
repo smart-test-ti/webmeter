@@ -1,6 +1,6 @@
 const ENGLISH = {
     'plan_page_title':'TEST PLAN',
-    'result_page_title':'TEST RESULT',
+    'task_page_title':'TASK RESULT',
     'monitor': 'Monitor',
     'star_me': 'Star Me',
     'documentation': 'Documentation',
@@ -61,7 +61,7 @@ const ENGLISH = {
 
 const CHINESE = {
     'plan_page_title':'测试计划',
-    'result_page_title':'测试结果',
+    'task_page_title':'任务管理',
     'monitor': '资源监控',
     'star_me': 'Github点赞',
     'documentation': '文档',
