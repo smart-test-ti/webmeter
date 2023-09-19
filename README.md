@@ -6,7 +6,7 @@
 <br>
 </p>
 <p align="center">
-<a href="https://pypi.org/project/solox/" target="__blank"><img src="https://img.shields.io/pypi/v/webmeter" alt="solox preview"></a>
+<a href="https://pypi.org/project/webmeter/" target="__blank"><img src="https://img.shields.io/pypi/v/webmeter" alt="solox preview"></a>
 <a href="https://pepy.tech/project/solox" target="__blank"><img src="https://static.pepy.tech/personalized-badge/webmeter?period=total&units=international_system&left_color=grey&right_color=orange&left_text=downloads"></a>
 
 <br>
