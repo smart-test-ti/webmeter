@@ -11,7 +11,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     install_requires=['fastapi','uvicorn', 'requests', 'loguru', 'fire','pyfiglet','psutil',
     'pyyaml','python-multipart','sqlalchemy'],
-    version='1.0.9',
+    version='1.0.10',
     long_description=long_description,
     long_description_content_type="text/markdown",
     description="WebMeter - A web api-performance tool based on jmeter.",
