@@ -1,4 +1,4 @@
-from core.sqlhandle import models, schemas, database
+from webmeter.core.sqlhandle import models, schemas, database
 from typing import Optional
 from loguru import logger
 import os, shutil, datetime
