@@ -7,7 +7,7 @@ import os
 from webmeter.core.utils import Common
 
 SQL_DIR = Common.make_dir(os.path.join(os.getcwd(), 'webmeter'))
-SQLALCHEMY_DATABASE_URL = "sqlite:///{}/webmeter_app.db".format(SQL_DIR)
+SQLALCHEMY_DATABASE_URL = "sqlite:///{}/app.db".format(SQL_DIR)
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}

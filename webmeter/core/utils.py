@@ -91,7 +91,7 @@ class Common(object):
             return Platform.LINUX.value
         else:
             logger.error('platform is undefined')
-            return None
+            return Platform.LINUX.value
         
 
 class JMX(object):

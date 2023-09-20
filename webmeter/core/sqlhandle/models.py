@@ -1,6 +1,5 @@
 from sqlalchemy import Boolean, Column, Integer, String, DateTime, Float
 from webmeter.core.sqlhandle.database import Base
-import datetime
 
 
 class Task(Base):

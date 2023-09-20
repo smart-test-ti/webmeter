@@ -1,6 +1,5 @@
 import os
 import datetime
-import json
 from loguru import logger
 from webmeter.core.utils import Common
 from webmeter.core.sqlhandle import crud
@@ -9,8 +8,9 @@ from webmeter.core.task import TaskBase
 class EngineServie(TaskBase):
 
     JMETER_PATH = {
-        'windows': os.path.join(Common.STATICPATH, 'jmeter', 'win_mac', 'apache-jmeter-5.6.2', 'bin', 'jmeter.bat'),
-        'macos': os.path.join(Common.STATICPATH, 'jmeter', 'win_mac', 'apache-jmeter-5.6.2', 'bin', 'jmeter.sh')
+        'windows': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2', 'bin', 'jmeter.bat'),
+        'macos': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2', 'bin', 'jmeter.sh'),
+        'linux': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2', 'bin', 'jmeter.sh')
     }
 
     @classmethod
@@ -48,6 +48,7 @@ class EngineServie(TaskBase):
         report_path = Common.make_dir(os.path.join(report_dir, task_format))
         log_path = Common.make_dir(os.path.join(log_dir, task_format))
         if remote is not True: 
+            #单机模式
             crud.create_task(tasks={
                 'plan': content.get('plan_name'),
                 'task': task_format,
@@ -62,6 +63,7 @@ class EngineServie(TaskBase):
                 report_path=report_path,
             ))
         else:
+            #分布式模式
             result = Common.exec_cmd('{jmeter} -n -t {jmx_path} -l {jtl_path} -j {log_path} -e -o {report_path} -R {hosts}'.format(
                 jmeter=cls.JMETER_PATH.get(Common.pc_platform()),
                 jmx_path=os.path.join(TaskBase.ROOT_DIR, content.get('plan_name'), 'plan.jmx'),

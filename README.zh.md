@@ -1,5 +1,5 @@
 <p align="center">
-  <a>English</a> | <a href="./README.zh.md">中文</a> | <a href="./FAQ.md">FAQ</a>
+  <a href="./README.md">English</a> | <a>中文</a> | <a href="./FAQ.md">FAQ</a>
 </p>
 <p align="center">
 <a href="#">
@@ -14,42 +14,42 @@
 
 ## WebMeter
 
-An Open Source Web api-performance tool based on jmeter.
+一个WEB版的JMeter
 
-## Requirements
+## 环境
 
-- Install python 3.10 + [**GO**](https://www.python.org/downloads/)
-- JMeter requirements [**GO**](https://github.com/apache/jmeter#requirements)
+- 安装python 3.10 + [**GO**](https://www.python.org/downloads/)
+- 安装JMeter的环境（一般是Java和配置环境变量） [**GO**](https://github.com/apache/jmeter#requirements)
 
-## Installation
+## 安装
 
-### default
+### 默认
 
 ```shell
 pip install -U webmeter
 ```
 
-### mirrors
+### 镜像
 
 ```shell
 pip install -i  https://mirrors.ustc.edu.cn/pypi/web/simple -U webmeter
 ```
 
-## Quickstart
+## 快速开始
 
-### default
+### 默认
 
 ```shell
 python -m webmeter
 ```
 
-### customize
+### 自定义
 
 ```shell
 python -m webmeter --host={ip} --port={port}
 ```
 
-## Develop
+## 开发
 
 * https://fastapi.tiangolo.com/
 * https://cn.vuejs.org/
@@ -57,9 +57,9 @@ python -m webmeter --host={ip} --port={port}
 * https://github.com/tabler/tabler
 * https://jmeter.apache.org/
 
-### debug
+### 调式
 
-* remove [webmeter] moudle from all python file
+* 所有python文件中移除 [webmeter]模块，不然用的还是线上的代码
 
 ```python
 example

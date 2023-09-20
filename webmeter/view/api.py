@@ -209,3 +209,16 @@ async def statistics(content: dict):
       logger.exception(e)
       result = {'status':0, 'msg': str(e)}
    return result
+
+
+@router.post("/api/task/log")
+async def task_log(content: dict):
+   plan = content.get('plan')
+   task = content.get('task')
+   try:
+      data = TaskDetail.read_log_file(plan, task)
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result

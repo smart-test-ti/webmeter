@@ -433,19 +433,14 @@
                                         </div>
                                         <div class="tab-pane" id="tabs-plan-log">
                                             <h4>
-                                                <el-select v-model="log" filterable placeholder="Select log">
-                                                    <el-option
-                                                      v-for="item in Logs"
-                                                      :key="item.value"
-                                                      :label="item.label"
-                                                      :value="item.value"
-                                                    />
-                                                  </el-select>
+                                                <select @change="showLog()" class="form-control form-select form-select-sm" v-model="selectedLog" style="width: 170px;">
+                                                    <option v-for="log in Logs" :key="log" :text="log"></option>
+                                                </select>
                                             </h4>
-                                            <!-- <pre style="height: 700px;">
-                                                <code class="language-python" ></code>
-                                            </pre> -->
-                                            <el-empty description="No log found." />
+                                            <pre style="height: 700px;" v-if="taskLog" v-text="taskLog">
+                                                <!-- <code class="language-java" v-text="taskLog"></code> -->
+                                            </pre>
+                                            <el-empty v-else description="No log found." />
                                         </div>
                                     </div>
                                 </div>
@@ -713,8 +708,10 @@ const app = createApp({
         const bodydataVisavle = ref(true)
 
         // Log
+        const selectedLog = ref('')
         const log = ref('')
         const Logs = reactive([])
+        const taskLog = ref('')
         
         onBeforeMount(() => {
             hljs.highlightAll();
@@ -796,6 +793,7 @@ const app = createApp({
 
         const clickPlan = (name) => {
             loading.value = true
+            Logs.length = 0
             axios.post('/api/plan/info', {
                 plan_name: name
             })
@@ -839,6 +837,13 @@ const app = createApp({
                     if(schedulerChecked.value){
                         schedulerDisabled.value = false
                     }
+
+                    //log
+                    plan_data['plan_info']['tasks'].forEach(i =>{
+                        Logs.push(i)
+                    })
+                    selectedLog.value = Logs[0]
+                    showLog()
                     loading.value = false
                 }else{
                     loading.value = false
@@ -1018,6 +1023,7 @@ const app = createApp({
                 if(plan_data['status'] == 1){
                     console.log(response)
                     redPointer.value = true
+                    clickPlan(checkedPlan.value)
                 }else{
                     elMessage('error', plan_data['msg'])
                 }
@@ -1085,6 +1091,27 @@ const app = createApp({
 
         const clickScheduler = () => {
             schedulerDisabled.value = schedulerChecked.value ? true : false
+        }
+        
+        const showLog = () => {
+            loading.value = true
+            axios.post('/api/task/log', {
+                plan: checkedPlan.value,
+                task: selectedLog.value
+            })
+            .then(function (response) {
+                if(response['data']['status'] == 1){
+                    taskLog.value = response['data']['data']
+                }else{
+                    elMessage('error', response['data']['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                elMessage('error', error)
+            });
+            loading.value = false
         }
 
         const elMessage = (type, message) => {
@@ -1176,8 +1203,10 @@ const app = createApp({
             bodydataVisavle,
 
             // Log
+            selectedLog,
             log,
             Logs,
+            taskLog,
             
             // founction
             createPlan,
@@ -1190,7 +1219,8 @@ const app = createApp({
             removeClick,
             clickScheduler,
             editPlan,
-            run
+            run,
+            showLog
         };
     }
 });

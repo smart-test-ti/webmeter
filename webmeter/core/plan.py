@@ -275,9 +275,11 @@ class TestPlan(Base, Thread_Group, Samplers):
         plan_base_info = Base.info(plan_jmx_path)
         thread_group_info = Thread_Group.info(plan_jmx_path)
         samplers_info = Samplers.info(plan_jmx_path)
+        plan_task_info = self.get_all_task(plan)
         result.update(plan_base_info)
         result.update(thread_group_info)
         result.update(samplers_info)
+        result.update(plan_task_info)
         return result
     
     def edit(self, content: dict) -> None:
@@ -328,3 +330,17 @@ class TestPlan(Base, Thread_Group, Samplers):
             plan_dict['checked'] =True if plan == plan_name else False
             plan_list.append(plan_dict)
         return plan_list
+    
+    def get_all_task(self, plan_name) -> dict:
+        """get plan tasks list"""
+        task_dict = dict()
+        log_dirs = os.path.join(self.root_dir, plan_name, 'log')
+        if os.path.exists(log_dirs):
+            task_dirs = os.listdir(log_dirs)
+            task_list = reversed(sorted(task_dirs, key=lambda x: os.path.getmtime(os.path.join(log_dirs, x))))
+            task_sorted_list = [task for task in task_list]
+            task_dict['tasks'] = task_sorted_list
+        else:
+            task_dict['tasks'] = []    
+        return task_dict
+        

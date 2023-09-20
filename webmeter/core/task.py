@@ -13,31 +13,35 @@ class TaskBase(object):
     def read_statistics_file(cls, plan: str, task: str) -> dict:
         """read statistics.json content"""
         statistics_file_path = os.path.join(cls.ROOT_DIR, plan, 'report', task,'statistics.json')
-        content = Common.read_file_content(statistics_file_path)
-        if content:
+        if os.path.exists(statistics_file_path):
+            content = Common.read_file_content(statistics_file_path)
             return json.loads(content)
         else:
-            raise Exception('No content found in the statistics.json')
+            logger.warning('No file found')
+            return None
         
     @classmethod
     def read_result_file(cls, plan: str, task: str) -> list:
         """read result.jtl content"""
         result_file_path = os.path.join(cls.ROOT_DIR, plan, 'report', task,'result.jtl')
-        content = Common.read_file_lines(result_file_path)
-        if content.__len__() > 0:
+        if os.path.exists(result_file_path):
+            content = Common.read_file_lines(result_file_path)
             return content
         else:
-            raise Exception('No content found in the result.jtl')
+            logger.warning('No file found')
+            return None
 
     @classmethod
     def read_log_file(cls, plan: str, task: str) -> Optional[str]:
         """read result.log content"""
-        log_file_path = os.path.join(cls.ROOT_DIR, plan, 'log', task,'result.log')
-        content = Common.read_file_content(log_file_path)
-        if content:
-            return content
+        log_dir = os.path.join(cls.ROOT_DIR, plan, 'log')
+        if os.path.exists(log_dir):
+            log_file_path = os.path.join(log_dir, task,'result.log')
+            content = Common.read_file_content(log_file_path)
+            return content.strip()
         else:
-            raise Exception('No content found in the result.log')
+            logger.warning('No file found')
+            return None
         
 class TaskDetail(TaskBase):
     
@@ -64,4 +68,3 @@ class TaskDetail(TaskBase):
                     'allThreads':item.split(',')[12],
                     'URL': item.split(',')[13]}  for item in jtlContent]
         return jtlList
-
