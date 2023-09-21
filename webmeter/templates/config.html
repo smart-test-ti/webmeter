@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <!--
 * WebMeter - A web api-performance tool based on jmeter.
@@ -12,10 +13,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link rel="icon" href="/static/image/logo.png">
 
-    <title>WebMeter -  TASK ANALYSIS</title>
+    <title>WebMeter -  CONFIG</title>
     <!-- CSS files -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
 </head>
 <body class="Body">
 <div class="page" id="app">
@@ -32,7 +34,7 @@
             <div class="collapse navbar-collapse" id="navbar-menu" style="margin-left: 20px;">
                 <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                     <ul class="navbar-nav">
-                        <li class="nav-item"  style="margin-left: 20px;font-weight: bolder;">
+                        <li class="nav-item" style="margin-left: 20px;font-weight: bolder;">
                             <a class="nav-link" href="/plan" >
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg t="1691481964005" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11530" width="320" height="320"><path d="M874.15 750.71L623.92 311.53V72.4H400.09v239.13L149.86 750.71c-51.04 89.59 13.65 200.92 116.77 200.92h490.76c103.11 0 167.81-111.33 116.76-200.92z" fill="#FFFFFF" p-id="11531"></path><path d="M881.44 746.61l-249.09-437.3V80.8h79.14c4.66 0 8.4-3.77 8.4-8.4s-3.74-8.4-8.4-8.4H312.52c-4.66 0-8.4 3.77-8.4 8.4s3.74 8.4 8.4 8.4h79.2v228.54L142.56 746.61c-25.46 44.69-25.26 97.9 0.59 142.33 25.85 44.49 71.98 71.07 123.5 71.07h490.77c51.45 0 97.58-26.58 123.43-71.07 25.85-44.43 26.05-97.65 0.59-142.33zM615.55 80.8v222.32H408.52V80.8h207.03z m250.79 799.73c-22.84 39.24-63.52 62.67-108.93 62.67H266.65c-45.41 0-86.16-23.43-108.99-62.67-22.77-39.24-22.97-86.22-0.52-125.66l247.84-434.96H619.1l247.78 434.96c22.43 39.44 22.23 86.42-0.54 125.66z" fill="#252526" p-id="11532"></path><path d="M157.66 880.52c22.84 39.31 63.59 62.73 108.99 62.73h490.77c45.41 0 86.09-23.43 108.93-62.67 22.77-39.31 22.97-86.29 0.52-125.73l-27.23-47.8c-90.01 21.45-184.12 19.64-272.63-8.88l-55-17.72c-96.99-37-202.42-42.38-302.39-17.72l-52.49 92.12c-22.43 39.44-22.24 86.43 0.53 125.67z" fill="#4FAEC9" p-id="11533"></path></svg>
@@ -40,7 +42,7 @@
                                 <span class="nav-link-title strong-text" v-text="language.plan_page_title"></span>
                             </a>
                         </li>
-                        <li class="nav-item active"  style="margin-left: 20px;font-weight: bolder;">
+                        <li class="nav-item"  style="margin-left: 20px;font-weight: bolder;">
                             <a class="nav-link" href="/result" >
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg t="1690875909592" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="26542" width="320" height="320"><path d="M244.224 370.78016h526.336c48.64 0 87.552 39.424 87.552 87.552v292.352c0 48.64-39.424 87.552-87.552 87.552H244.224c-48.64 0-87.552-39.424-87.552-87.552v-292.352c-0.512-48.128 38.912-87.552 87.552-87.552z" fill="#CAE4FF" p-id="26543"></path><path d="M760.832 983.30624H245.76c-114.176 0-206.848-92.672-206.848-206.848v-357.888c0-114.176 92.672-206.336 206.848-206.848h515.072c114.176 0 206.336 92.672 206.848 206.848v357.888c0 114.176-92.672 206.848-206.848 206.848zM245.76 270.09024c-81.92 0-148.48 66.56-148.48 148.48v357.888c0 81.92 66.56 148.48 148.48 148.48h515.072c81.92 0 148.48-66.56 148.48-148.48v-357.888c0-81.92-66.56-148.48-148.48-148.48H245.76z" fill="#0972E7" p-id="26544"></path><path d="M303.616 748.29824c0.512 14.848-11.264 27.648-26.112 28.16-14.848 0.512-27.648-11.264-28.16-26.112v-291.328c0.512-14.848 13.312-26.624 28.16-26.112 14.336 0.512 25.6 11.776 26.112 26.112v289.28z" fill="#0972E7" p-id="26545"></path><path d="M742.912 758.53824c0 13.824-11.264 25.088-25.088 25.088H274.432c-13.824 0.512-25.6-9.728-26.112-23.552-0.512-13.824 9.728-25.6 23.552-26.112h446.464c13.312 0 24.576 11.264 24.576 24.576z m-261.12-224.768c-9.728-10.24-26.112-10.24-36.352-0.512l-78.848 79.36c-10.24 10.24-10.24 26.624 0 36.864 9.728 10.24 26.112 10.24 36.352 0.512l79.36-78.848c9.728-10.752 9.728-27.136-0.512-37.376z" fill="#0972E7" p-id="26546"></path><path d="M564.736 648.97024c10.24-9.728 10.24-26.112 0-36.352l-79.36-78.848c-10.24-10.24-26.624-10.24-36.864 0-10.24 9.728-10.24 26.112 0 36.352l78.848 78.848c10.752 10.24 27.136 10.24 37.376 0z" fill="#0972E7" p-id="26547"></path><path d="M649.216 533.77024c-9.728-10.24-26.112-10.24-36.352-0.512l-79.36 78.848c-10.24 10.24-10.24 26.624 0 36.864 9.728 10.24 26.112 10.24 36.352 0.512l79.36-78.848c9.728-10.24 9.728-26.624 0-36.864z" fill="#0972E7" p-id="26548"></path><path d="M714.24 468.74624c-9.728-10.24-26.112-10.24-36.352-0.512l-79.36 78.848c-10.24 10.24-10.24 26.624 0 36.864 9.728 10.24 26.112 10.24 36.352 0.512l79.36-78.848c10.24-10.24 10.24-27.136 0-36.864zM97.792 404.74624H39.936c0-51.2-0.512-120.832-0.512-120.832 0-112.128 91.136-203.264 203.264-203.264h136.704c123.392 0 194.56 66.56 194.56 182.784h-57.856c0-83.968-44.544-124.928-136.192-124.928H242.688c-80.384 0-145.408 65.024-145.408 145.408 0 0 0.512 69.632 0.512 120.832z" fill="#0972E7" p-id="26549"></path></svg>
@@ -82,156 +84,52 @@
         </div>
     </header>
     <div class="page-wrapper sceen-body" v-loading="loading">
-        <div class="page-header d-print-none">
-            <div class="container">
-              <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                  <span class="status-indicator status-green status-indicator-animated">
-                    <span class="status-indicator-circle"></span>
-                    <span class="status-indicator-circle"></span>
-                    <span class="status-indicator-circle"></span>
-                  </span>
-                </div>
-                <div class="col">
-                  <h2 class="page-title">
-                    <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-                        <li class="breadcrumb-item"><a href="/result">{{ plan }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ task }}</a></li>
-                    </ol>      
-                </h2>
-                  <div class="text-secondary">
-                    <ul class="list-inline list-inline-dots mb-0">
-                        <li class="list-inline-item"><span class="text-green">MODEL</span></li>
-                        <li class="list-inline-item">stand-alone</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-md-auto ms-auto d-print-none">
-                  <div class="btn-list">
-                    <a class="btn">
-                        <svg t="1694597731524" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="51115" width="320" height="320"><path d="M0 0h1024v1024H0z" fill="#F5F5F5" fill-opacity=".01" p-id="51116"></path><path d="M316.94848 57.77408v30.72H121.89696c-17.46944 0-31.80544 13.43488-33.28 30.5152l-0.12288 2.88768v195.05152h-30.72V121.89696a64.12288 64.12288 0 0 1 60.49792-64.02048l3.62496-0.1024h195.05152z" fill="#14142B" p-id="51117"></path><path d="M175.53408 184.32m40.96 0l737.28 0q40.96 0 40.96 40.96l0 737.28q0 40.96-40.96 40.96l-737.28 0q-40.96 0-40.96-40.96l0-737.28q0-40.96 40.96-40.96Z" fill="#FF6600" opacity=".1" p-id="51118"></path><path d="M88.49408 707.05152v195.05152c0 17.46944 13.43488 31.80544 30.5152 33.28l2.88768 0.12288h195.05152v30.72H121.89696a64.12288 64.12288 0 0 1-64.02048-60.49792l-0.1024-3.62496v-195.05152h30.72zM966.22592 707.05152v195.05152a64.12288 64.12288 0 0 1-60.49792 64.02048l-3.62496 0.1024h-195.05152v-30.72h195.05152c17.46944 0 31.80544-13.43488 33.28-30.5152l0.12288-2.88768v-195.05152h30.72zM902.10304 57.77408a64.12288 64.12288 0 0 1 64.02048 60.49792l0.1024 3.62496v195.05152h-30.72V121.89696c0-17.46944-13.43488-31.80544-30.5152-33.28l-2.88768-0.12288h-195.05152v-30.72h195.05152zM593.36704 277.21728h-162.73408l-48.7424 73.1136-153.43616 0.02048v396.43136h567.0912V350.35136h-153.45664l-48.7424-73.13408z m-146.30912 30.72h129.8432l48.78336 73.13408h139.12064v334.97088h-505.6512V381.05088l139.1616 0.02048 48.7424-73.15456z" fill="#14142B" p-id="51119"></path><path d="M512 447.87712a88.49408 88.49408 0 1 0 0 177.00864 88.49408 88.49408 0 0 0 0-177.00864z m0 30.72a57.77408 57.77408 0 1 1 0 115.56864 57.77408 57.77408 0 0 1 0-115.56864z" fill="#14142B" p-id="51120"></path></svg>
-                        ScreenShot
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         <div class="page-body">
-            <div class="container-xl">    
-                <el-tabs v-model="activeTab" type="card" class="analysis-tabs">
-                    <el-tab-pane label="Dashboard" name="dashboard">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Test and Report information</h3>
+            <div class="container-xl">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-2 d-none d-md-block border-end">
+                            <div class="card-header d-none d-md-block">
+                                <strong>JMETER CONFIG</strong>
                             </div>
+                            <div class="card-body scrollable">
+                                <div class="btn-group-vertical w-100 mb-2 "role="group">
+                                    <input type="radio" class="btn-check" id="jmeter_bat" name="btn-radio-vertical" checked="true" @click="getJmeterFileContent('jmeter.bat')">
+                                    <label type="button" class="btn" for="jmeter_bat">jmeter.bat</label>
+                                </div>
+                                <div class="btn-group-vertical w-100 mb-2 "role="group">
+                                    <input type="radio" class="btn-check" id="jmeter_sh" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter.sh')">
+                                    <label type="button" class="btn" for="jmeter_sh">jmeter.sh</label>
+                                </div>
+                                <div class="btn-group-vertical w-100 mb-2 "role="group">
+                                    <input type="radio" class="btn-check" id="jmeter.properties" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter.properties')">
+                                    <label type="button" class="btn" for="jmeter.properties">jmeter.properties</label>
+                                </div>
+                                <div class="btn-group-vertical w-100 mb-2 "role="group">
+                                    <input type="radio" class="btn-check" id="jmeter-server.bat" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter-server.bat')">
+                                    <label type="button" class="btn" for="jmeter-server.bat">jmeter-server.bat</label>
+                                </div>
+                                <div class="btn-group-vertical w-100 mb-2 "role="group">
+                                    <input type="radio" class="btn-check" id="jmeter-server.sh" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter-server')">
+                                    <label type="button" class="btn" for="jmeter-server.sh">jmeter-server</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-column">
                             <div class="card-body">
-                                <div class="card">
-                                    <div class="table-responsive">
-                                        <table class="table table-vcenter table-bordered table-nowrap card-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Data Source</td>
-                                                    <td v-text="baseInfo.source_file"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Start Time</td>
-                                                    <td v-text="baseInfo.stime"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>End Time</td>
-                                                    <td v-text="baseInfo.etime"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <textarea class="form-control" v-model="configContent"  style="height: 650px;background-color: rgba(0, 0, 0, 0.781);color: white"></textarea>
+                            </div>
+                            <div class="card-footer bg-transparent mt-auto">
+                                <div class="btn-list justify-content-end">
+                                    <a  class="btn" @click="setJmeterFileContent()">
+                                        <svg t="1692672026903" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7786" width="320" height="320"><path d="M904 1024H120c-66.168 0-120-53.832-120-120V120C0 53.832 53.832 0 120 0h784c66.168 0 120 53.832 120 120v784c0 66.168-53.832 120-120 120zM120 4C56.038 4 4 56.038 4 120v784c0 63.962 52.038 116 116 116h784c63.962 0 116-52.038 116-116V120c0-63.962-52.038-116-116-116H120z" fill="#D8DDE3" p-id="7787"></path><path d="M732 832H292c-55.14 0-100-44.86-100-100V292c0-55.14 44.86-100 100-100h440c55.14 0 100 44.86 100 100v440c0 55.14-44.86 100-100 100zM292 252c-22.056 0-40 17.944-40 40v440c0 22.056 17.944 40 40 40h440c22.056 0 40-17.944 40-40V292c0-22.056-17.944-40-40-40H292z" fill="#20263B" p-id="7788"></path><path d="M642 442H382c-44.112 0-80-35.888-80-80v-110c0-33.084 26.916-60 60-60h300c33.084 0 60 26.916 60 60v110c0 44.112-35.888 80-80 80z m-280-190v110c0 11.028 8.972 20 20 20h260c11.028 0 20-8.972 20-20v-110H362z" fill="#20263B" p-id="7789"></path><path d="M572.928 275h60v80.174h-60z" fill="#FF4B07" p-id="7790"></path></svg>
+                                        <label v-text="language.save"></label>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="card mt-3" style="max-height: 28rem;">
-                            <div class="card-header">
-                                <h3 class="card-title">Requests Summary</h3>
-                            </div>
-                            <div class="card-body card-body-scrollable card-body-scrollable-shadow">
-                                <div class="card">
-                                    <div class="table-responsive">
-                                        <table class="table table-vcenter table-bordered table-nowrap card-table">
-                                            <thead class="text-center">
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">lable</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">thread Name</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">URL</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">all Threads</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">response Code</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">response Message</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">failure Message</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">bytes</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">sent Bytes</th>
-                                            </thead>
-                                            <tbody v-for="item in requestSummary" :key="item" class="text-center">
-                                                <td v-text="item.lable"></td>
-                                                <td v-text="item.threadName"></td>
-                                                <td v-text="item.URL"></td>
-                                                <td v-text="item.allThreads"></td>
-                                                <td v-text="item.responseCode"></td>
-                                                <td v-text="item.responseMessage"></td>
-                                                <td v-text="item.failureMessage" style="color: red;max-width: 200px;"></td>
-                                                <td v-text="item.bytes"></td>
-                                                <td v-text="item.sentBytes"></td>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mt-3">
-                            <div class="card-header">
-                                <h3 class="card-title">Statistics</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-vcenter table-bordered table-nowrap card-table">
-                                        <thead class="text-center">
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">lable</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">samplers</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">errors</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">error(%)</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">avg ResTime</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">median ResTime</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">min ResTime</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">max ResTime</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">90th pct</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">95th pct</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">99th pct</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">throughput(s)</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">sent(KB/s)</th>
-                                            <th style="font-size: 13px;background-color: rgb(0, 132, 255);color: white;">recieve(KB/s)</th>
-                                        </thead>
-                                        <tbody class="text-center">
-                                            <td v-text="statisticsJson.transaction"></td>
-                                            <td v-text="statisticsJson.sampleCount"></td>
-                                            <td v-text="statisticsJson.errorCount"></td>
-                                            <td v-text="statisticsJson.errorPct"></td>
-                                            <td v-text="statisticsJson.meanResTime"></td>
-                                            <td v-text="statisticsJson.medianResTime"></td>
-                                            <td v-text="statisticsJson.minResTime"></td>
-                                            <td v-text="statisticsJson.maxResTime"></td>
-                                            <td v-text="statisticsJson.pct1ResTime"></td>
-                                            <td v-text="statisticsJson.pct2ResTime"></td>
-                                            <td v-text="statisticsJson.pct3ResTime"></td>
-                                            <td v-text="statisticsJson.throughput"></td>
-                                            <td v-text="statisticsJson.sentKBytesPerSec"></td>
-                                            <td v-text="statisticsJson.receivedKBytesPerSec"></td>
-                                        </tbody>
-
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="Charts" name="charts">Charts</el-tab-pane>
-                </el-tabs>
+                      </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -246,12 +144,12 @@
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a v-text="language.documentation" target="_blank" class="link-secondary">
+                            <a  target="_blank" class="link-secondary" v-text="language.documentation">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <svg t="1691475851430" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4000" width="320" height="320"><path d="M512 42.666667A464.64 464.64 0 0 0 42.666667 502.186667 460.373333 460.373333 0 0 0 363.52 938.666667c23.466667 4.266667 32-9.813333 32-22.186667v-78.08c-130.56 27.733333-158.293333-61.44-158.293333-61.44a122.026667 122.026667 0 0 0-52.053334-67.413333c-42.666667-28.16 3.413333-27.733333 3.413334-27.733334a98.56 98.56 0 0 1 71.68 47.36 101.12 101.12 0 0 0 136.533333 37.973334 99.413333 99.413333 0 0 1 29.866667-61.44c-104.106667-11.52-213.333333-50.773333-213.333334-226.986667a177.066667 177.066667 0 0 1 47.36-124.16 161.28 161.28 0 0 1 4.693334-121.173333s39.68-12.373333 128 46.933333a455.68 455.68 0 0 1 234.666666 0c89.6-59.306667 128-46.933333 128-46.933333a161.28 161.28 0 0 1 4.693334 121.173333A177.066667 177.066667 0 0 1 810.666667 477.866667c0 176.64-110.08 215.466667-213.333334 226.986666a106.666667 106.666667 0 0 1 32 85.333334v125.866666c0 14.933333 8.533333 26.88 32 22.186667A460.8 460.8 0 0 0 981.333333 502.186667 464.64 464.64 0 0 0 512 42.666667" fill="#231F20" p-id="4001"></path></svg>
-                            <a v-text="language.source_code" href="https://github.com/smart-test-ti/webmeter" target="_blank" class="link-secondary" rel="noopener">
+                            <a href="https://github.com/smart-test-ti/webmeter" target="_blank" class="link-secondary" rel="noopener" v-text="language.source_code">
                             </a>
                         </li>
                     </ul>
@@ -281,7 +179,12 @@
 <script src="https://unpkg.com/element-plus"></script>
 <script src="https://unpkg.com/@element-plus/icons-vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
 <script src="/static/js/lan.js"></script>
+<script src="/static/js/common.js"></script>
+
+
 <script>
 
 const { 
@@ -298,93 +201,63 @@ const app = createApp({
     setup() {
         const loading = ref(false)
         const language = ref({})
-        const activeTab = ref('dashboard')
-        const baseInfo = ref({})
-        const requestSummary = reactive([])
-        const statisticsJson = ref({})
+        const configContent = ref('')
+        const checkedFile = ref('jmeter.bat')
+
         
-        onBeforeMount(() => {
-            getLanguage()
-        });
+        onBeforeMount(() => {});
 
         onMounted(() => {
-            getTestAndReportInfo()
-            getRequestSummaryInfo()
-            getStatisticsInfo()
+            getLanguage()
+            getJmeterFileContent('jmeter.bat')
         });
 
-        const getTestAndReportInfo = () => {
+        const getJmeterFileContent = (file) => {
             loading.value = true
-            axios.post('/api/task/analysis/base_info', {
-                plan: '{{ plan }}',
-                task: '{{ task }}'
+            checkedFile.value = file
+            axios.post('/api/config/file/read', {
+                file: file
             })
             .then(function (response) {
                 if(response['data']['status'] == 1){
-                    baseInfo.value = response['data']['data']           
+                    configContent.value = response['data']['data']
+                               
                 }else{
                     elMessage('error', response['data']['msg'])
                 }
-                console.log(response);
                 loading.value = false
+                console.log(response);
             })
             .catch(function (error) {
                 console.log(error);
                 elMessage('error', error)
+                loading.value = false
             });
         }
 
-        const getRequestSummaryInfo = () => {
+        const setJmeterFileContent = () => {
             loading.value = true
-            requestSummary.length = 0 
-            axios.post('/api/task/analysis/request_summary', {
-                plan: '{{ plan }}',
-                task: '{{ task }}'
+            axios.post('/api/config/file/write', {
+                file: checkedFile.value,
+                file_content: configContent.value
             })
             .then(function (response) {
-                var data = response['data']
-                if(data['status'] == 1){
-                    data['data'].forEach(i =>{
-                        requestSummary.push(i)
-                    })
-                    loading.value = false
+                if(response['data']['status'] == 1){
+                    elMessage('success', response['data']['msg'])
+                               
                 }else{
-                    loading.value = false
-                    elMessage('error', data['msg'])
+                    elMessage('error', response['data']['msg'])
                 }
+                loading.value = false
                 console.log(response);
             })
             .catch(function (error) {
-                loading.value = false
                 console.log(error);
                 elMessage('error', error)
-            });
-        };
-
-        const getStatisticsInfo = () => {
-            loading.value = true
-            axios.post('/api/task/analysis/statistics', {
-                plan: '{{ plan }}',
-                task: '{{ task }}'
-            })
-            .then(function (response) {
-                var data = response['data']
-                if(data['status'] == 1){
-                    statisticsJson.value = data['data']['Total']
-                    loading.value = false
-                }else{
-                    loading.value = false
-                    elMessage('error', data['msg'])
-                }
-                console.log(response);
-            })
-            .catch(function (error) {
                 loading.value = false
-                console.log(error);
-                elMessage('error', error)
             });
-        };
-
+        }
+        
 
 
         const setLanguage = (language) => {
@@ -401,13 +274,12 @@ const app = createApp({
                     elMessage('error', response['data']['msg'])
                 }
                 console.log(response);
-                loading.value = false
             })
             .catch(function (error) {
-                loading.value = false
                 console.log(error);
                 elMessage('error', error)
             });
+            loading.value = false
         }
 
         const getLanguage = () => {
@@ -427,7 +299,6 @@ const app = createApp({
                     language.value = ENGLISH
                 }
                 console.log(response);
-                loading.value = false
             })
             .catch(function (error) {
                 console.log(error);
@@ -436,45 +307,14 @@ const app = createApp({
             });
         }
 
-        const elMessage = (type, message) => {
-            switch(type){
-                case 'success':
-                    ElementPlus.ElMessage({
-                        showClose: true,
-                        message: message,
-                        type: 'success',
-                    })
-                    break;
-                case 'warning':
-                    ElementPlus.ElMessage({
-                        showClose: true,
-                        message: message,
-                        type: 'warning',
-                    })
-                    break;
-                case 'error':
-                    ElementPlus.ElMessage({
-                        showClose: true,
-                        message: message,
-                        type: 'error',
-                    })
-                    break;
-                default:
-                    ElementPlus.ElMessage({
-                        showClose: true,
-                        message: message,
-                    })         
-            };
-        }
-
         return {
             loading,
             language,
-            activeTab,
-            baseInfo,
-            requestSummary,
-            statisticsJson,
-            setLanguage
+            configContent,
+            checkedFile,
+            setLanguage,
+            getJmeterFileContent,
+            setJmeterFileContent
         };
     }
 });

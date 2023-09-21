@@ -1,11 +1,11 @@
 from loguru import logger
 from typing import Union
 from fastapi import APIRouter, UploadFile, File, Form
-from webmeter.core.plan import TestPlan
-from webmeter.core.engine import EngineServie
-from webmeter.core.sqlhandle import crud, models, schemas
-from webmeter.core.sqlhandle.database import engine
-from webmeter.core.task import TaskDetail
+from core.plan import TestPlan
+from core.engine import EngineServie
+from core.sqlhandle import crud, models, schemas
+from core.sqlhandle.database import engine
+from core.task import TaskDetail
 router = APIRouter()
 test_plan = TestPlan()
 models.Base.metadata.create_all(bind=engine)
@@ -219,6 +219,29 @@ async def task_log(content: dict):
    try:
       data = TaskDetail.read_log_file(plan, task)
       result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/config/file/read")
+async def read_config_file(content: dict):
+   file = content.get('file')
+   try:
+      data = EngineServie.read_JmeterFile(file)
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/config/file/write")
+async def write_config_file(content: dict):
+   file = content.get('file')
+   file_content = content.get('file_content')
+   try:
+      EngineServie.write_JmeterFile(file, file_content)
+      result = {'status':1, 'msg': 'success'}
    except Exception as e:
       logger.exception(e)
       result = {'status':0, 'msg': str(e)}

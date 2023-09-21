@@ -72,6 +72,11 @@ class Common(object):
         with open(file=file_path, mode='r', encoding='utf-8') as f:
             content = f.read() 
             return content
+    
+    @classmethod
+    def write_file_content(cls, file_path, content):
+        with open(file=file_path, mode='w', encoding='utf-8') as f:
+            f.write(content)
 
     @classmethod
     def read_file_lines(cls, file_path) -> list:

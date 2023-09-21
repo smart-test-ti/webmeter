@@ -41,4 +41,4 @@ const elMessage = (type, message) => {
                 message: message,
             })         
     };
-}
+};

@@ -1,22 +1,18 @@
 import os
 import datetime
 from loguru import logger
-from webmeter.core.utils import Common
-from webmeter.core.sqlhandle import crud
-from webmeter.core.task import TaskBase
+from core.utils import Common, Platform
+from core.sqlhandle import crud
+from core.task import TaskBase
 
 class EngineServie(TaskBase):
 
-    JMETER_DIR = {
-        'windows': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2'),
-        'macos': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2'),
-        'linux': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2')
-    }
+    JMETER_DIR = os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2')
 
     JMETER_PATH = {
-        'windows': os.path.join(JMETER_DIR['windows'], 'bin', 'jmeter.bat'),
-        'macos': os.path.join(JMETER_DIR['macos'], 'bin', 'jmeter.sh'),
-        'linux': os.path.join(JMETER_DIR['linux'], 'bin', 'jmeter.sh')
+        'windows': os.path.join(JMETER_DIR, 'bin', 'jmeter.bat'),
+        'macos': os.path.join(JMETER_DIR, 'bin', 'jmeter.sh'),
+        'linux': os.path.join(JMETER_DIR, 'bin', 'jmeter.sh')
     }
 
     @classmethod
@@ -28,24 +24,16 @@ class EngineServie(TaskBase):
         return result    
     
     @classmethod
-    def read_JmeterPropertiesFile(cls) -> None:
-        """read jmeter.properties"""
-        pass
-
-    @classmethod
-    def set_JmeterPropertiesFile(cls) -> None:
-        """update jmeter.properties"""
-        pass
+    def read_JmeterFile(cls, file) -> str:
+        file_path = os.path.join(cls.JMETER_DIR, 'bin', file)
+        content = Common.read_file_content(file_path)
+        return content
     
     @classmethod
-    def read_JmeterServerFile(cls) -> None:
-        """read jmeter-server (sh or bat)"""
-        pass
+    def write_JmeterFile(cls, file, content) -> None:
+        file_path = os.path.join(cls.JMETER_DIR, 'bin', file)
+        Common.write_file_content(file_path, content)
 
-    @classmethod
-    def set_JmeterServerFile(cls) -> None:
-        """update jmeter-server (sh or bat)"""
-        pass
 
     @classmethod
     def run(cls, content: dict, remote=False) -> int:

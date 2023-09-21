@@ -26,3 +26,7 @@ async def result(request: Request):
 @router.get("/analysis/{plan}/{task}", response_class=HTMLResponse)
 async def result(request: Request, plan: str, task: str):
    return templates.TemplateResponse("analysis.html", {"request": request, "plan": plan, "task": task})
+
+@router.get("/config", response_class=HTMLResponse)
+async def result(request: Request):
+   return templates.TemplateResponse("config.html", {"request": request})

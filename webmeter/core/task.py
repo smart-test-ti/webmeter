@@ -1,8 +1,8 @@
 from loguru import logger
 import json, os
 from typing import Optional
-from webmeter.core.utils import Common
-from webmeter.core.sqlhandle import crud
+from core.utils import Common
+from core.sqlhandle import crud
 
 
 class TaskBase(object):
