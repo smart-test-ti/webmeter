@@ -1,6 +1,5 @@
 <p align="center">
-  <a href="./README.md">English</a> | <a>中文</a> | <a href="./FAQ.md">FAQ</a>
-</p>
+  <a href="./README.md">English</a> | <a>中文</a>
 <p align="center">
 <a href="#">
 <img src="https://github.com/smart-test-ti/webmeter/blob/main/webmeter/static/image/logo.png?raw=true" alt="Webmeter" width="90">
@@ -18,8 +17,8 @@
 
 ## 环境
 
-- 安装python 3.10 + [**GO**](https://www.python.org/downloads/)
-- 安装JMeter的环境（一般是Java和配置环境变量） [**GO**](https://github.com/apache/jmeter#requirements)
+- 安装python 3.10 + [**下载**](https://www.python.org/downloads/)
+- 安装java的环境（配置环境变量JAVA_HOME） [**下载**](https://github.com/apache/jmeter#requirements)
 
 ## 安装
 

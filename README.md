@@ -1,5 +1,5 @@
 <p align="center">
-  <a>English</a> | <a href="./README.zh.md">中文</a> | <a href="./FAQ.md">FAQ</a>
+  <a>English</a> | <a href="./README.zh.md">中文</a>
 </p>
 <p align="center">
 <a href="#">
@@ -14,12 +14,12 @@
 
 ## WebMeter
 
-An Open Source Web api-performance tool based on jmeter.
+An Open Source Web API-Performance tool based on JMeter.
 
 ## Requirements
 
-- Install python 3.10 + [**GO**](https://www.python.org/downloads/)
-- JMeter requirements [**GO**](https://github.com/apache/jmeter#requirements)
+- Install python 3.10+ [**Download**](https://www.python.org/downloads/)
+- Install java 1.8+ [**Download**](https://www.java.com/)
 
 ## Installation
 

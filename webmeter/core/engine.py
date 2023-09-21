@@ -7,15 +7,39 @@ from webmeter.core.task import TaskBase
 
 class EngineServie(TaskBase):
 
-    JMETER_PATH = {
-        'windows': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2', 'bin', 'jmeter.bat'),
-        'macos': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2', 'bin', 'jmeter.sh'),
-        'linux': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2', 'bin', 'jmeter.sh')
+    JMETER_DIR = {
+        'windows': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2'),
+        'macos': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2'),
+        'linux': os.path.join(Common.STATICPATH, 'jmeter', 'apache-jmeter-5.6.2')
     }
+
+    JMETER_PATH = {
+        'windows': os.path.join(JMETER_DIR['windows'], 'bin', 'jmeter.bat'),
+        'macos': os.path.join(JMETER_DIR['macos'], 'bin', 'jmeter.sh'),
+        'linux': os.path.join(JMETER_DIR['linux'], 'bin', 'jmeter.sh')
+    }
+
+    @classmethod
+    def check_JavaEnvironment(cls):
+        result = Common.exec_cmd('java -version')
+        if result != 0:
+            logger.error('Please download java (https://www.java.com/)')
+            raise Exception('No java version found')
+        return result    
+    
+    @classmethod
+    def read_JmeterPropertiesFile(cls) -> None:
+        """read jmeter.properties"""
+        pass
 
     @classmethod
     def set_JmeterPropertiesFile(cls) -> None:
         """update jmeter.properties"""
+        pass
+    
+    @classmethod
+    def read_JmeterServerFile(cls) -> None:
+        """read jmeter-server (sh or bat)"""
         pass
 
     @classmethod

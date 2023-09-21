@@ -133,10 +133,11 @@ async def save_plan(content: dict):
    return result
 
 @router.post("/api/plan/run")
-async def run_plan(content: dict):
+async def run(content: dict):
    try:
-      EngineServie.run(content=content, remote=False)
-      result = {'status':1, 'msg': 'run success'}   
+      if EngineServie.check_JavaEnvironment() == 0:
+         EngineServie.run(content=content, remote=False)
+         result = {'status':1, 'msg': 'run success'}   
    except Exception as e:
       logger.exception(e)
       result = {'status':0, 'msg': str(e)}
