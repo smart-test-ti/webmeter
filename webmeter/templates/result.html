@@ -123,6 +123,7 @@
                                     <span class="badge bg-indigo" style="color: white;">Running<span class="animated-dots"></span></span>
                                 </td>
                                 <td v-else-if="item.status == 'Done'"><span class="badge bg-green" style="color: white;">Done</span></td>
+                                <td v-else><span class="badge bg-secondary" style="color: white;">Cancel</span></td>
                                 <td v-text="item.stime"></td>
                                 <td v-text="item.etime"></td>
                                 <td>

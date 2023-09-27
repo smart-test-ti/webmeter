@@ -2,6 +2,7 @@ import socket
 import os
 from enum import Enum, unique
 import platform
+import psutil
 from loguru import logger
 from xml.etree import ElementTree
 from typing import Optional
@@ -203,3 +204,26 @@ class JMX(object):
                 jmxElementTreeDom.write(jmx_path_or_name, encoding='utf-8')
                 return True
         return False
+    
+
+class Performance(object):
+        
+    @classmethod
+    def getMachineCPU(cls) -> float:
+        percent = psutil.cpu_percent(interval=1)
+        return percent
+        
+    @classmethod
+    def getMachineMemory(cls) -> float:
+        percent = psutil.virtual_memory().percent
+        # memory['swap_memory'] = psutil.swap_memory()
+        return percent
+    
+    @classmethod
+    def getMachineDisk(cls) -> dict:
+        diskinfo = dict()
+        partitions = psutil.disk_partitions()
+        for disk in partitions:
+            diskname = disk.device[0]
+            diskinfo[diskname]['usage'] = psutil.disk_usage(diskname)
+        return diskinfo    

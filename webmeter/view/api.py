@@ -6,6 +6,7 @@ from core.engine import EngineServie
 from core.sqlhandle import crud, models, schemas
 from core.sqlhandle.database import engine
 from core.task import TaskDetail
+from core.utils import Performance
 router = APIRouter()
 test_plan = TestPlan()
 models.Base.metadata.create_all(bind=engine)
@@ -143,6 +144,16 @@ async def run(content: dict):
       result = {'status':0, 'msg': str(e)}
    return result
 
+@router.post("/api/plan/stop")
+async def stop():
+   try:
+      EngineServie.stop()
+      result = {'status':1, 'msg': 'stop success'}   
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
 @router.post("/api/task/query/all")
 async def query_task_all():
    try:
@@ -242,6 +253,26 @@ async def write_config_file(content: dict):
    try:
       EngineServie.write_JmeterFile(file, file_content)
       result = {'status':1, 'msg': 'success'}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/monitor/cpu")
+async def monitor_cpu():
+   try:
+      data = Performance.getMachineCPU()
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/monitor/memory")
+async def monitor_memory():
+   try:
+      data = Performance.getMachineMemory()
+      result = {'status':1, 'msg': 'success', 'data': data}
    except Exception as e:
       logger.exception(e)
       result = {'status':0, 'msg': str(e)}

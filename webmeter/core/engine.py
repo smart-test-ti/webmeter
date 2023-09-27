@@ -95,7 +95,16 @@ class EngineServie(TaskBase):
             logger.error('task is failed')    
         return result
 
-
+    @classmethod
+    def stop(cls) -> int:
+        if Common.pc_platform() == Platform.WINDOWS.value:
+            result = Common.exec_cmd(os.path.join(cls.JMETER_DIR, 'bin', 'stoptest.cmd'))
+        else:    
+            result = Common.exec_cmd(os.path.join(cls.JMETER_DIR, 'bin', 'stoptest.sh'))
+        if result != 0:
+            logger.error('stop failed')    
+        return result
+        
 class EngineAPI(object):
     """for python api"""
     pass     
