@@ -1,4 +1,5 @@
 import uvicorn
+import os
 from fastapi import FastAPI
 import requests
 import webbrowser
@@ -10,7 +11,8 @@ from webmeter.core.utils import Common
 app = FastAPI(debug=False)
 app.include_router(page.router)
 app.include_router(api.router)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+STATICPATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), "static")
+app.mount("/static", StaticFiles(directory=STATICPATH), name="static")
 
 
 def status(host: str, port: int) -> bool:
