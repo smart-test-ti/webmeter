@@ -3,13 +3,15 @@ from fastapi import FastAPI
 import requests
 import webbrowser
 import multiprocessing
-import os
+from fastapi.staticfiles import StaticFiles
 from webmeter.view import page,api
 from webmeter.core.utils import Common
 
 app = FastAPI(debug=False)
 app.include_router(page.router)
 app.include_router(api.router)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 def status(host: str, port: int) -> bool:
     r = requests.get('http://{}:{}/plan'.format(host, port), timeout=2.0)
