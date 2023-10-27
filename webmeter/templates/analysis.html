@@ -108,7 +108,7 @@
                 </div>
                 <div class="col-md-auto ms-auto d-print-none">
                   <div class="btn-list">
-                    <a class="btn">
+                    <a class="btn" @click="screenShot('sceen-body', 'analysis.png')">
                         <svg t="1694597731524" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="51115" width="320" height="320"><path d="M0 0h1024v1024H0z" fill="#F5F5F5" fill-opacity=".01" p-id="51116"></path><path d="M316.94848 57.77408v30.72H121.89696c-17.46944 0-31.80544 13.43488-33.28 30.5152l-0.12288 2.88768v195.05152h-30.72V121.89696a64.12288 64.12288 0 0 1 60.49792-64.02048l3.62496-0.1024h195.05152z" fill="#14142B" p-id="51117"></path><path d="M175.53408 184.32m40.96 0l737.28 0q40.96 0 40.96 40.96l0 737.28q0 40.96-40.96 40.96l-737.28 0q-40.96 0-40.96-40.96l0-737.28q0-40.96 40.96-40.96Z" fill="#FF6600" opacity=".1" p-id="51118"></path><path d="M88.49408 707.05152v195.05152c0 17.46944 13.43488 31.80544 30.5152 33.28l2.88768 0.12288h195.05152v30.72H121.89696a64.12288 64.12288 0 0 1-64.02048-60.49792l-0.1024-3.62496v-195.05152h30.72zM966.22592 707.05152v195.05152a64.12288 64.12288 0 0 1-60.49792 64.02048l-3.62496 0.1024h-195.05152v-30.72h195.05152c17.46944 0 31.80544-13.43488 33.28-30.5152l0.12288-2.88768v-195.05152h30.72zM902.10304 57.77408a64.12288 64.12288 0 0 1 64.02048 60.49792l0.1024 3.62496v195.05152h-30.72V121.89696c0-17.46944-13.43488-31.80544-30.5152-33.28l-2.88768-0.12288h-195.05152v-30.72h195.05152zM593.36704 277.21728h-162.73408l-48.7424 73.1136-153.43616 0.02048v396.43136h567.0912V350.35136h-153.45664l-48.7424-73.13408z m-146.30912 30.72h129.8432l48.78336 73.13408h139.12064v334.97088h-505.6512V381.05088l139.1616 0.02048 48.7424-73.15456z" fill="#14142B" p-id="51119"></path><path d="M512 447.87712a88.49408 88.49408 0 1 0 0 177.00864 88.49408 88.49408 0 0 0 0-177.00864z m0 30.72a57.77408 57.77408 0 1 1 0 115.56864 57.77408 57.77408 0 0 1 0-115.56864z" fill="#14142B" p-id="51120"></path></svg>
                         ScreenShot
                     </a>
@@ -163,10 +163,11 @@
                                                 <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">URL</th>
                                                 <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">all Threads</th>
                                                 <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">response Code</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">response Message</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">response Time(ms)</th>
                                                 <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">failure Message</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">bytes</th>
-                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">sent Bytes</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">bytes(KB)</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">sent Bytes(KB)</th>
+                                                <th style="font-size: 13px;background-color: rgb(15, 167, 48);color: white;">Connect(ms)</th>
                                             </thead>
                                             <tbody v-for="item in requestSummary" :key="item" class="text-center">
                                                 <td v-text="item.lable"></td>
@@ -174,10 +175,11 @@
                                                 <td v-text="item.URL"></td>
                                                 <td v-text="item.allThreads"></td>
                                                 <td v-text="item.responseCode"></td>
-                                                <td v-text="item.responseMessage"></td>
+                                                <td v-text="item.responseTime"></td>
                                                 <td v-text="item.failureMessage" style="color: red;max-width: 200px;"></td>
                                                 <td v-text="item.bytes"></td>
                                                 <td v-text="item.sentBytes"></td>
+                                                <td v-text="item.Connect"></td>
                                             </tbody>
                                         </table>
                                     </div>
@@ -230,7 +232,56 @@
                             </div>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane label="Charts" name="charts">Charts</el-tab-pane>
+                    <el-tab-pane label="Charts" name="charts">
+                        <div class="card response-time-card">
+                            <div class="card-header">
+                                <div class='card-title'>Response Times Over Time (ms)</div>
+                                <div class="card-actions btn-actions">
+                                    <a class="btn-action cursor-pointer" @click="initResponseOverTimeChart()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+                                    </a>
+                                    <a class="btn-action cursor-pointer" id="mem_png" @click="screenShot('response-time-card','response-time.png')">
+                                        <svg t="1646303797379" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5790" width="2000" height="2000"><path d="M897.856 842.56c14.464-6.72 18.624-20.48 9.28-30.848l-241.216-263.296a25.792 25.792 0 0 0-7.68-5.888c-14.016-7.296-33.6-5.184-43.776 4.8l-241.152 233.088-103.808-70.528a30.912 30.912 0 0 0-3.52-1.92c-14.08-7.36-33.664-4.992-43.776 4.864l-101.056 97.728a18.368 18.368 0 0 0-6.08 13.952c0.512 12.288 14.848 22.016 32.128 21.696h732.8a40.768 40.768 0 0 0 17.856-3.648zM259.84 399.68a78.464 78.464 0 0 0 117.504 67.84 78.272 78.272 0 0 0 0-135.744A78.208 78.208 0 0 0 259.84 399.68" p-id="5791"></path><path d="M864.832 872.256H159.232a83.84 83.84 0 0 1-83.776-83.776V235.52a83.84 83.84 0 0 1 83.776-83.776h705.536a83.84 83.84 0 0 1 83.776 83.776v552.96a83.84 83.84 0 0 1-83.712 83.776zM159.232 183.744a51.84 51.84 0 0 0-51.776 51.776v552.96a51.84 51.84 0 0 0 51.776 51.776h705.536a51.84 51.84 0 0 0 51.776-51.776V235.52a51.84 51.84 0 0 0-51.776-51.776H159.232z" p-id="5792"></path></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart-response-time"></div>
+                            </div>
+                        </div>
+                        <div class="card latency-time-card mt-3">
+                            <div class="card-header">
+                                <div class='card-title'>Latencies Over Time (ms)</div>
+                                <div class="card-actions btn-actions">
+                                    <a class="btn-action cursor-pointer" @click="initLatencyOverTimeChart()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+                                    </a>
+                                    <a class="btn-action cursor-pointer" id="mem_png" @click="screenShot('latency-time-card','latency-time.png')">
+                                        <svg t="1646303797379" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5790" width="2000" height="2000"><path d="M897.856 842.56c14.464-6.72 18.624-20.48 9.28-30.848l-241.216-263.296a25.792 25.792 0 0 0-7.68-5.888c-14.016-7.296-33.6-5.184-43.776 4.8l-241.152 233.088-103.808-70.528a30.912 30.912 0 0 0-3.52-1.92c-14.08-7.36-33.664-4.992-43.776 4.864l-101.056 97.728a18.368 18.368 0 0 0-6.08 13.952c0.512 12.288 14.848 22.016 32.128 21.696h732.8a40.768 40.768 0 0 0 17.856-3.648zM259.84 399.68a78.464 78.464 0 0 0 117.504 67.84 78.272 78.272 0 0 0 0-135.744A78.208 78.208 0 0 0 259.84 399.68" p-id="5791"></path><path d="M864.832 872.256H159.232a83.84 83.84 0 0 1-83.776-83.776V235.52a83.84 83.84 0 0 1 83.776-83.776h705.536a83.84 83.84 0 0 1 83.776 83.776v552.96a83.84 83.84 0 0 1-83.712 83.776zM159.232 183.744a51.84 51.84 0 0 0-51.776 51.776v552.96a51.84 51.84 0 0 0 51.776 51.776h705.536a51.84 51.84 0 0 0 51.776-51.776V235.52a51.84 51.84 0 0 0-51.776-51.776H159.232z" p-id="5792"></path></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart-latency-time"></div>
+                            </div>
+                        </div>
+                        <div class="card connect-time-card mt-3">
+                            <div class="card-header">
+                                <div class='card-title'>Connect Time Over Time (ms)</div>
+                                <div class="card-actions btn-actions">
+                                    <a class="btn-action cursor-pointer" @click="initConnectOverTimeChart()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+                                    </a>
+                                    <a class="btn-action cursor-pointer" @click="screenShot('connect-time-card','connect-time-card.png')">
+                                        <svg t="1646303797379" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5790" width="2000" height="2000"><path d="M897.856 842.56c14.464-6.72 18.624-20.48 9.28-30.848l-241.216-263.296a25.792 25.792 0 0 0-7.68-5.888c-14.016-7.296-33.6-5.184-43.776 4.8l-241.152 233.088-103.808-70.528a30.912 30.912 0 0 0-3.52-1.92c-14.08-7.36-33.664-4.992-43.776 4.864l-101.056 97.728a18.368 18.368 0 0 0-6.08 13.952c0.512 12.288 14.848 22.016 32.128 21.696h732.8a40.768 40.768 0 0 0 17.856-3.648zM259.84 399.68a78.464 78.464 0 0 0 117.504 67.84 78.272 78.272 0 0 0 0-135.744A78.208 78.208 0 0 0 259.84 399.68" p-id="5791"></path><path d="M864.832 872.256H159.232a83.84 83.84 0 0 1-83.776-83.776V235.52a83.84 83.84 0 0 1 83.776-83.776h705.536a83.84 83.84 0 0 1 83.776 83.776v552.96a83.84 83.84 0 0 1-83.712 83.776zM159.232 183.744a51.84 51.84 0 0 0-51.776 51.776v552.96a51.84 51.84 0 0 0 51.776 51.776h705.536a51.84 51.84 0 0 0 51.776-51.776V235.52a51.84 51.84 0 0 0-51.776-51.776H159.232z" p-id="5792"></path></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart-connect-time"></div>
+                            </div>
+                        </div>
+                    </el-tab-pane>
                 </el-tabs>
             </div>
         </div>
@@ -281,7 +332,12 @@
 <script src="https://unpkg.com/element-plus"></script>
 <script src="https://unpkg.com/@element-plus/icons-vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/static/js/apexcharts.js"></script>
+<script src="/static/js/common.js"></script>
 <script src="/static/js/lan.js"></script>
+<script src="/static/js/html2canvas.min.js"></script>
+
+
 <script>
 
 const { 
@@ -301,6 +357,9 @@ const app = createApp({
         const activeTab = ref('dashboard')
         const baseInfo = ref({})
         const requestSummary = reactive([])
+        const responseOverTime = reactive([])
+        const connectOverTime = reactive([])
+        const latencyOverTime = reactive([])
         const statisticsJson = ref({})
         
         onBeforeMount(() => {
@@ -311,7 +370,65 @@ const app = createApp({
             getTestAndReportInfo()
             getRequestSummaryInfo()
             getStatisticsInfo()
+            initResponseOverTimeChart()
+            initConnectOverTimeChart()
+            initLatencyOverTimeChart()
         });
+
+        const screenShot = (classname, downloadname) => {
+            let container = document.getElementsByClassName(classname);
+            html2canvas(container[0]).then(canvas => {
+                let imgData = canvas.toDataURL();
+                let link = document.createElement('a');
+                link.href = imgData;
+                link.download = downloadname;
+                let flag = link.click();
+            })
+        }
+
+        const options = (type, dataLabels=false) => {
+            let options = {
+                chart: {
+                    type: type,
+                    fontFamily: 'inherit',
+                    height: 240,
+                    parentHeightOffset: 0,
+                    toolbar: {
+                        show: false,
+                    },
+                    animations: {
+                        enabled: false
+                    },
+                },
+                dataLabels: {
+                    enabled: dataLabels
+                },
+                fill: {
+                    opacity: 1
+                },
+                stroke: {
+                    width: 2,
+                    lineCap: "round",
+                    curve: "smooth",
+                },
+                series: [],
+                grid: {
+                    padding: {
+                        top: -20,
+                        bottom: -4
+                    },
+                    strokeDashArray: 4,
+                },
+                xaxis: {
+                    name: "time",
+                    tickAmount:6,
+                    labels: {
+                        rotate: 0,
+                    }
+                },
+            };
+            return options
+        }
 
         const getTestAndReportInfo = () => {
             loading.value = true
@@ -385,6 +502,104 @@ const app = createApp({
             });
         };
 
+        const initResponseOverTimeChart = () => {
+            var response_time_chart = new ApexCharts(document.querySelector("#chart-response-time"), options('bar'));
+            response_time_chart.render();
+            loading.value = true
+            responseOverTime.length = 0 
+            axios.post('/api/task/analysis/response_time', {
+                plan: '{{ plan }}',
+                task: '{{ task }}'
+            })
+            .then(function (response) {
+                var data = response['data']
+                if(data['status'] == 1){
+                    data['data'].forEach(i =>{
+                        responseOverTime.push(i)
+                    })
+                    response_time_chart.updateSeries([{
+                        name: 'response_time',
+                        data: responseOverTime
+                    }])
+                    loading.value = false
+                }else{
+                    loading.value = false
+                    elMessage('error', data['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                loading.value = false
+                console.log(error);
+                elMessage('error', error)
+            });
+        }
+
+        const initConnectOverTimeChart = () => {
+            var connect_time_chart = new ApexCharts(document.querySelector("#chart-connect-time"), options('bar'));
+            connect_time_chart.render();
+            loading.value = true
+            connectOverTime.length = 0 
+            axios.post('/api/task/analysis/connect_time', {
+                plan: '{{ plan }}',
+                task: '{{ task }}'
+            })
+            .then(function (response) {
+                var data = response['data']
+                if(data['status'] == 1){
+                    data['data'].forEach(i =>{
+                        connectOverTime.push(i)
+                    })
+                    connect_time_chart.updateSeries([{
+                        name: 'connect_time',
+                        data: connectOverTime
+                    }])
+                    loading.value = false
+                }else{
+                    loading.value = false
+                    elMessage('error', data['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                loading.value = false
+                console.log(error);
+                elMessage('error', error)
+            });
+        }
+
+        const initLatencyOverTimeChart = () => {
+            var latency_time_chart = new ApexCharts(document.querySelector("#chart-latency-time"), options('bar'));
+            latency_time_chart.render();
+            loading.value = true
+            latencyOverTime.length = 0 
+            axios.post('/api/task/analysis/latency', {
+                plan: '{{ plan }}',
+                task: '{{ task }}'
+            })
+            .then(function (response) {
+                var data = response['data']
+                if(data['status'] == 1){
+                    data['data'].forEach(i =>{
+                        latencyOverTime.push(i)
+                    })
+                    latency_time_chart.updateSeries([{
+                        name: 'latency',
+                        data: latencyOverTime
+                    }])
+                    loading.value = false
+                }else{
+                    loading.value = false
+                    elMessage('error', data['msg'])
+                }
+                console.log(response);
+            })
+            .catch(function (error) {
+                loading.value = false
+                console.log(error);
+                elMessage('error', error)
+            });
+        }
 
 
         const setLanguage = (language) => {
@@ -473,8 +688,15 @@ const app = createApp({
             activeTab,
             baseInfo,
             requestSummary,
+            responseOverTime,
+            connectOverTime,
+            latencyOverTime,
             statisticsJson,
-            setLanguage
+            screenShot,
+            setLanguage,
+            initResponseOverTimeChart,
+            initConnectOverTimeChart,
+            initLatencyOverTimeChart
         };
     }
 });

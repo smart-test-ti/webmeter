@@ -11,7 +11,6 @@ const getLocationParams = () => {
     return obj;
   };
 
-
 const elMessage = (type, message) => {
     switch(type){
         case 'success':

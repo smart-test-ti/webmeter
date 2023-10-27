@@ -1,9 +1,9 @@
 import os
 import datetime
 from loguru import logger
-from webmeter.core.utils import Common, Platform
-from webmeter.core.sqlhandle import crud
-from webmeter.core.task import TaskBase
+from core.utils import Common, Platform
+from core.sqlhandle import crud
+from core.task import TaskBase
 
 class EngineServie(TaskBase):
 
@@ -107,4 +107,12 @@ class EngineServie(TaskBase):
         
 class EngineAPI(object):
     """for python api"""
+    # 接口：协议、路由、参数
+    # 线程数
+    # 持续时间
+    # JMX文件
+    # 测试报告
+    # 模式：单机、分布式
+    # 是否监控本机性能
+    # 配置文件操作
     pass     

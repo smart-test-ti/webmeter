@@ -1,12 +1,12 @@
 from loguru import logger
 from typing import Union
 from fastapi import APIRouter, UploadFile, File, Form
-from webmeter.core.plan import TestPlan
-from webmeter.core.engine import EngineServie
-from webmeter.core.sqlhandle import crud, models, schemas
-from webmeter.core.sqlhandle.database import engine
-from webmeter.core.task import TaskDetail
-from webmeter.core.utils import Performance
+from core.plan import TestPlan
+from core.engine import EngineServie
+from core.sqlhandle import crud, models, schemas
+from core.sqlhandle.database import engine
+from core.task import TaskDetail
+from core.utils import Performance
 router = APIRouter()
 test_plan = TestPlan()
 models.Base.metadata.create_all(bind=engine)
@@ -222,6 +222,41 @@ async def statistics(content: dict):
       result = {'status':0, 'msg': str(e)}
    return result
 
+@router.post("/api/task/analysis/response_time")
+async def responsetime(content: dict):
+   plan = content.get('plan')
+   task = content.get('task')
+   try:
+      data = TaskDetail.initResponseOverTime(plan, task)
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/task/analysis/connect_time")
+async def connct_time(content: dict):
+   plan = content.get('plan')
+   task = content.get('task')
+   try:
+      data = TaskDetail.initConnectOverTime(plan, task)
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
+
+@router.post("/api/task/analysis/latency")
+async def latency(content: dict):
+   plan = content.get('plan')
+   task = content.get('task')
+   try:
+      data = TaskDetail.initLatencyOverTime(plan, task)
+      result = {'status':1, 'msg': 'success', 'data': data}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result
 
 @router.post("/api/task/log")
 async def task_log(content: dict):
