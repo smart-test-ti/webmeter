@@ -110,7 +110,7 @@
                   <div class="btn-list">
                     <a class="btn" @click="screenShot('sceen-body', 'analysis.png')">
                         <svg t="1694597731524" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="51115" width="320" height="320"><path d="M0 0h1024v1024H0z" fill="#F5F5F5" fill-opacity=".01" p-id="51116"></path><path d="M316.94848 57.77408v30.72H121.89696c-17.46944 0-31.80544 13.43488-33.28 30.5152l-0.12288 2.88768v195.05152h-30.72V121.89696a64.12288 64.12288 0 0 1 60.49792-64.02048l3.62496-0.1024h195.05152z" fill="#14142B" p-id="51117"></path><path d="M175.53408 184.32m40.96 0l737.28 0q40.96 0 40.96 40.96l0 737.28q0 40.96-40.96 40.96l-737.28 0q-40.96 0-40.96-40.96l0-737.28q0-40.96 40.96-40.96Z" fill="#FF6600" opacity=".1" p-id="51118"></path><path d="M88.49408 707.05152v195.05152c0 17.46944 13.43488 31.80544 30.5152 33.28l2.88768 0.12288h195.05152v30.72H121.89696a64.12288 64.12288 0 0 1-64.02048-60.49792l-0.1024-3.62496v-195.05152h30.72zM966.22592 707.05152v195.05152a64.12288 64.12288 0 0 1-60.49792 64.02048l-3.62496 0.1024h-195.05152v-30.72h195.05152c17.46944 0 31.80544-13.43488 33.28-30.5152l0.12288-2.88768v-195.05152h30.72zM902.10304 57.77408a64.12288 64.12288 0 0 1 64.02048 60.49792l0.1024 3.62496v195.05152h-30.72V121.89696c0-17.46944-13.43488-31.80544-30.5152-33.28l-2.88768-0.12288h-195.05152v-30.72h195.05152zM593.36704 277.21728h-162.73408l-48.7424 73.1136-153.43616 0.02048v396.43136h567.0912V350.35136h-153.45664l-48.7424-73.13408z m-146.30912 30.72h129.8432l48.78336 73.13408h139.12064v334.97088h-505.6512V381.05088l139.1616 0.02048 48.7424-73.15456z" fill="#14142B" p-id="51119"></path><path d="M512 447.87712a88.49408 88.49408 0 1 0 0 177.00864 88.49408 88.49408 0 0 0 0-177.00864z m0 30.72a57.77408 57.77408 0 1 1 0 115.56864 57.77408 57.77408 0 0 1 0-115.56864z" fill="#14142B" p-id="51120"></path></svg>
-                        ScreenShot
+                        <label v-text="language.screenshot"></label>
                     </a>
                   </div>
                 </div>
@@ -120,10 +120,10 @@
         <div class="page-body">
             <div class="container-xl">    
                 <el-tabs v-model="activeTab" type="card" class="analysis-tabs">
-                    <el-tab-pane label="Dashboard" name="dashboard">
+                    <el-tab-pane :label="language.dashboard" name="dashboard">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Test and Report information</h3>
+                                <h3 class="card-title" v-text="language.test_and_report_info"></h3>
                             </div>
                             <div class="card-body">
                                 <div class="card">
@@ -151,7 +151,7 @@
                         
                         <div class="card mt-3" style="max-height: 28rem;">
                             <div class="card-header">
-                                <h3 class="card-title">Requests Summary</h3>
+                                <h3 class="card-title" v-text="language.requests_summary"></h3>
                             </div>
                             <div class="card-body card-body-scrollable card-body-scrollable-shadow">
                                 <div class="card">
@@ -188,7 +188,7 @@
                         </div>
                         <div class="card mt-3">
                             <div class="card-header">
-                                <h3 class="card-title">Statistics</h3>
+                                <h3 class="card-title" v-text="language.statistics"></h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -232,10 +232,10 @@
                             </div>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane label="Charts" name="charts">
+                    <el-tab-pane :label="language.charts" name="charts">
                         <div class="card response-time-card">
                             <div class="card-header">
-                                <div class='card-title'>Response Times Over Time (ms)</div>
+                                <div class='card-title' v-text="language.response_times_over_time"></div>
                                 <div class="card-actions btn-actions">
                                     <a class="btn-action cursor-pointer" @click="initResponseOverTimeChart()">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
@@ -251,7 +251,7 @@
                         </div>
                         <div class="card latency-time-card mt-3">
                             <div class="card-header">
-                                <div class='card-title'>Latencies Over Time (ms)</div>
+                                <div class='card-title' v-text="language.latencies_over_time"></div>
                                 <div class="card-actions btn-actions">
                                     <a class="btn-action cursor-pointer" @click="initLatencyOverTimeChart()">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
@@ -267,7 +267,7 @@
                         </div>
                         <div class="card connect-time-card mt-3">
                             <div class="card-header">
-                                <div class='card-title'>Connect Time Over Time (ms)</div>
+                                <div class='card-title' v-text="language.connect_time_over_time"></div>
                                 <div class="card-actions btn-actions">
                                     <a class="btn-action cursor-pointer" @click="initConnectOverTimeChart()">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>

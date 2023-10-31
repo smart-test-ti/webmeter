@@ -34,6 +34,10 @@ class EngineServie(TaskBase):
         file_path = os.path.join(cls.JMETER_DIR, 'bin', file)
         Common.write_file_content(file_path, content)
 
+    @classmethod
+    def remote_hosts(cls):
+        pass    
+
 
     @classmethod
     def run(cls, content: dict, remote=False) -> int:

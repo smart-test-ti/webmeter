@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 from fastapi import APIRouter
 import os
+from core.utils import Common
 
 router = APIRouter()
 
@@ -29,4 +30,5 @@ async def result(request: Request, plan: str, task: str):
 
 @router.get("/config", response_class=HTMLResponse)
 async def result(request: Request):
-   return templates.TemplateResponse("config.html", {"request": request})
+   platform = Common.pc_platform()
+   return templates.TemplateResponse("config.html", {"request": request, 'platform': platform})

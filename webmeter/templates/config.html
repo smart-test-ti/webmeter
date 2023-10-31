@@ -90,28 +90,31 @@
                     <div class="row g-0">
                         <div class="col-2 d-none d-md-block border-end">
                             <div class="card-header d-none d-md-block">
-                                <strong>JMETER CONFIG</strong>
+                                <strong v-text="language.jmeter_config"></strong>
                             </div>
                             <div class="card-body scrollable">
+                                {% if platform == 'windows' %}
                                 <div class="btn-group-vertical w-100 mb-2 "role="group">
                                     <input type="radio" class="btn-check" id="jmeter_bat" name="btn-radio-vertical" checked="true" @click="getJmeterFileContent('jmeter.bat')">
                                     <label type="button" class="btn" for="jmeter_bat">jmeter.bat</label>
                                 </div>
                                 <div class="btn-group-vertical w-100 mb-2 "role="group">
+                                    <input type="radio" class="btn-check" id="jmeter-server.bat" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter-server.bat')">
+                                    <label type="button" class="btn" for="jmeter-server.bat">jmeter-server.bat</label>
+                                </div>
+                                {% else %}
+                                <div class="btn-group-vertical w-100 mb-2 "role="group">
                                     <input type="radio" class="btn-check" id="jmeter_sh" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter.sh')">
                                     <label type="button" class="btn" for="jmeter_sh">jmeter.sh</label>
                                 </div>
                                 <div class="btn-group-vertical w-100 mb-2 "role="group">
-                                    <input type="radio" class="btn-check" id="jmeter.properties" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter.properties')">
-                                    <label type="button" class="btn" for="jmeter.properties">jmeter.properties</label>
-                                </div>
-                                <div class="btn-group-vertical w-100 mb-2 "role="group">
-                                    <input type="radio" class="btn-check" id="jmeter-server.bat" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter-server.bat')">
-                                    <label type="button" class="btn" for="jmeter-server.bat">jmeter-server.bat</label>
-                                </div>
-                                <div class="btn-group-vertical w-100 mb-2 "role="group">
                                     <input type="radio" class="btn-check" id="jmeter-server.sh" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter-server')">
                                     <label type="button" class="btn" for="jmeter-server.sh">jmeter-server</label>
+                                </div>
+                                {% endif %}
+                                <div class="btn-group-vertical w-100 mb-2 "role="group">
+                                    <input type="radio" class="btn-check" id="jmeter.properties" name="btn-radio-vertical" @click="getJmeterFileContent('jmeter.properties')">
+                                    <label type="button" class="btn" for="jmeter.properties">jmeter.properties</label>
                                 </div>
                             </div>
                         </div>

@@ -3,6 +3,7 @@ import os
 from enum import Enum, unique
 import platform
 import psutil
+import time
 from loguru import logger
 from xml.etree import ElementTree
 from typing import Optional
