@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, Column, Integer, String, DateTime, Float
-from core.sqlhandle.database import Base
+from webmeter.core.sqlhandle.database import Base
 
 
 class Task(Base):
@@ -8,7 +8,7 @@ class Task(Base):
     id = Column(Integer, primary_key=True, index=True)
     plan = Column(String, index=True)
     task = Column(String, index=True, unique=True)
-    model = Column(String, index=True, default='stand-alone') #stand-alone | distributed
+    model = Column(String, index=True, default='local') #local | remote
     success_num = Column(Integer, index=True, default=0)
     fail_num = Column(Integer, index=True, default=0)
     threads = Column(Integer, index=True, default=1)
