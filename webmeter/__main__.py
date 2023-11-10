@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from logzero import logger
+from loguru import logger
 import platform
 import fire as fire
 
