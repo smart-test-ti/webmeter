@@ -12,6 +12,7 @@ setuptools.setup(
     install_requires=['fastapi','uvicorn', 'requests', 'loguru', 'fire','pyfiglet','psutil',
     'pyyaml','python-multipart','sqlalchemy'],
     version='1.0.14',
+    python_requires='>=3.10',
     long_description=long_description,
     long_description_content_type="text/markdown",
     description="WebMeter - A web api-performance tool based on jmeter.",
