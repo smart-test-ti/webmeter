@@ -1,9 +1,10 @@
 import os
 import datetime
 from loguru import logger
-from webmeter.core.utils import Common, Platform
-from webmeter.core.sqlhandle import crud
-from webmeter.core.task import TaskBase
+from typing import Optional
+from core.utils import Common, Platform
+from core.sqlhandle import crud
+from core.task import TaskBase
 
 class EngineServie(TaskBase):
 
@@ -35,12 +36,36 @@ class EngineServie(TaskBase):
         Common.write_file_content(file_path, content)
 
     @classmethod
-    def remote_hosts(cls):
-        pass    
+    def remote_hosts_list(cls) -> list:
+        remote_hosts_list = list()
+        properties_path = os.path.join(cls.JMETER_DIR, 'bin', 'jmeter.properties')
+        try:
+            with open(file=properties_path, mode='r', encoding='utf-8') as f:
+                lines = f.readlines()
+                for line in lines:
+                    if line.startswith('remote_hosts'):
+                        remote_hosts_list = line.split('=')[1].strip().split(',')
+                        break
+        except Exception:
+            logger.warning('No remote_hosts found')            
+        return remote_hosts_list  
+
+    @classmethod
+    def remote_hosts(cls) -> Optional[str]:
+        properties_path = os.path.join(cls.JMETER_DIR, 'bin', 'jmeter.properties')
+        try:
+            with open(file=properties_path, mode='r', encoding='utf-8') as f:
+                lines = f.readlines()
+                for line in lines:
+                    if line.startswith('remote_hosts'):
+                        remote_hosts = line.split('=')[1].strip()
+                        return remote_hosts
+        except Exception:
+            logger.warning('No remote_hosts found')            
 
 
     @classmethod
-    def run(cls, content: dict, remote=False) -> int:
+    def run(cls, content: dict, model='local') -> int:
         """
         execute jmeter command
          -n This specifies JMeter is to run in cli mode
@@ -63,7 +88,7 @@ class EngineServie(TaskBase):
         log_dir = Common.make_dir(os.path.join(TaskBase.ROOT_DIR, content.get('plan_name'), 'log'))
         report_path = Common.make_dir(os.path.join(report_dir, task_format))
         log_path = Common.make_dir(os.path.join(log_dir, task_format))
-        if remote is not True: 
+        if model == 'local': 
             #单机模式
             crud.create_task(tasks={
                 'plan': content.get('plan_name'),
@@ -80,12 +105,16 @@ class EngineServie(TaskBase):
             ))
         else:
             #分布式模式
+            if content.get('hosts') == 'All':
+                remote_hosts = cls.remote_hosts()
+            else:
+                remote_hosts = content.get('hosts')   
             result = Common.exec_cmd('{jmeter} -n -t {jmx_path} -l {jtl_path} -j {log_path} -e -o {report_path} -R {hosts}'.format(
                 jmeter=cls.JMETER_PATH.get(Common.pc_platform()),
                 jmx_path=os.path.join(TaskBase.ROOT_DIR, content.get('plan_name'), 'plan.jmx'),
                 jtl_path=os.path.join(report_path, 'result.jtl'),
                 log_path=os.path.join(log_path, 'result.log'),
-                hosts=content.get('hosts')
+                hosts=remote_hosts
             ))
         if result == 0:
             task_result = TaskBase.read_statistics_file(content.get('plan_name'), task_format)

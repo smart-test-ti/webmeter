@@ -1,12 +1,12 @@
 from loguru import logger
 from typing import Union
 from fastapi import APIRouter, UploadFile, File, Form
-from webmeter.core.plan import TestPlan
-from webmeter.core.engine import EngineServie
-from webmeter.core.sqlhandle import crud, models, schemas
-from webmeter.core.sqlhandle.database import engine
-from webmeter.core.task import TaskDetail
-from webmeter.core.utils import Performance
+from core.plan import TestPlan
+from core.engine import EngineServie
+from core.sqlhandle import crud, models, schemas
+from core.sqlhandle.database import engine
+from core.task import TaskDetail
+from core.utils import Performance
 router = APIRouter()
 test_plan = TestPlan()
 models.Base.metadata.create_all(bind=engine)
@@ -133,11 +133,21 @@ async def save_plan(content: dict):
       result = {'status':0, 'msg': str(e)}
    return result
 
+@router.post("/api/plan/hosts")
+async def remote_hosts():
+   try:
+      hosts = EngineServie.remote_hosts_list()
+      result = {'status':1, 'hosts': hosts}
+   except Exception as e:
+      logger.exception(e)
+      result = {'status':0, 'msg': str(e)}
+   return result       
+
 @router.post("/api/plan/run")
 async def run(content: dict):
    try:
       if EngineServie.check_JavaEnvironment() == 0:
-         EngineServie.run(content=content, remote=False)
+         EngineServie.run(content=content, model=content.get('model'))
          result = {'status':1, 'msg': 'run success'}   
    except Exception as e:
       logger.exception(e)
