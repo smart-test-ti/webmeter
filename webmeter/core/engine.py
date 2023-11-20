@@ -88,14 +88,14 @@ class EngineServie(TaskBase):
         log_dir = Common.make_dir(os.path.join(TaskBase.ROOT_DIR, content.get('plan_name'), 'log'))
         report_path = Common.make_dir(os.path.join(report_dir, task_format))
         log_path = Common.make_dir(os.path.join(log_dir, task_format))
+        crud.create_task(tasks={
+            'plan': content.get('plan_name'),
+            'task': task_format,
+            'model': model,
+            'threads': int(content.get('threads'))
+        })
         if model == 'local': 
             #单机模式
-            crud.create_task(tasks={
-                'plan': content.get('plan_name'),
-                'task': task_format,
-                'model': 'local',
-                'threads': int(content.get('threads'))
-            })
             result = Common.exec_cmd('{jmeter} -n -t {jmx_path} -l {jtl_path} -j {log_path} -e -o {report_path}'.format(
                 jmeter=cls.JMETER_PATH.get(Common.pc_platform()),
                 jmx_path=os.path.join(TaskBase.ROOT_DIR, content.get('plan_name'), 'plan.jmx'),
@@ -114,16 +114,24 @@ class EngineServie(TaskBase):
                 jmx_path=os.path.join(TaskBase.ROOT_DIR, content.get('plan_name'), 'plan.jmx'),
                 jtl_path=os.path.join(report_path, 'result.jtl'),
                 log_path=os.path.join(log_path, 'result.log'),
+                report_path=report_path,
                 hosts=remote_hosts
             ))
         if result == 0:
             task_result = TaskBase.read_statistics_file(content.get('plan_name'), task_format)
-            crud.update_task(tasks={
-                'task': task_format,
-                'success_num': task_result['Total']['sampleCount'] -  task_result['Total']['errorCount'] ,
-                'fail_num': task_result['Total']['errorCount'],
-                'status': 'Done'
-            })
+            if task_result:
+                crud.update_task(tasks={
+                    'task': task_format,
+                    'success_num': task_result['Total']['sampleCount'] -  task_result['Total']['errorCount'] ,
+                    'fail_num': task_result['Total']['errorCount'],
+                    'status': 'Done'
+                })
+            else:
+                crud.update_task(tasks={
+                    'task': task_format,
+                    'status': 'Error'
+                })
+                logger.error('remote_host connect failed')     
         else:
             logger.error('task is failed')    
         return result
