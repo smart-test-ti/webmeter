@@ -1,12 +1,12 @@
 from loguru import logger
 from typing import Union
 from fastapi import APIRouter, UploadFile, File, Form
-from core.plan import TestPlan
-from core.engine import EngineServie
-from core.sqlhandle import crud, models, schemas
-from core.sqlhandle.database import engine
-from core.task import TaskDetail
-from core.utils import Performance
+from webmeter.core.plan import TestPlan
+from webmeter.core.engine import EngineServie
+from webmeter.core.sqlhandle import crud, models, schemas
+from webmeter.core.sqlhandle.database import engine
+from webmeter.core.task import TaskDetail
+from webmeter.core.utils import Performance
 router = APIRouter()
 test_plan = TestPlan()
 models.Base.metadata.create_all(bind=engine)

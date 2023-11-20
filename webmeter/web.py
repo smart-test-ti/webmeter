@@ -5,8 +5,10 @@ import requests
 import webbrowser
 import multiprocessing
 from fastapi.staticfiles import StaticFiles
+from loguru import logger
 from webmeter.view import page,api
 from webmeter.core.utils import Common
+from webmeter.core.engine import EngineServie
 
 app = FastAPI(debug=False)
 app.include_router(page.router)
@@ -29,9 +31,16 @@ def open_url(host: str, port: int)  -> None:
         flag = status(host, port)
     webbrowser.open('http://{}:{}/plan'.format(host, port), new=2)
 
-def main(host=Common.ip(), port=6006) -> None:
-    pool = multiprocessing.Pool(processes=2)
-    pool.apply_async(start, (host, port))
-    pool.apply_async(open_url, (host, port))
-    pool.close()
-    pool.join()
+def main(host=Common.ip(), port=6006, jmeter_server='off') -> None:
+    if jmeter_server == 'off':
+        pool = multiprocessing.Pool(processes=2)
+        pool.apply_async(start, (host, port))
+        pool.apply_async(open_url, (host, port))
+        pool.close()
+        pool.join()
+    elif jmeter_server == 'on':
+        EngineServie.check_JavaEnvironment()
+        EngineServie.check_JmeterEnvironment()
+        Common.exec_cmd(f'{EngineServie.JMETER_SERVER_PATH.get(Common.pc_platform())} -Djava.rmi.server.hostname={host}')
+    else:
+        logger.error('The value of jmeter_server is invalid.')        

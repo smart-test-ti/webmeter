@@ -1,8 +1,8 @@
 from typing import Optional
 from loguru import logger
 import os, shutil, datetime
-from core.sqlhandle import models, schemas, database
-from core.plan import TestPlan
+from webmeter.core.sqlhandle import models, schemas, database
+from webmeter.core.plan import TestPlan
 
 def create_task(tasks: dict):
     with database.dbConnect() as session:

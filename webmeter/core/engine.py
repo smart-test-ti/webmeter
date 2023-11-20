@@ -2,9 +2,9 @@ import os
 import datetime
 from loguru import logger
 from typing import Optional
-from core.utils import Common, Platform
-from core.sqlhandle import crud
-from core.task import TaskBase
+from webmeter.core.utils import Common, Platform
+from webmeter.core.sqlhandle import crud
+from webmeter.core.task import TaskBase
 
 class EngineServie(TaskBase):
 
@@ -16,12 +16,25 @@ class EngineServie(TaskBase):
         'linux': os.path.join(JMETER_DIR, 'bin', 'jmeter.sh')
     }
 
+    JMETER_SERVER_PATH = {
+        'windows': os.path.join(JMETER_DIR, 'bin', 'jmeter-server.bat'),
+        'macos': os.path.join(JMETER_DIR, 'bin', 'jmeter-server'),
+        'linux': os.path.join(JMETER_DIR, 'bin', 'jmeter-server')
+    }
+
     @classmethod
     def check_JavaEnvironment(cls):
         result = Common.exec_cmd('java -version')
         if result != 0:
             logger.error('Please download java (https://www.java.com/)')
-            raise Exception('No java version found')
+            raise Exception('No JAVA_HOME found')
+        return result
+
+    @classmethod
+    def check_JmeterEnvironment(cls):
+        result = Common.exec_cmd('jmeter -v')
+        if result != 0:
+            raise Exception('No JMETER_HOME found')
         return result    
     
     @classmethod
@@ -127,10 +140,7 @@ class EngineServie(TaskBase):
                     'status': 'Done'
                 })
             else:
-                crud.update_task(tasks={
-                    'task': task_format,
-                    'status': 'Error'
-                })
+                crud.update_task(tasks={'task': task_format,'status': 'Error'})
                 logger.error('remote_host connect failed')     
         else:
             logger.error('task is failed')    

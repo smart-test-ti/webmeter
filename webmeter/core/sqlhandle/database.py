@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 from loguru import logger
 import os
-from core.utils import Common
+from webmeter.core.utils import Common
 
 SQL_DIR = Common.make_dir(os.path.join(os.getcwd(), 'webmeter'))
 SQLALCHEMY_DATABASE_URL = "sqlite:///{}/app.db".format(SQL_DIR)

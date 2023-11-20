@@ -11,7 +11,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     install_requires=['fastapi','uvicorn', 'requests', 'loguru', 'fire','pyfiglet','psutil',
     'pyyaml','python-multipart','sqlalchemy'],
-    version='1.0.14',
+    version='1.0.15',
     python_requires='>=3.10',
     long_description=long_description,
     long_description_content_type="text/markdown",

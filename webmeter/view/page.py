@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 from fastapi import APIRouter
 import os
-from core.utils import Common
+from webmeter.core.utils import Common
 
 router = APIRouter()
 

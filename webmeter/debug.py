@@ -1,10 +1,12 @@
 import uvicorn
 from fastapi import FastAPI
-from view import page,api
-from core.utils import Common
 from fastapi.staticfiles import StaticFiles
 import requests
 import webbrowser
+from loguru import logger
+from view import page,api
+from core.utils import Common
+from core.engine import EngineServie
 
 app = FastAPI(debug=True)
 app.include_router(page.router)
@@ -25,8 +27,15 @@ def open_url(host: str, port: int) -> None:
         flag = status(host, port)
     webbrowser.open('http://{}:{}/plan'.format(host, port), new=2)
 
-def main(host=Common.ip(), port=6006) -> None:
-    start(host, port)   
+def main(host=Common.ip(), port=6006, jmeter_server='off') -> None:
+    if jmeter_server == 'off':
+        start(host, port)
+    elif jmeter_server == 'on':
+        EngineServie.check_JavaEnvironment()
+        EngineServie.check_JmeterEnvironment()
+        Common.exec_cmd(f'{EngineServie.JMETER_SERVER_PATH.get(Common.pc_platform())} -Djava.rmi.server.hostname={host}')
+    else:
+        logger.error('The value of jmeter_server is invalid.')   
 
 if __name__ == "__main__":
     main()
